@@ -40,6 +40,28 @@ export interface SiteNav {
     home_label: string;
     back_label: string;
     available_label: string;
+    theme_toggle_aria: string;
+    lang_toggle_aria: string;
+    exp_yrs_label: string;
+    exp_label: string;
+    location_label: string;
+    phone_label: string;
+    exp_title: string;
+    grad_label: string;
+    hero_eyebrow: string;
+    specializations_label: string;
+    view_cv_label: string;
+    education_section_title: string;
+    methodology_label: string;
+    professional_label: string;
+    technical_label: string;
+    laboral_label: string;
+    current_label: string;
+    items_label: string;
+    engineering_spec_label: string;
+    email_label: string;
+    web_label: string;
+    behance_label: string;
     profiles: SiteProfile[];
 }
 

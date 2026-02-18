@@ -3,26 +3,28 @@
 	import { loadSiteData } from '$lib/data/site-loader';
 	import PortalLayout from '$lib/components/PortalLayout.svelte';
 
-	const cvData = loadCVData();
-	const site = loadSiteData();
-	const focus = getFocusByName('developer');
-	const profileSite = site.nav.profiles.find((p) => p.href.includes('developer'));
+	const cvData = $derived(loadCVData());
+	const site = $derived(loadSiteData());
+	const focus = $derived(getFocusByName('developer'));
+	const profileSite = $derived(site.nav.profiles.find((p) => p.href.includes('developer')));
 
-	const navItems = profileSite
-		? [
-				{ label: profileSite.sections.perfil, href: '#perfil' },
-				{ label: profileSite.sections.habilidades, href: '#habilidades' },
-				{ label: profileSite.sections.experiencia, href: '#experiencia' },
-				{ label: profileSite.sections.educacion, href: '#educacion' }
-			]
-		: [];
+	const navItems = $derived(
+		profileSite
+			? [
+					{ label: profileSite.sections.perfil, href: '#perfil' },
+					{ label: profileSite.sections.habilidades, href: '#habilidades' },
+					{ label: profileSite.sections.experiencia, href: '#experiencia' },
+					{ label: profileSite.sections.educacion, href: '#educacion' }
+				]
+			: []
+	);
 </script>
 
 <svelte:head>
 	<title>{focus?.title} — {cvData.personal.name}</title>
 	<meta
 		name="description"
-		content="CV de {cvData.personal.name} como {focus?.title}. 18 años de experiencia."
+		content="{focus?.title} — {cvData.personal.name}. {site.meta.description}"
 	/>
 </svelte:head>
 
@@ -42,7 +44,7 @@
 				<div class="header-badge-row">
 					<span class="header-badge">
 						<span class="badge-dot"></span>
-						ENGINEERING SPECIFICATION
+						{site.nav.engineering_spec_label}
 					</span>
 				</div>
 
@@ -121,7 +123,7 @@
 						<div class="skill-card">
 							<div class="skill-card-header">
 								<h3 class="skill-category">{skillGroup.category.toUpperCase()}</h3>
-								<span class="skill-count">{skillGroup.items.length} items</span>
+								<span class="skill-count">{skillGroup.items.length} {site.nav.items_label}</span>
 							</div>
 							<ul class="skill-list">
 								{#each skillGroup.items as item}

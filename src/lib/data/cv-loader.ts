@@ -1,9 +1,12 @@
 import { parse } from 'toml';
 import type { CVData } from '$lib/types/CV';
-import cvToml from './cv.toml?raw';
+import { lang } from '$lib/state/lang.svelte';
+import cvEs from './cv.es.toml?raw';
+import cvEn from './cv.en.toml?raw';
 
 export function loadCVData(): CVData {
-	return parse(cvToml) as CVData;
+	const raw = lang.current === 'en' ? cvEn : cvEs;
+	return parse(raw) as CVData;
 }
 
 export function getFocusByName(name: string) {

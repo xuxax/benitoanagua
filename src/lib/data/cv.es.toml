@@ -24,6 +24,7 @@ year = "2025"
 [[focuses]]
 name = "developer"
 title = "Desarrollador Full Stack & Frontend Senior"
+subtitles = ["Full Stack Development", "Modern Web Architecture", "Frontend Leadership"]
 summary = "Desarrollador Full Stack Senior con 18 años de experiencia en desarrollo web moderno, especializado en Frontend. Experto en la creación de interfaces de usuario escalables, responsivas y de alto rendimiento utilizando Svelte, Vue.js y Blazor. Amplia experiencia en arquitectura frontend, optimización de aplicaciones web y desarrollo de sistemas de componentes reutilizables. Experiencia liderando proyectos técnicos, implementando mejores prácticas de desarrollo y colaborando con equipos multidisciplinarios en el ciclo completo SDLC."
 
 [[focuses.skills]]
@@ -81,6 +82,7 @@ description = "Desarrollé y personalicé sistemas de gestión de contenidos (CM
 [[focuses]]
 name = "designer"
 title = "Diseñador UI/UX & Product Designer"
+subtitles = ["UI/UX Strategy", "Digital Product Design", "User Experience"]
 summary = "Diseñador UI/UX y Product Designer con 18 años de experiencia creando experiencias digitales centradas en el usuario. Especializado en diseño de interfaces intuitivas, sistemas de diseño escalables y prototipado interactivo de alta fidelidad. Experto en herramientas modernas de diseño incluyendo Figma, Affinity (Canva) y Adobe Creative Suite para producción profesional y colaborativa. Experiencia traduciendo necesidades del negocio en soluciones visuales efectivas que mejoran la usabilidad y satisfacción del usuario en proyectos web y móviles."
 
 [[focuses.skills]]
@@ -138,6 +140,7 @@ description = "Gestioné el diseño visual, maquetación y actualización de con
 [[focuses]]
 name = "graphic"
 title = "Diseñador Gráfico Integral (Digital & Off-set)"
+subtitles = ["Diseño Gráfico", "Digital & Off-set"]
 summary = "Diseñador Gráfico Multimedia con 18 años de experiencia en diseño digital y producción impresa. Especializado en creación de identidades visuales de marca, diseño editorial y producción para imprenta offset y serigrafía. Experto en Adobe Creative Suite y Affinity (Canva) para producción profesional de alto nivel. Amplia experiencia gestionando proyectos desde la conceptualización hasta la producción final, coordinando con proveedores de imprenta y asegurando calidad técnica en medios digitales, offset y serigrafía."
 
 [[focuses.skills]]

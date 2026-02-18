@@ -11,6 +11,28 @@ description = "18 años construyendo productos digitales con precisión estructu
 home_label = "Perfiles"
 back_label = "Perfiles"
 available_label = "Disponible"
+theme_toggle_aria = "Cambiar tema"
+lang_toggle_aria = "Cambiar idioma"
+exp_yrs_label = "18 Años de Experiencia"
+exp_label = "18 Años"
+location_label = "Ubicación"
+phone_label = "Teléfono"
+exp_title = "Experiencia"
+grad_label = "Graduación"
+hero_eyebrow = "Perfil Profesional Multidisciplinario"
+specializations_label = "especializaciones disponibles"
+view_cv_label = "Ver CV completo"
+education_section_title = "Formación académica"
+methodology_label = "Metodología"
+professional_label = "Profesional"
+technical_label = "Técnicas"
+laboral_label = "Laboral"
+current_label = "Actual"
+items_label = "ítems"
+engineering_spec_label = "ESPECIFICACIÓN TÉCNICA"
+email_label = "Correo"
+web_label = "Web"
+behance_label = "Behance"
 
 [[nav.profiles]]
 label = "Full Stack"
@@ -52,7 +74,7 @@ bio = "18 años construyendo productos digitales con precisión estructural. Dis
 title = "Portafolio"
 
 [[footer.sections.portfolio.links]]
-label = "Website"
+label = "Sitio web"
 href_key = "website"
 icon = "language"
 
@@ -81,7 +103,7 @@ icon = "chat"
 accent = true
 
 [[footer.sections.contact.links]]
-label = "benito.anagua@gmail.com"
+label = "Correo electrónico"
 href_key = "email"
 icon = "mail"
 mailto = true

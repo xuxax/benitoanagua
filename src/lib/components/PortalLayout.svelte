@@ -4,6 +4,8 @@
 	import { getPersonalInfo } from '$lib/data/cv-loader';
 	import type { PersonalInfo } from '$lib/types/CV';
 
+	import { lang } from '$lib/state/lang.svelte';
+
 	interface NavItem {
 		label: string;
 		href: string;
@@ -17,8 +19,9 @@
 
 	let { navItems = [], showBackButton = false, children }: Props = $props();
 
-	const site = loadSiteData();
-	const personal = getPersonalInfo();
+	// Datos reactivos al idioma
+	const site = $derived(loadSiteData());
+	const personal = $derived(getPersonalInfo());
 
 	// Resuelve la URL de un link del footer usando href_key → PersonalInfo
 	function resolveHref(link: { href_key: string; mailto?: boolean }): string {
@@ -46,6 +49,10 @@
 		const newTheme = isDark ? 'light' : 'dark';
 		document.documentElement.setAttribute('data-theme', newTheme);
 		localStorage.setItem('theme', newTheme);
+	}
+
+	function toggleLang() {
+		lang.set(lang.current === 'es' ? 'en' : 'es');
 	}
 </script>
 
@@ -80,14 +87,20 @@
 					{/each}
 				</nav>
 
-				<button
-					class="theme-toggle"
-					onclick={toggleTheme}
-					aria-label="Cambiar tema"
-					id="theme-toggle-btn"
-				>
-					<span class="material-symbols-outlined">{isDark ? 'light_mode' : 'dark_mode'}</span>
-				</button>
+				<div class="header-actions">
+					<button class="lang-toggle" onclick={toggleLang} aria-label={site.nav.lang_toggle_aria}>
+						{lang.current.toUpperCase()}
+					</button>
+
+					<button
+						class="theme-toggle"
+						onclick={toggleTheme}
+						aria-label={site.nav.theme_toggle_aria}
+						id="theme-toggle-btn"
+					>
+						<span class="material-symbols-outlined">{isDark ? 'light_mode' : 'dark_mode'}</span>
+					</button>
+				</div>
 
 				<div class="status-indicator">
 					<span class="status-dot"></span>
@@ -324,6 +337,40 @@
 	.nav-link.active {
 		color: var(--color-primary);
 		border-bottom-color: var(--color-primary);
+	}
+
+	.header-actions {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.lang-toggle {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 2.25rem;
+		padding: 0 0.75rem;
+		background: var(--color-surface);
+		border: 1px solid var(--color-outline);
+		cursor: pointer;
+		font-family: var(--font-mono);
+		font-size: 0.625rem;
+		font-weight: 700;
+		color: var(--color-on-surface);
+		transition: all var(--duration-base) var(--ease-out);
+		flex-shrink: 0;
+		border-radius: var(--radius-sm);
+	}
+
+	.lang-toggle:hover {
+		border-color: var(--color-primary);
+		background: var(--color-primary-container);
+		box-shadow: var(--ring-primary);
+	}
+
+	.lang-toggle:active {
+		transform: scale(0.96);
 	}
 
 	.theme-toggle {

@@ -3,26 +3,28 @@
 	import { loadSiteData } from '$lib/data/site-loader';
 	import PortalLayout from '$lib/components/PortalLayout.svelte';
 
-	const cvData = loadCVData();
-	const site = loadSiteData();
-	const focus = getFocusByName('designer');
-	const profileSite = site.nav.profiles.find((p) => p.href.includes('designer'));
+	const cvData = $derived(loadCVData());
+	const site = $derived(loadSiteData());
+	const focus = $derived(getFocusByName('designer'));
+	const profileSite = $derived(site.nav.profiles.find((p) => p.href.includes('designer')));
 
-	const navItems = profileSite
-		? [
-				{ label: profileSite.sections.perfil, href: '#perfil' },
-				{ label: profileSite.sections.habilidades, href: '#habilidades' },
-				{ label: profileSite.sections.experiencia, href: '#experiencia' },
-				{ label: profileSite.sections.educacion, href: '#educacion' }
-			]
-		: [];
+	const navItems = $derived(
+		profileSite
+			? [
+					{ label: profileSite.sections.perfil, href: '#perfil' },
+					{ label: profileSite.sections.habilidades, href: '#habilidades' },
+					{ label: profileSite.sections.experiencia, href: '#experiencia' },
+					{ label: profileSite.sections.educacion, href: '#educacion' }
+				]
+			: []
+	);
 </script>
 
 <svelte:head>
 	<title>{focus?.title} — {cvData.personal.name}</title>
 	<meta
 		name="description"
-		content="CV de {cvData.personal.name} como {focus?.title}. 18 años de experiencia."
+		content="{focus?.title} — {cvData.personal.name}. {site.meta.description}"
 	/>
 </svelte:head>
 
@@ -32,7 +34,7 @@
 		<section class="cv-header" id="perfil">
 			<div class="header-eyebrow">
 				<span class="eyebrow-line"></span>
-				<span class="eyebrow-text">{focus?.title} · 18 Años de Experiencia</span>
+				<span class="eyebrow-text">{focus?.title} · {site.nav.exp_yrs_label}</span>
 				<span class="eyebrow-line"></span>
 			</div>
 
@@ -64,19 +66,19 @@
 
 				<div class="header-right">
 					<div class="info-block">
-						<span class="info-label">Ubicación</span>
+						<span class="info-label">{site.nav.location_label}</span>
 						<span class="info-value">{cvData.personal.location}</span>
 					</div>
 					<div class="info-block">
-						<span class="info-label">Teléfono</span>
+						<span class="info-label">{site.nav.phone_label}</span>
 						<span class="info-value">{cvData.personal.phone}</span>
 					</div>
 					<div class="info-block">
-						<span class="info-label">Experiencia</span>
-						<span class="info-value info-accent">18 años</span>
+						<span class="info-label">{site.nav.exp_title}</span>
+						<span class="info-value info-accent">{site.nav.exp_label}</span>
 					</div>
 					<div class="info-block">
-						<span class="info-label">Graduación</span>
+						<span class="info-label">{site.nav.grad_label}</span>
 						<span class="info-value">2012</span>
 					</div>
 				</div>
@@ -86,7 +88,9 @@
 		<!-- ══ HERRAMIENTAS ══ -->
 		<section class="skills-section" id="habilidades">
 			<div class="section-header">
-				<h2 class="section-title">{profileSite?.sections.habilidades} & Metodología</h2>
+				<h2 class="section-title">
+					{profileSite?.sections.habilidades} & {site.nav.methodology_label}
+				</h2>
 				<div class="section-rule"></div>
 			</div>
 
@@ -109,7 +113,10 @@
 		<!-- ══ TRAYECTORIA ══ -->
 		<section class="experience-section" id="experiencia">
 			<div class="section-header">
-				<h2 class="section-title">{profileSite?.sections.experiencia} Profesional</h2>
+				<h2 class="section-title">
+					{profileSite?.sections.experiencia}
+					{site.nav.professional_label}
+				</h2>
 				<div class="section-rule"></div>
 			</div>
 
@@ -119,7 +126,7 @@
 						<div class="timeline-period">
 							<span class="period-dates">{exp.period}</span>
 							{#if index === 0}
-								<span class="period-badge">Actual</span>
+								<span class="period-badge">{site.nav.current_label}</span>
 							{/if}
 							<span class="period-role">{exp.position}</span>
 						</div>

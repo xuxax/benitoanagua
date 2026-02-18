@@ -3,26 +3,28 @@
 	import { loadSiteData } from '$lib/data/site-loader';
 	import PortalLayout from '$lib/components/PortalLayout.svelte';
 
-	const cvData = loadCVData();
-	const site = loadSiteData();
-	const focus = getFocusByName('graphic');
-	const profileSite = site.nav.profiles.find((p) => p.href.includes('graphic'));
+	const cvData = $derived(loadCVData());
+	const site = $derived(loadSiteData());
+	const focus = $derived(getFocusByName('graphic'));
+	const profileSite = $derived(site.nav.profiles.find((p) => p.href.includes('graphic')));
 
-	const navItems = profileSite
-		? [
-				{ label: profileSite.sections.perfil, href: '#perfil' },
-				{ label: profileSite.sections.habilidades, href: '#habilidades' },
-				{ label: profileSite.sections.experiencia, href: '#experiencia' },
-				{ label: profileSite.sections.educacion, href: '#educacion' }
-			]
-		: [];
+	const navItems = $derived(
+		profileSite
+			? [
+					{ label: profileSite.sections.perfil, href: '#perfil' },
+					{ label: profileSite.sections.habilidades, href: '#habilidades' },
+					{ label: profileSite.sections.experiencia, href: '#experiencia' },
+					{ label: profileSite.sections.educacion, href: '#educacion' }
+				]
+			: []
+	);
 </script>
 
 <svelte:head>
 	<title>{focus?.title} — {cvData.personal.name}</title>
 	<meta
 		name="description"
-		content="CV de {cvData.personal.name} como {focus?.title}. 18 años de experiencia."
+		content="{focus?.title} — {cvData.personal.name}. {site.meta.description}"
 	/>
 </svelte:head>
 
@@ -38,9 +40,12 @@
 			<div class="header-inner">
 				<div class="header-left">
 					<div class="header-label-col">
-						<span class="header-label">Diseño Gráfico</span>
-						<span class="header-label">Digital & Off-set</span>
-						<span class="header-label">18 Años</span>
+						{#if focus?.subtitles}
+							{#each focus.subtitles as sub}
+								<span class="header-label">{sub}</span>
+							{/each}
+						{/if}
+						<span class="header-label">{site.nav.exp_label}</span>
 					</div>
 					<h1 class="header-title">{focus?.title}</h1>
 				</div>
@@ -48,27 +53,27 @@
 				<div class="header-right">
 					<div class="contact-block">
 						<div class="contact-row">
-							<span class="contact-key">Ubicación</span>
+							<span class="contact-key">{site.nav.location_label}</span>
 							<span class="contact-val">{cvData.personal.location}</span>
 						</div>
 						<div class="contact-row">
-							<span class="contact-key">Teléfono</span>
+							<span class="contact-key">{site.nav.phone_label}</span>
 							<span class="contact-val">{cvData.personal.phone}</span>
 						</div>
 						<div class="contact-row">
-							<span class="contact-key">Email</span>
+							<span class="contact-key">{site.nav.email_label}</span>
 							<a class="contact-val contact-link" href="mailto:{cvData.personal.email}"
 								>{cvData.personal.email}</a
 							>
 						</div>
 						<div class="contact-row">
-							<span class="contact-key">Web</span>
+							<span class="contact-key">{site.nav.web_label}</span>
 							<a class="contact-val contact-link" href={cvData.personal.website} target="_blank"
 								>benitoanagua.pages.dev</a
 							>
 						</div>
 						<div class="contact-row">
-							<span class="contact-key">Behance</span>
+							<span class="contact-key">{site.nav.behance_label}</span>
 							<a class="contact-val contact-link" href={cvData.personal.behance} target="_blank"
 								>behance.net/benitoanagua</a
 							>
@@ -89,7 +94,8 @@
 		<section class="skills-section" id="habilidades">
 			<h2 class="section-title">
 				<span class="title-number">I.</span>
-				{profileSite?.sections.habilidades} Técnicas
+				{profileSite?.sections.habilidades}
+				{site.nav.technical_label}
 			</h2>
 
 			<div class="skills-grid">
@@ -117,7 +123,8 @@
 		<section class="experience-section" id="experiencia">
 			<h2 class="section-title">
 				<span class="title-number">II.</span>
-				{profileSite?.sections.experiencia} Laboral
+				{profileSite?.sections.experiencia}
+				{site.nav.laboral_label}
 			</h2>
 
 			<div class="timeline">

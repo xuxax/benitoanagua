@@ -1,0 +1,111 @@
+[meta]
+lang = "en"
+site_name = "Benito Anagua"
+tagline = "Full Stack · UI/UX · Graphic"
+description = "18 years building digital products with structural precision. Available for freelance projects and remote collaborations."
+
+[nav]
+home_label = "Profiles"
+back_label = "Profiles"
+available_label = "Available"
+theme_toggle_aria = "Toggle theme"
+lang_toggle_aria = "Change language"
+exp_yrs_label = "18 Years of Experience"
+exp_label = "18 Years"
+location_label = "Location"
+phone_label = "Phone"
+exp_title = "Experience"
+grad_label = "Graduation"
+hero_eyebrow = "Multidisciplinary Professional Profile"
+specializations_label = "specializations available"
+view_cv_label = "View full CV"
+education_section_title = "Academic Background"
+methodology_label = "Methodology"
+professional_label = "Professional"
+technical_label = "Technical"
+laboral_label = "Experience"
+current_label = "Current"
+items_label = "items"
+engineering_spec_label = "ENGINEERING SPECIFICATION"
+email_label = "Email"
+web_label = "Web"
+behance_label = "Behance"
+
+[[nav.profiles]]
+label = "Full Stack"
+href = "/developer"
+code = "01 / DEV"
+icon = "terminal"
+[nav.profiles.sections]
+perfil = "Profile"
+habilidades = "Stack"
+experiencia = "History"
+educacion = "Education"
+
+[[nav.profiles]]
+label = "UI/UX"
+href = "/designer"
+code = "02 / UX"
+icon = "layers"
+[nav.profiles.sections]
+perfil = "Profile"
+habilidades = "Tools"
+experiencia = "Trajectory"
+educacion = "Education"
+
+[[nav.profiles]]
+label = "Graphic"
+href = "/graphic"
+code = "03 / GFX"
+icon = "draw"
+[nav.profiles.sections]
+perfil = "Profile"
+habilidades = "Capabilities"
+experiencia = "History"
+educacion = "Education"
+
+[footer]
+bio = "18 years building digital products with structural precision. Available for freelance projects and remote collaborations."
+
+[footer.sections.portfolio]
+title = "Portfolio"
+
+[[footer.sections.portfolio.links]]
+label = "Website"
+href_key = "website"
+icon = "language"
+
+[[footer.sections.portfolio.links]]
+label = "Behance"
+href_key = "behance"
+icon = "palette"
+
+[[footer.sections.portfolio.links]]
+label = "GitHub"
+href_key = "github"
+icon = "code"
+
+[footer.sections.contact]
+title = "Contact"
+
+[[footer.sections.contact.links]]
+label = "LinkedIn"
+href_key = "linkedin"
+icon = "open_in_new"
+
+[[footer.sections.contact.links]]
+label = "WhatsApp"
+href_key = "whatsapp"
+icon = "chat"
+accent = true
+
+[[footer.sections.contact.links]]
+label = "Email"
+href_key = "email"
+icon = "mail"
+mailto = true
+
+[[footer.sections.contact.links]]
+label = "Tarija, Bolivia"
+href_key = "maps"
+icon = "location_on"

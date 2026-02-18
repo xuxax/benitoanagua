@@ -32,6 +32,7 @@ export interface Experience {
 export interface Focus {
 	name: string;
 	title: string;
+	subtitles?: string[];
 	summary: string;
 	skills: Skill[];
 	experiences: Experience[];

@@ -3,12 +3,12 @@
 	import { loadSiteData } from '$lib/data/site-loader';
 	import PortalLayout from '$lib/components/PortalLayout.svelte';
 
-	const personal = getPersonalInfo();
-	const focuses = getAllFocuses();
-	const education = getEducation();
-	const site = loadSiteData();
+	const personal = $derived(getPersonalInfo());
+	const focuses = $derived(getAllFocuses());
+	const education = $derived(getEducation());
+	const site = $derived(loadSiteData());
 
-	const navItems = site.nav.profiles.map((p) => ({ label: p.label, href: p.href }));
+	const navItems = $derived(site.nav.profiles.map((p) => ({ label: p.label, href: p.href })));
 
 	function getFocusSiteData(focusName: string) {
 		return (
@@ -32,7 +32,7 @@
 		<section class="hero-section">
 			<div class="hero-eyebrow">
 				<span class="eyebrow-line"></span>
-				<span class="eyebrow-text">Perfil Profesional Multidisciplinario</span>
+				<span class="eyebrow-text">{site.nav.hero_eyebrow}</span>
 			</div>
 
 			<h1 class="hero-name">{personal.name}</h1>
@@ -69,7 +69,7 @@
 		<section class="profiles-section">
 			<div class="profiles-header">
 				<h2 class="profiles-title">{site.nav.home_label}</h2>
-				<span class="profiles-ref">{focuses.length} especializaciones disponibles</span>
+				<span class="profiles-ref">{focuses.length} {site.nav.specializations_label}</span>
 			</div>
 
 			<div class="profiles-grid">
@@ -99,7 +99,7 @@
 						</div>
 
 						<div class="card-cta">
-							<span>Ver CV completo</span>
+							<span>{site.nav.view_cv_label}</span>
 							<span class="material-symbols-outlined">arrow_forward</span>
 						</div>
 					</a>
@@ -110,7 +110,7 @@
 		<!-- Education -->
 		<section class="education-section">
 			<div class="section-header">
-				<h2 class="profiles-title">Formación académica</h2>
+				<h2 class="profiles-title">{site.nav.education_section_title}</h2>
 			</div>
 			<div class="education-grid">
 				{#each education as entry}
