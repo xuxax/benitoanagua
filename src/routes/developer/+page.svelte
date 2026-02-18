@@ -1,822 +1,614 @@
 <script lang="ts">
 	import { loadCVData, getFocusByName } from '$lib/data/cv-loader';
+	import PortalLayout from '$lib/components/PortalLayout.svelte';
 
 	const cvData = loadCVData();
 	const developerFocus = getFocusByName('developer');
 
-	const techStack = [
-		{ name: 'Svelte / SvelteKit', level: 98, label: 'CORE_98%' },
-		{ name: 'C# / .NET Core', level: 95, label: 'CORE_95%' },
-		{ name: 'Vue.js Ecosystem', level: 90, label: 'STABLE_90%' },
-		{ name: 'Blazor / WebAssembly', level: 88, label: 'STABLE_88%' }
+	const navItems = [
+		{ label: '01_Profile', href: '#profile' },
+		{ label: '02_Tech_Stack', href: '#stack' },
+		{ label: '03_Experience', href: '#experience' },
+		{ label: '04_Education', href: '#education' }
 	];
-
-	const primaryEngines = ['SVELTE', 'VUE', '.NET', 'C#'];
 </script>
 
-<div class="blueprint-wrapper">
-	<!-- Header / Identity System -->
-	<header class="blueprint-header">
-		<div class="header-container">
-			<div class="header-left">
-				<div class="identity-logo">
-					<span class="material-symbols-outlined">architecture</span>
-					<div class="corner-dot top-left"></div>
-					<div class="corner-dot bottom-right"></div>
+<PortalLayout {navItems} showBackButton={true}>
+	<div class="profile-grid">
+		<!-- Profile Section -->
+		<section class="profile-section" id="profile">
+			<div class="profile-content">
+				<div class="profile-image">
+					<img
+						src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs6oLpS7hl_pU5OVuwT5G3-daplDGUS9OM7LUYblAGbo_0sgxuwmZ35VqjrEzWzwQaEgxXK9nQ4EGJlSUD_nLxG0QgHrIasz5Sps7mXqkWndXzVjIU2cbiQMCTpjdZAEDopS_YmnKgHObr-Y8LUn3UEjUXOmjh9KMKxQj0FaL0mK6T2FIWYXMq-Q1jlcuItUBiUYPOTkNC9LfMtgRPQwkbAxomowo2a-6mYy8MIA5jtD31ubcc7TbGHHu_GgzxIYq1bkvt9tOQAJGs"
+						alt="Benito Anagua Ibarra"
+					/>
 				</div>
-				<div class="identity-title">
-					<h1>{cvData.personal.name}</h1>
-					<p>Full_Stack_Architect <span class="text-primary">//</span> V18.0_EXPERIENCE</p>
-				</div>
-			</div>
-			<div class="header-right">
-				<div class="status-badge">
-					<span class="status-label">STATUS:</span>
-					<span class="status-value">ACTIVE_SYSTEM</span>
-				</div>
-				<div class="status-badge">
-					<span class="status-label">LOC:</span>
-					<span class="status-value">TAR_BOL</span>
-				</div>
-				<button class="download-btn">
-					<span class="material-symbols-outlined">download</span>
-					GENERATE_REPORT_PDF
-				</button>
-			</div>
-		</div>
-	</header>
-
-	<main class="blueprint-main">
-		<div class="main-container">
-			<div class="content-grid">
-				<!-- Left Column: Specs & Core -->
-				<aside class="left-column">
-					<!-- System Metadata -->
-					<section class="spec-section">
-						<h2 class="section-title">
-							<span class="section-dot"></span>
-							SECTION_00 <span class="text-primary">//</span> SYSTEM_CORE
-						</h2>
-						<div class="metadata-grid">
-							<div class="metadata-cell">
-								<p class="metadata-label">Uptime_Years</p>
-								<p class="metadata-value">18+</p>
-							</div>
-							<div class="metadata-cell">
-								<p class="metadata-label">Architecture</p>
-								<p class="metadata-value">FULLSTACK</p>
-							</div>
-							<div class="metadata-cell full-width">
-								<p class="metadata-label">Primary_Engine</p>
-								<div class="engine-tags">
-									{#each primaryEngines as engine}
-										<span class="engine-tag">{engine}</span>
-									{/each}
-								</div>
-							</div>
-						</div>
-					</section>
-
-					<!-- Technical Stack Matrix -->
-					<section class="spec-section">
-						<h2 class="section-title">
-							<span class="section-dot"></span>
-							SECTION_01 <span class="text-primary">//</span> TECH_STACK
-						</h2>
-						<div class="tech-stack">
-							{#each techStack as tech}
-								<div class="tech-item group">
-									<div class="tech-header">
-										<span class="tech-name">{tech.name}</span>
-										<span class="tech-level">{tech.label}</span>
-									</div>
-									<div class="tech-bar">
-										<div class="tech-fill" style="width: {tech.level}%"></div>
-									</div>
-								</div>
-							{/each}
-						</div>
-					</section>
-
-					<!-- Certification -->
-					<section class="spec-section">
-						<h2 class="section-title">
-							<span class="section-dot"></span>
-							SECTION_02 <span class="text-primary">//</span> CERTIFICATION
-						</h2>
-						<div class="certification-box">
-							<p class="cert-date">Graduation_Date: {cvData.education.year}</p>
-							<p class="cert-degree">{cvData.education.degree}</p>
-							<p class="cert-university">{cvData.education.university}</p>
-						</div>
-					</section>
-				</aside>
-
-				<!-- Right Column: Timeline Log -->
-				<div class="right-column">
-					<h2 class="section-title">
-						<span class="section-dot"></span>
-						SECTION_03 <span class="text-primary">//</span> CHRONOLOGICAL_LOG
+				<div class="profile-info">
+					<div class="profile-badges">
+						<span class="badge badge-primary">STATUS: ACTIVE_ENG</span>
+						<span class="badge badge-secondary">LOC: TARIJA_BOL</span>
+					</div>
+					<h2 class="profile-title">
+						Full Stack<br />
+						<span class="highlight">Systems Engineer</span>
 					</h2>
-					<div class="timeline">
-						{#each developerFocus?.experiences || [] as experience, index}
-							<div class="timeline-entry group">
-								<div class="timeline-dot" class:active={index === 0}></div>
-								<div class="timeline-content">
-									<div class="timeline-header">
-										<span class="timeline-period" class:active={index === 0}
-											>{experience.period}</span
-										>
-										<h3 class="timeline-company">{experience.company}</h3>
-									</div>
-									<div class="timeline-description">
-										<p>{experience.description}</p>
-									</div>
-								</div>
-							</div>
-						{/each}
+					<p class="profile-summary">
+						{developerFocus?.summary}
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Sidebar Stats -->
+		<aside class="stats-sidebar">
+			<div class="stats-card">
+				<span class="stats-label">Experience_Metrics</span>
+				<div class="stats-grid">
+					<div class="stat-item">
+						<div class="stat-value">18</div>
+						<div class="stat-label">Years_Professional</div>
+					</div>
+					<div class="stat-item">
+						<div class="stat-value">150+</div>
+						<div class="stat-label">Projects_Delivered</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</main>
 
-	<!-- Technical Footer -->
-	<footer class="blueprint-footer">
-		<div class="footer-container">
-			<div class="footer-output">
-				<div class="output-header">
-					<span class="material-symbols-outlined">terminal</span>
-					<span class="output-title">SYSTEM_OUTPUT</span>
-				</div>
-				<p class="output-text">
-					This document is a technical architectural report for {cvData.personal.name}. Generated on
-					system timestamp {new Date().toISOString().split('T')[0].replace(/-/g, '.')}.
-				</p>
+			<div class="contact-card">
+				<span class="contact-label">Core_Contact_Data</span>
+				<ul class="contact-list">
+					<li>
+						<span class="material-symbols-outlined">alternate_email</span>
+						<span>{cvData.personal.email}</span>
+					</li>
+					<li>
+						<span class="material-symbols-outlined">location_on</span>
+						<span>{cvData.personal.location}</span>
+					</li>
+					<li>
+						<span class="material-symbols-outlined">language</span>
+						<span>{cvData.personal.github.split('/').pop()}</span>
+					</li>
+				</ul>
 			</div>
-			<div class="footer-meta">
-				<div class="meta-group">
-					<p class="meta-label">Data_Integrity</p>
-					<ul class="meta-list">
-						<li>SHA-256: 9e32f...a12</li>
-						<li>ENCRYPT: RSA_4096</li>
-						<li>STATUS: VERIFIED</li>
-					</ul>
-				</div>
-				<div class="meta-group">
-					<p class="meta-label">Contact_Protocol</p>
-					<ul class="meta-list">
-						<li>METHOD: TCP_IP</li>
-						<li>PORT: 8080</li>
-						<li>SIGNAL: AVAILABLE</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="footer-bottom">
-			<p>© {new Date().getFullYear()} BAI_ARCHITECTURAL_OUTLINE</p>
-			<div class="footer-links">
-				<button type="button">Privacy_Policy</button>
-				<button type="button">System_Logs</button>
-			</div>
-		</div>
-	</footer>
+		</aside>
 
-	<!-- Floating UI Elements -->
-	<div class="floating-actions">
-		<button class="floating-btn" aria-label="Settings">
-			<span class="material-symbols-outlined">settings</span>
-		</button>
-		<button class="floating-btn" aria-label="Scroll to top">
-			<span class="material-symbols-outlined">expand_less</span>
-		</button>
+		<!-- Tech Stack Section -->
+		<section class="stack-section" id="stack">
+			<div class="section-header">
+				<h3 class="section-title">02. Technical_Stack_Matrix</h3>
+				<span class="section-ref">REF_ID: STACK_MATRIX_V4</span>
+			</div>
+
+			<div class="stack-grid">
+				{#if developerFocus?.skills}
+					{#each developerFocus.skills as skillCategory}
+						<div class="stack-card">
+							<div class="stack-card-header">
+								<span class="material-symbols-outlined"
+									>{skillCategory.category === 'Frontend'
+										? 'layers'
+										: skillCategory.category === 'Backend'
+											? 'terminal'
+											: skillCategory.category === 'Datos & DevOps'
+												? 'database'
+												: 'palette'}</span
+								>
+								<h4>{skillCategory.category}</h4>
+							</div>
+							<ul class="stack-list">
+								{#each skillCategory.items as item}
+									<li>
+										<span class="item-name">{item}</span>
+									</li>
+								{/each}
+							</ul>
+						</div>
+					{/each}
+				{/if}
+			</div>
+		</section>
+
+		<!-- Experience Section -->
+		<section class="experience-section" id="experience">
+			<div class="section-header">
+				<h3 class="section-title">03. Professional_Experience</h3>
+			</div>
+
+			<div class="timeline">
+				{#each developerFocus?.experiences || [] as exp, index}
+					<div class="timeline-item" class:active={index === 0}>
+						<div class="timeline-dot"></div>
+						<div class="timeline-content">
+							<div class="timeline-header">
+								<div>
+									<h4 class="company">{exp.company}</h4>
+									<span class="position">{exp.position}</span>
+								</div>
+								<span class="period">{exp.period}</span>
+							</div>
+							<p class="description">{exp.description}</p>
+						</div>
+					</div>
+				{/each}
+			</div>
+		</section>
+
+		<!-- Education Section -->
+		<section class="education-section" id="education">
+			<div class="section-header">
+				<h3 class="section-title">04. Education</h3>
+			</div>
+
+			<div class="education-card">
+				<span class="education-label">Degree_Ref</span>
+				<h4 class="degree">{cvData.education.degree}</h4>
+				<p class="university">{cvData.education.university}</p>
+				<p class="year">Graduation: {cvData.education.year}</p>
+			</div>
+		</section>
 	</div>
-</div>
+</PortalLayout>
 
 <style>
-	.blueprint-wrapper {
-		min-height: 100vh;
-		display: flex;
-		flex-direction: column;
-		background: var(--color-background);
-		position: relative;
-	}
-
-	/* Blueprint Grid Background */
-	.blueprint-wrapper::before {
-		content: '';
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-image: var(--blueprint-grid);
-		background-size: 30px 30px;
-		pointer-events: none;
-		z-index: 0;
-	}
-
-	/* Header */
-	.blueprint-header {
-		position: sticky;
-		top: 0;
-		z-index: 50;
-		background: var(--color-surface-container);
-		backdrop-filter: blur(12px);
-		border-bottom: var(--hairline-border);
-		padding: 1rem 1.5rem;
-	}
-
-	@media (min-width: 768px) {
-		.blueprint-header {
-			padding: 1rem 3rem;
-		}
-	}
-
-	.header-container {
-		max-width: 80rem;
-		margin: 0 auto;
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-	}
-
-	@media (min-width: 768px) {
-		.header-container {
-			flex-direction: row;
-			justify-content: space-between;
-			align-items: center;
-		}
-	}
-
-	.header-left {
-		display: flex;
-		align-items: center;
-		gap: 1.5rem;
-	}
-
-	.identity-logo {
-		position: relative;
-		width: 4rem;
-		height: 4rem;
-		border: 1px solid var(--color-primary);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background: var(--color-primary-container);
-	}
-
-	.identity-logo .material-symbols-outlined {
-		font-size: 2.5rem;
-		color: var(--color-primary);
-	}
-
-	.corner-dot {
-		position: absolute;
-		width: 8px;
-		height: 8px;
-		background: var(--color-primary);
-	}
-
-	.corner-dot.top-left {
-		top: -4px;
-		left: -4px;
-	}
-
-	.corner-dot.bottom-right {
-		bottom: -4px;
-		right: -4px;
-	}
-
-	.identity-title h1 {
-		font-size: 1.5rem;
-		font-weight: 900;
-		color: var(--color-on-surface);
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		margin: 0;
-		line-height: 1;
-	}
-
-	.identity-title p {
-		font-family: var(--font-mono);
-		font-size: 0.75rem;
-		color: var(--color-primary);
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		margin: 0.5rem 0 0 0;
-	}
-
-	.header-right {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-		align-items: center;
-	}
-
-	.status-badge {
-		padding: 0.25rem 0.75rem;
-		border: 1px solid var(--color-outline-variant);
-		background: var(--color-primary-container);
-		border-radius: 2px;
-		font-family: var(--font-mono);
-		font-size: 0.625rem;
-		display: flex;
-		gap: 0.25rem;
-	}
-
-	.status-label {
-		color: var(--color-on-surface-variant);
-	}
-
-	.status-value {
-		color: var(--color-primary);
-	}
-
-	.download-btn {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		background: var(--color-primary);
-		color: var(--color-on-primary);
-		padding: 0.5rem 1rem;
-		font-weight: 700;
-		font-size: 0.75rem;
-		border: none;
-		border-radius: 2px;
-		cursor: pointer;
-		transition: background 0.2s ease;
-	}
-
-	.download-btn:hover {
-		background: var(--color-primary-container);
-	}
-
-	.download-btn .material-symbols-outlined {
-		font-size: 1rem;
-	}
-
-	/* Main Content */
-	.blueprint-main {
-		flex: 1;
-		padding: 3rem 1.5rem;
-		position: relative;
-		z-index: 1;
-	}
-
-	@media (min-width: 768px) {
-		.blueprint-main {
-			padding: 3rem 3rem;
-		}
-	}
-
-	.main-container {
-		max-width: 80rem;
-		margin: 0 auto;
-	}
-
-	.content-grid {
+	.profile-grid {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 3rem;
+		gap: 1px;
+		background: var(--color-outline-variant);
 	}
 
 	@media (min-width: 1024px) {
-		.content-grid {
-			grid-template-columns: 330px 1fr;
+		.profile-grid {
+			grid-template-columns: 2fr 1fr;
 		}
 	}
 
-	.section-title {
-		font-family: var(--font-mono);
-		font-size: 0.75rem;
-		font-weight: 700;
-		color: var(--color-primary);
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		margin-bottom: 1.5rem;
-	}
-
-	.section-dot {
-		width: 6px;
-		height: 6px;
-		background: var(--stroke-primary);
-		border-radius: 50%;
-	}
-
-	/* Left Column */
-	.left-column {
-		display: flex;
-		flex-direction: column;
-		gap: 3rem;
-	}
-
-	.spec-section {
-		background: var(--color-surface-container);
-		padding: 1.5rem;
-		border: var(--hairline-border);
-	}
-
-	.metadata-grid {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 1px;
-		background: var(--color-outline-variant);
-		border: var(--hairline-border);
-	}
-
-	.metadata-cell {
+	/* Profile Section */
+	.profile-section {
 		background: var(--color-surface);
-		padding: 1rem;
-	}
-
-	.metadata-cell.full-width {
-		grid-column: span 2;
-	}
-
-	.metadata-label {
-		font-family: var(--font-mono);
-		font-size: 0.625rem;
-		color: var(--color-on-surface-variant);
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		margin: 0 0 0.25rem 0;
-	}
-
-	.metadata-value {
-		font-size: 1.5rem;
-		font-weight: 900;
-		color: var(--color-on-surface);
-		font-style: italic;
-		margin: 0;
-	}
-
-	.engine-tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-		margin-top: 0.5rem;
-	}
-
-	.engine-tag {
-		font-family: var(--font-mono);
-		font-size: 0.625rem;
-		padding: 0.125rem 0.5rem;
-		background: var(--color-primary-container);
-		color: var(--color-primary);
-		border: 1px solid var(--color-outline-variant);
-	}
-
-	/* Tech Stack */
-	.tech-stack {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-		font-family: var(--font-mono);
-	}
-
-	.tech-item {
-		border-left: 2px solid var(--color-outline-variant);
-		padding-left: 1rem;
-		transition: border-color 0.3s ease;
-	}
-
-	.tech-item:hover {
-		border-color: var(--color-primary);
-	}
-
-	.tech-header {
-		display: flex;
-		justify-content: space-between;
-		align-items: flex-end;
-		margin-bottom: 0.25rem;
-	}
-
-	.tech-name {
-		font-size: 0.875rem;
-		font-weight: 700;
-		color: var(--color-on-surface);
-		letter-spacing: 0.025em;
-	}
-
-	.tech-level {
-		font-size: 0.625rem;
-		color: var(--color-primary);
-	}
-
-	.tech-bar {
-		width: 100%;
-		background: var(--color-surface-variant);
-		height: 4px;
-	}
-
-	.tech-fill {
-		height: 100%;
-		background: var(--color-primary);
-		box-shadow: 0 0 8px color-mix(in srgb, var(--color-primary) 50%, transparent);
-	}
-
-	/* Certification */
-	.certification-box {
-		padding: 1rem;
-		border: 1px dashed var(--color-outline-variant);
-		background: var(--color-primary-container);
-		border-radius: 2px;
-	}
-
-	.cert-date {
-		font-family: var(--font-mono);
-		font-size: 0.625rem;
-		color: var(--color-primary);
-		text-transform: uppercase;
-		margin: 0 0 0.5rem 0;
-	}
-
-	.cert-degree {
-		font-weight: 700;
-		color: var(--color-on-surface);
-		margin: 0 0 0.25rem 0;
-		font-size: 0.875rem;
-	}
-
-	.cert-university {
-		font-family: var(--font-mono);
-		font-size: 0.75rem;
-		color: var(--color-on-surface-variant);
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		margin: 0;
-	}
-
-	/* Right Column - Timeline */
-	.right-column {
-		padding-top: 0;
-	}
-
-	.timeline {
-		position: relative;
-		border-left: 1px solid var(--color-outline-variant);
-		margin-left: 0.5rem;
-		padding-left: 2rem;
-	}
-
-	.timeline-entry {
-		position: relative;
-		padding-bottom: 4rem;
-	}
-
-	.timeline-entry:last-child {
-		padding-bottom: 0;
-	}
-
-	.timeline-dot {
-		position: absolute;
-		left: -2rem;
-		top: 0;
-		width: 12px;
-		height: 12px;
-		background: var(--color-surface);
-		border: 2px solid var(--color-outline-variant);
-		border-radius: 50%;
-		transition:
-			border-color 0.3s ease,
-			transform 0.3s ease;
-	}
-
-	.timeline-entry:hover .timeline-dot {
-		border-color: var(--color-primary);
-	}
-
-	.timeline-dot.active {
-		background: var(--color-primary);
-		border-color: var(--color-primary);
-		transform: scale(1.25);
-	}
-
-	.timeline-header {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-		margin-bottom: 1rem;
+		padding: 2rem;
 	}
 
 	@media (min-width: 768px) {
-		.timeline-header {
-			flex-direction: row;
-			align-items: center;
+		.profile-section {
+			padding: 3rem;
 		}
 	}
 
-	.timeline-period {
-		font-family: var(--font-mono);
-		font-size: 0.75rem;
-		padding: 0.125rem 0.5rem;
-		background: var(--color-surface-container);
-		color: var(--color-on-surface-variant);
-		border-radius: 2px;
-		width: fit-content;
-	}
-
-	.timeline-period.active {
-		background: var(--color-primary-container);
-		color: var(--color-primary);
-	}
-
-	.timeline-company {
-		font-size: 1.25rem;
-		font-weight: 900;
-		color: var(--color-on-surface);
-		text-transform: uppercase;
-		font-style: italic;
-		letter-spacing: 0.025em;
-		margin: 0;
-	}
-
-	.timeline-description {
-		background: var(--color-surface-container);
-		padding: 1.5rem;
-		border: 1px solid var(--color-outline-variant);
-		border-radius: 4px;
-		transition: border-color 0.3s ease;
-	}
-
-	.timeline-entry:hover .timeline-description {
-		border-color: var(--color-primary);
-	}
-
-	.timeline-description p {
-		font-family: var(--font-mono);
-		font-size: 0.875rem;
-		color: var(--color-on-surface-variant);
-		line-height: 1.6;
-		margin: 0;
-	}
-
-	/* Footer */
-	.blueprint-footer {
-		border-top: var(--hairline-border);
-		background: var(--color-surface);
-		padding: 3rem 1.5rem;
-		position: relative;
-		z-index: 1;
-	}
-
-	@media (min-width: 768px) {
-		.blueprint-footer {
-			padding: 3rem 3rem;
-		}
-	}
-
-	.footer-container {
-		max-width: 80rem;
-		margin: 0 auto;
+	.profile-content {
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;
 	}
 
 	@media (min-width: 768px) {
-		.footer-container {
+		.profile-content {
 			flex-direction: row;
-			justify-content: space-between;
-			align-items: flex-end;
+			gap: 3rem;
 		}
 	}
 
-	.footer-output {
-		font-family: var(--font-mono);
-		max-width: 300px;
+	.profile-image {
+		width: 120px;
+		height: 120px;
+		flex-shrink: 0;
+		border: 1px solid var(--color-outline-variant);
+		overflow: hidden;
+		background: var(--color-surface-variant);
 	}
 
-	.output-header {
+	.profile-image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		filter: grayscale(100%);
+	}
+
+	.profile-info {
+		flex: 1;
+	}
+
+	.profile-badges {
 		display: flex;
-		align-items: center;
+		flex-wrap: wrap;
 		gap: 0.5rem;
-		color: var(--color-primary);
-		margin-bottom: 0.5rem;
+		margin-bottom: 1.5rem;
 	}
 
-	.output-header .material-symbols-outlined {
-		font-size: 1rem;
-	}
-
-	.output-title {
-		font-size: 0.75rem;
-		font-weight: 700;
-	}
-
-	.output-text {
+	.badge {
 		font-size: 0.625rem;
+		font-weight: 700;
+		padding: 0.25rem 0.5rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.badge-primary {
+		background: var(--color-primary-container);
+		color: var(--color-primary);
+	}
+
+	.badge-secondary {
+		background: var(--color-surface-variant);
 		color: var(--color-on-surface-variant);
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		line-height: 1.6;
-		margin: 0;
 	}
 
-	.footer-meta {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 3rem;
-		font-family: var(--font-mono);
-	}
-
-	.meta-label {
-		font-size: 0.625rem;
-		color: var(--color-primary);
+	.profile-title {
+		font-size: clamp(2rem, 5vw, 3rem);
+		font-weight: 900;
 		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		font-weight: 700;
+		letter-spacing: -0.02em;
+		line-height: 1;
 		margin: 0 0 1rem 0;
+		color: var(--color-on-surface);
 	}
 
-	.meta-list {
+	.profile-title .highlight {
+		color: var(--color-primary);
+	}
+
+	.profile-summary {
+		font-size: 0.875rem;
+		line-height: 1.7;
+		color: var(--color-on-surface-variant);
+		margin: 0;
+		max-width: 48rem;
+	}
+
+	/* Sidebar Stats */
+	.stats-sidebar {
+		background: var(--color-surface);
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	@media (min-width: 1024px) {
+		.stats-sidebar {
+			grid-column: 2;
+			grid-row: 1 / 3;
+		}
+	}
+
+	.stats-card,
+	.contact-card {
+		border: 1px solid var(--color-outline-variant);
+		padding: 1.5rem;
+	}
+
+	.stats-label,
+	.contact-label {
+		display: block;
+		font-size: 0.625rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--color-on-surface-variant);
+		margin-bottom: 1rem;
+	}
+
+	.stats-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+	}
+
+	.stat-item {
+		border-left: 2px solid var(--color-primary);
+		padding-left: 0.75rem;
+	}
+
+	.stat-value {
+		font-size: 1.75rem;
+		font-weight: 900;
+		line-height: 1;
+		color: var(--color-on-surface);
+	}
+
+	.stat-label {
+		font-size: 0.5625rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--color-on-surface-variant);
+		margin-top: 0.25rem;
+	}
+
+	.contact-list {
 		list-style: none;
 		padding: 0;
 		margin: 0;
-		font-size: 0.625rem;
-		color: var(--color-on-surface-variant);
 		display: flex;
 		flex-direction: column;
-		gap: 0.25rem;
+		gap: 0.75rem;
 	}
 
-	.footer-bottom {
-		max-width: 80rem;
-		margin: 3rem auto 0;
-		padding-top: 2rem;
-		border-top: 1px solid var(--color-outline-variant);
+	.contact-list li {
 		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-		font-family: var(--font-mono);
-		font-size: 0.625rem;
-		color: var(--color-on-surface-variant);
-		text-transform: uppercase;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.75rem;
+		font-weight: 500;
+	}
+
+	.contact-list .material-symbols-outlined {
+		font-size: 1rem;
+		color: var(--color-primary);
+	}
+
+	/* Stack Section */
+	.stack-section {
+		background: var(--color-surface);
+		padding: 2rem;
 	}
 
 	@media (min-width: 768px) {
-		.footer-bottom {
-			flex-direction: row;
-			justify-content: space-between;
-			align-items: center;
+		.stack-section {
+			padding: 3rem;
 		}
 	}
 
-	.footer-links {
-		display: flex;
-		gap: 1rem;
+	@media (min-width: 1024px) {
+		.stack-section {
+			grid-column: 1 / 3;
+		}
 	}
 
-	.footer-links button {
-		color: var(--color-on-surface-variant);
-		background: none;
-		border: none;
-		font-family: var(--font-mono);
-		font-size: 0.625rem;
-		cursor: pointer;
-		transition: color 0.2s ease;
-	}
-
-	.footer-links button:hover {
-		color: var(--color-primary);
-	}
-
-	/* Floating Actions */
-	.floating-actions {
-		position: fixed;
-		bottom: 2rem;
-		right: 2rem;
-		z-index: 100;
+	.section-header {
 		display: flex;
 		flex-direction: column;
-		gap: 1rem;
+		gap: 0.5rem;
+		margin-bottom: 2rem;
 	}
 
-	.floating-btn {
-		width: 2.5rem;
-		height: 2.5rem;
-		border: var(--hairline-border);
-		background: var(--color-surface-container);
-		backdrop-filter: blur(8px);
+	@media (min-width: 768px) {
+		.section-header {
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+		}
+	}
+
+	.section-title {
+		font-size: 1.5rem;
+		font-weight: 900;
+		text-transform: uppercase;
+		letter-spacing: -0.02em;
+		margin: 0;
+		color: var(--color-on-surface);
+	}
+
+	.section-ref {
+		font-size: 0.625rem;
+		font-family: var(--font-mono);
+		color: var(--color-on-surface-variant);
+	}
+
+	.stack-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1px;
+		background: var(--color-outline-variant);
+		border: 1px solid var(--color-outline-variant);
+	}
+
+	@media (min-width: 768px) {
+		.stack-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.stack-grid {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+
+	.stack-card {
+		background: var(--color-surface);
+		padding: 1.5rem;
+	}
+
+	.stack-card-header {
 		display: flex;
 		align-items: center;
-		justify-content: center;
-		cursor: pointer;
-		color: var(--color-primary);
-		transition: background 0.2s ease;
+		gap: 0.5rem;
+		margin-bottom: 1rem;
 	}
 
-	.floating-btn:hover {
-		background: var(--color-primary-container);
-	}
-
-	.floating-btn .material-symbols-outlined {
+	.stack-card-header .material-symbols-outlined {
 		font-size: 1.25rem;
+		color: var(--color-primary);
 	}
 
-	.text-primary {
+	.stack-card-header h4 {
+		font-size: 0.75rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		margin: 0;
+		color: var(--color-on-surface);
+	}
+
+	.stack-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.stack-list li {
+		font-size: 0.75rem;
+		font-weight: 500;
+		color: var(--color-on-surface-variant);
+		padding-bottom: 0.5rem;
+		border-bottom: 1px solid var(--color-surface-variant);
+	}
+
+	.stack-list li:last-child {
+		border-bottom: none;
+	}
+
+	/* Experience Section */
+	.experience-section {
+		background: var(--color-surface);
+		padding: 2rem;
+	}
+
+	@media (min-width: 768px) {
+		.experience-section {
+			padding: 3rem;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.experience-section {
+			grid-column: 1 / 3;
+		}
+	}
+
+	.timeline {
+		position: relative;
+		padding-left: 2rem;
+		border-left: 2px solid var(--color-primary);
+	}
+
+	.timeline-item {
+		position: relative;
+		padding-bottom: 3rem;
+	}
+
+	.timeline-item:last-child {
+		padding-bottom: 0;
+	}
+
+	.timeline-dot {
+		position: absolute;
+		left: -2.25rem;
+		top: 0;
+		width: 0.5rem;
+		height: 0.5rem;
+		border-radius: 50%;
+		background: var(--color-outline-variant);
+	}
+
+	.timeline-item.active .timeline-dot {
+		background: var(--color-primary);
+		transform: scale(1.5);
+	}
+
+	.timeline-content {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.timeline-header {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	@media (min-width: 768px) {
+		.timeline-header {
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: flex-start;
+		}
+	}
+
+	.company {
+		font-size: 1rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		margin: 0;
+		color: var(--color-on-surface);
+	}
+
+	.position {
+		font-size: 0.75rem;
+		font-weight: 600;
 		color: var(--color-primary);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.period {
+		font-size: 0.625rem;
+		font-family: var(--font-mono);
+		padding: 0.25rem 0.5rem;
+		background: var(--color-surface-variant);
+		color: var(--color-on-surface-variant);
+		white-space: nowrap;
+	}
+
+	.description {
+		font-size: 0.8125rem;
+		line-height: 1.7;
+		color: var(--color-on-surface-variant);
+		margin: 0;
+		max-width: 56rem;
+	}
+
+	/* Education Section */
+	.education-section {
+		background: var(--color-surface);
+		padding: 2rem;
+	}
+
+	@media (min-width: 768px) {
+		.education-section {
+			padding: 3rem;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.education-section {
+			grid-column: 1 / 3;
+		}
+	}
+
+	.education-card {
+		border: 1px solid var(--color-outline-variant);
+		padding: 1.5rem;
+		max-width: 32rem;
+	}
+
+	.education-label {
+		display: block;
+		font-size: 0.625rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--color-on-surface-variant);
+		margin-bottom: 1rem;
+	}
+
+	.degree {
+		font-size: 1.25rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		margin: 0 0 0.5rem 0;
+		color: var(--color-on-surface);
+	}
+
+	.university {
+		font-size: 0.875rem;
+		font-weight: 600;
+		color: var(--color-primary);
+		margin: 0;
+	}
+
+	.year {
+		font-size: 0.75rem;
+		font-family: var(--font-mono);
+		color: var(--color-on-surface-variant);
+		margin: 0.5rem 0 0 0;
 	}
 </style>

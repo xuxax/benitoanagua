@@ -33,11 +33,6 @@
 			localStorage.setItem('theme', theme);
 		}
 	}
-
-	function toggleTheme() {
-		currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-		applyTheme(currentTheme);
-	}
 </script>
 
 <svelte:head>
@@ -50,59 +45,6 @@
 	/>
 </svelte:head>
 
-<div class="architectural-outline" data-theme={currentTheme}>
+<div data-theme={currentTheme}>
 	{@render children()}
-
-	<!-- Theme Toggle (Floating) -->
-	<button
-		class="theme-toggle"
-		onclick={toggleTheme}
-		aria-label="Toggle theme"
-		title={currentTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-	>
-		{#if currentTheme === 'dark'}
-			<span class="material-symbols-outlined">light_mode</span>
-		{:else}
-			<span class="material-symbols-outlined">dark_mode</span>
-		{/if}
-	</button>
 </div>
-
-<style>
-	.architectural-outline {
-		min-height: 100vh;
-		background-color: var(--color-background);
-		color: var(--color-on-background);
-		background-image: var(--blueprint-grid);
-		background-size: 40px 40px;
-	}
-
-	/* Theme Toggle Button */
-	.theme-toggle {
-		position: fixed;
-		bottom: 2rem;
-		right: 2rem;
-		z-index: 100;
-		width: 3rem;
-		height: 3rem;
-		border: var(--hairline-border);
-		background: var(--color-surface-container);
-		backdrop-filter: blur(8px);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		cursor: pointer;
-		color: var(--color-primary);
-		transition: all 0.2s ease;
-		border-radius: 2px;
-	}
-
-	.theme-toggle:hover {
-		background: var(--color-primary-container);
-		border-color: var(--color-primary);
-	}
-
-	.theme-toggle .material-symbols-outlined {
-		font-size: 1.5rem;
-	}
-</style>

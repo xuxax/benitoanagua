@@ -1,8 +1,15 @@
 <script lang="ts">
 	import { loadCVData, getAllFocuses } from '$lib/data/cv-loader';
+	import PortalLayout from '$lib/components/PortalLayout.svelte';
 
 	const cvData = loadCVData();
 	const focuses = getAllFocuses();
+
+	const navItems = [
+		{ label: 'Full Stack', href: '/developer' },
+		{ label: 'UI/UX', href: '/designer' },
+		{ label: 'Graphic', href: '/graphic' }
+	];
 
 	function getFocusRoute(focusName: string): string {
 		switch (focusName) {
@@ -14,19 +21,6 @@
 				return '/graphic';
 			default:
 				return '/';
-		}
-	}
-
-	function getFocusNumber(focusName: string): string {
-		switch (focusName) {
-			case 'developer':
-				return '01';
-			case 'designer':
-				return '02';
-			case 'graphic':
-				return '03';
-			default:
-				return '00';
 		}
 	}
 
@@ -44,589 +38,376 @@
 	}
 </script>
 
-<div class="portal-wrapper">
-	<!-- Top Navigation Bar -->
-	<header class="portal-header">
-		<div class="header-container">
-			<div class="header-left">
-				<div class="logo-icon">
-					<span class="material-symbols-outlined">architecture</span>
-					<div class="corner-dot"></div>
+<PortalLayout {navItems}>
+	<div class="home-grid">
+		<!-- Header Section -->
+		<section class="header-section">
+			<div class="header-content">
+				<div class="header-title-block">
+					<span class="header-label">
+						<span class="material-symbols-outlined">architecture</span>
+						<span>System v1.0 // Scale 1:1</span>
+					</span>
+					<h1 class="header-name">
+						Benito<br />Anagua Ibarra
+					</h1>
 				</div>
-				<div class="header-title">
-					<h1>{cvData.personal.name}</h1>
-					<p>Lead Architect / Project ID: CV-2024</p>
-				</div>
-			</div>
-			<div class="header-right">
-				<div class="status-group">
-					<span class="status-label">Status</span>
-					<span class="status-value">Active_System</span>
-				</div>
-				<div class="status-group">
-					<span class="status-label">Scale</span>
-					<span class="status-value">1:1_Digital</span>
-				</div>
-				<div class="status-group">
-					<span class="status-label">Revision</span>
-					<span class="status-value">04.2024</span>
+				<div class="header-status">
+					<div class="status-block">
+						<span class="status-dot"></span>
+						<span>Live System Online</span>
+					</div>
+					<div class="location-block">
+						<p class="location-main">Tarija, Bolivia</p>
+						<p class="location-coords">COORD: 21.532° S, 64.719° W</p>
+					</div>
 				</div>
 			</div>
+		</section>
+
+		<!-- Main Content Grid -->
+		<div class="main-grid">
+			<!-- Left Sidebar: Contact -->
+			<aside class="sidebar">
+				<div class="contact-card">
+					<div class="contact-id">ID-8821</div>
+
+					<div class="contact-section">
+						<span class="contact-label">Phone_Ref</span>
+						<p class="contact-value">{cvData.personal.phone}</p>
+					</div>
+
+					<div class="contact-section">
+						<span class="contact-label">Email_Address</span>
+						<p class="contact-value">{cvData.personal.email}</p>
+					</div>
+
+					<div class="contact-section">
+						<span class="contact-label">Location</span>
+						<p class="contact-value">{cvData.personal.location}</p>
+					</div>
+				</div>
+			</aside>
+
+			<!-- Right: Profile Cards -->
+			<section class="cards-section">
+				<div class="cards-grid">
+					{#each focuses as focus, index}
+						<a href={getFocusRoute(focus.name)} class="profile-card">
+							<div class="card-header">
+								<span class="card-number">{String(index + 1).padStart(2, '0')}</span>
+								<span class="material-symbols-outlined card-icon">{getFocusIcon(focus.name)}</span>
+							</div>
+							<div class="card-content">
+								<h3 class="card-title">{focus.title}</h3>
+								<p class="card-subtitle">{focus.summary.slice(0, 80)}...</p>
+								<div class="card-skills">
+									{#each focus.skills.slice(0, 2) as skill}
+										<span class="skill-tag">{skill.category}</span>
+									{/each}
+								</div>
+							</div>
+						</a>
+					{/each}
+				</div>
+			</section>
 		</div>
-	</header>
-
-	<main class="portal-main">
-		<!-- Hero Section -->
-		<section class="hero-section">
-			<div class="hero-accent"></div>
-			<h2 class="hero-title">
-				ARCHITECTURAL<br />OUTLINE
-			</h2>
-			<div class="hero-contact">
-				<div class="contact-badge">
-					<span class="material-symbols-outlined">mail</span>
-					<span>{cvData.personal.email}</span>
-				</div>
-				<div class="contact-badge">
-					<span class="material-symbols-outlined">location_on</span>
-					<span>{cvData.personal.location}</span>
-				</div>
-			</div>
-		</section>
-
-		<!-- 3 Entry Points -->
-		<section class="entry-grid">
-			{#each focuses as focus}
-				<a href={getFocusRoute(focus.name)} class="entry-card group">
-					<div class="entry-number">{getFocusNumber(focus.name)}</div>
-					<div class="entry-content">
-						<span class="material-symbols-outlined entry-icon">{getFocusIcon(focus.name)}</span>
-						<h3 class="entry-title">{focus.title}</h3>
-						<p class="entry-subtitle">{focus.summary.slice(0, 50)}...</p>
-						<div class="entry-divider"></div>
-						<ul class="entry-skills">
-							{#each focus.skills.slice(0, 3) as skillCategory}
-								<li>&gt; {skillCategory.category.toUpperCase().replace(/_/g, ' ')}</li>
-							{/each}
-						</ul>
-					</div>
-					<div class="entry-corner"></div>
-				</a>
-			{/each}
-		</section>
-
-		<!-- Footer Section -->
-		<footer class="portal-footer">
-			<div class="footer-specs">
-				<span class="specs-label">Project Specs</span>
-				<div class="specs-grid">
-					<div class="spec-item">
-						<span class="spec-key">Email_Ref</span>
-						<span class="spec-value">{cvData.personal.email}</span>
-					</div>
-					<div class="spec-item">
-						<span class="spec-key">Network_01</span>
-						<span class="spec-value">LinkedIn/BAI</span>
-					</div>
-					<div class="spec-item">
-						<span class="spec-key">Network_02</span>
-						<span class="spec-value">GitHub/BAI-ARCH</span>
-					</div>
-				</div>
-			</div>
-			<button class="download-btn">
-				Download PDF Specifications
-				<span class="material-symbols-outlined">download</span>
-			</button>
-		</footer>
-	</main>
-
-	<!-- Blueprint Visual Elements -->
-	<div class="blueprint-overlay">
-		<div class="measure-line horizontal top-1"></div>
-		<div class="measure-line horizontal top-2"></div>
-		<div class="measure-line vertical left-1"></div>
-		<div class="measure-line vertical left-2"></div>
-		<div class="coord-marker top-left">X: 0.000<br />Y: 1.000</div>
-		<div class="coord-marker top-right">X: 1.000<br />Y: 1.000</div>
-		<div class="coord-marker bottom-left">X: 0.000<br />Y: 0.000</div>
-		<div class="coord-marker bottom-right">X: 1.000<br />Y: 0.000</div>
 	</div>
-</div>
+</PortalLayout>
 
 <style>
-	.portal-wrapper {
-		min-height: 100vh;
-		display: flex;
-		flex-direction: column;
-		background-color: var(--color-background);
-		background-image: var(--blueprint-grid);
-		background-size: 40px 40px;
-		color: var(--color-on-background);
-		position: relative;
-		overflow-x: hidden;
-	}
-
-	/* Header */
-	.portal-header {
-		position: relative;
-		z-index: 10;
-		border-bottom: 1px solid var(--stroke-outline);
-		background-color: var(--color-surface-container);
-		backdrop-filter: blur(8px);
-		padding: 1rem 1.5rem;
-	}
-
-	@media (min-width: 768px) {
-		.portal-header {
-			padding: 1rem 3rem;
-		}
-	}
-
-	.header-container {
-		max-width: 80rem;
-		margin: 0 auto;
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-	}
-
-	@media (min-width: 768px) {
-		.header-container {
-			flex-direction: row;
-			justify-content: space-between;
-			align-items: center;
-		}
-	}
-
-	.header-left {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-	}
-
-	.logo-icon {
-		position: relative;
-		width: 2.5rem;
-		height: 2.5rem;
-		border: 1px solid var(--color-primary);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.logo-icon .material-symbols-outlined {
-		font-size: 1.25rem;
-		color: var(--color-primary);
-	}
-
-	.corner-dot {
-		position: absolute;
-		top: -3px;
-		left: -3px;
-		width: 6px;
-		height: 6px;
-		background: var(--color-primary);
-	}
-
-	.header-title h1 {
-		font-size: 1.25rem;
-		font-weight: 900;
-		color: var(--color-on-surface);
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		margin: 0;
-	}
-
-	.header-title p {
-		font-size: 0.625rem;
-		color: var(--color-primary);
-		font-weight: 500;
-		letter-spacing: 0.2em;
-		margin: 0.25rem 0 0 0;
-	}
-
-	.header-right {
-		display: none;
-		gap: 2rem;
-	}
-
-	@media (min-width: 768px) {
-		.header-right {
-			display: flex;
-		}
-	}
-
-	.status-group {
-		display: flex;
-		flex-direction: column;
-		font-size: 0.6875rem;
-		font-family: var(--font-mono);
-		color: var(--stroke-secondary);
-		padding-left: 2rem;
-		border-left: 1px solid var(--stroke-outline);
-	}
-
-	.status-label {
-		font-size: 0.5625rem;
-		opacity: 0.5;
-		text-transform: uppercase;
-	}
-
-	.status-value {
-		color: var(--color-on-surface);
-		font-weight: 500;
-	}
-
-	/* Main */
-	.portal-main {
-		flex: 1;
-		max-width: 80rem;
-		margin: 0 auto;
-		padding: 4rem 1.5rem;
-		width: 100%;
-	}
-
-	@media (min-width: 768px) {
-		.portal-main {
-			padding: 4rem 3rem;
-		}
-	}
-
-	/* Hero */
-	.hero-section {
-		position: relative;
-		margin-bottom: 5rem;
-		padding-left: 1.5rem;
-	}
-
-	.hero-accent {
-		position: absolute;
-		left: 0;
-		top: 0;
-		bottom: 0;
-		width: 1px;
-		background: linear-gradient(
-			to bottom,
-			var(--color-primary),
-			var(--stroke-tertiary),
-			transparent
-		);
-	}
-
-	.hero-title {
-		font-size: clamp(3rem, 10vw, 8rem);
-		font-weight: 900;
-		text-transform: uppercase;
-		letter-spacing: -0.02em;
-		line-height: 0.9;
-		margin: 0;
-		color: var(--color-on-surface);
-		opacity: 0.15;
-		-webkit-text-stroke: 1px var(--stroke-tertiary);
-	}
-
-	@media (min-width: 768px) {
-		.hero-title {
-			opacity: 0.4;
-		}
-	}
-
-	.hero-contact {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.75rem;
-		margin-top: 2rem;
-	}
-
-	.contact-badge {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		padding: 0.5rem 0.75rem;
-		background: var(--color-surface-container);
-		border: 1px solid var(--stroke-outline);
-		font-size: 0.75rem;
-		font-family: var(--font-mono);
-		letter-spacing: 0.05em;
-	}
-
-	.contact-badge .material-symbols-outlined {
-		font-size: 1rem;
-		color: var(--color-primary);
-	}
-
-	/* Entry Grid */
-	.entry-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		border: 1px solid var(--stroke-outline);
-		background: var(--color-surface-container);
-	}
-
-	@media (min-width: 768px) {
-		.entry-grid {
-			grid-template-columns: repeat(3, 1fr);
-		}
-	}
-
-	.entry-card {
-		position: relative;
-		padding: 2.5rem;
-		text-decoration: none;
-		color: inherit;
-		overflow: hidden;
-		transition: background-color 0.3s ease;
-		border-bottom: 1px solid var(--stroke-outline);
-	}
-
-	@media (min-width: 768px) {
-		.entry-card:not(:last-child) {
-			border-right: 1px solid var(--stroke-outline);
-			border-bottom: none;
-		}
-	}
-
-	.entry-card:hover {
-		background: var(--color-surface-container-high);
-	}
-
-	.entry-number {
-		position: absolute;
-		top: 1rem;
-		right: 1rem;
-		font-size: 2.5rem;
-		font-weight: 900;
-		font-family: var(--font-mono);
-		color: var(--color-primary);
-		opacity: 0.2;
-		transition: opacity 0.3s ease;
-	}
-
-	.entry-card:hover .entry-number {
-		opacity: 1;
-	}
-
-	.entry-content {
-		position: relative;
-		z-index: 1;
-	}
-
-	.entry-icon {
-		font-size: 2.5rem;
-		color: var(--color-primary);
-		margin-bottom: 1.5rem;
-	}
-
-	.entry-title {
-		font-size: 1.5rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		margin: 0 0 0.5rem 0;
-		color: var(--color-on-surface);
-	}
-
-	.entry-subtitle {
-		font-size: 0.875rem;
-		color: var(--stroke-secondary);
-		font-weight: 500;
-		letter-spacing: 0.05em;
-		margin: 0 0 2rem 0;
-	}
-
-	.entry-divider {
-		height: 1px;
-		background: var(--stroke-outline);
-		margin-bottom: 1.5rem;
-		transition: background-color 0.3s ease;
-	}
-
-	.entry-card:hover .entry-divider {
-		background: var(--color-primary);
-	}
-
-	.entry-skills {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		font-size: 0.6875rem;
-		font-family: var(--font-mono);
-		opacity: 0.6;
-		transition: opacity 0.3s ease;
-	}
-
-	.entry-card:hover .entry-skills {
-		opacity: 1;
-	}
-
-	.entry-skills li {
-		margin-bottom: 0.5rem;
-	}
-
-	.entry-corner {
-		position: absolute;
-		bottom: -0.5rem;
-		left: -0.5rem;
-		width: 2rem;
-		height: 2rem;
-		border-top: 1px solid var(--stroke-tertiary);
-		border-right: 1px solid var(--stroke-tertiary);
-		transition: border-color 0.3s ease;
-	}
-
-	.entry-card:hover .entry-corner {
-		border-color: var(--color-primary);
-	}
-
-	/* Footer */
-	.portal-footer {
+	.home-grid {
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;
-		padding-top: 2.5rem;
-		border-top: 1px solid var(--stroke-outline);
-		margin-top: 5rem;
+	}
+
+	/* Header Section */
+	.header-section {
+		border-bottom: 1px solid var(--color-outline-variant);
+		padding-bottom: 2rem;
+	}
+
+	.header-content {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
 	}
 
 	@media (min-width: 768px) {
-		.portal-footer {
+		.header-content {
 			flex-direction: row;
 			justify-content: space-between;
 			align-items: flex-end;
 		}
 	}
 
-	.footer-specs {
-		flex: 1;
-	}
-
-	.specs-label {
-		font-size: 0.625rem;
-		font-family: var(--font-mono);
-		color: var(--color-primary);
-		letter-spacing: 0.3em;
-		text-transform: uppercase;
-		display: block;
-		margin-bottom: 1rem;
-	}
-
-	.specs-grid {
+	.header-label {
 		display: flex;
-		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.625rem;
+		font-weight: 700;
+		color: var(--color-primary);
+		text-transform: uppercase;
+		letter-spacing: 0.2em;
+		margin-bottom: 0.75rem;
+	}
+
+	.header-label .material-symbols-outlined {
+		font-size: 1rem;
+	}
+
+	.header-name {
+		font-size: clamp(2.5rem, 8vw, 4.5rem);
+		font-weight: 900;
+		text-transform: uppercase;
+		letter-spacing: -0.02em;
+		line-height: 0.9;
+		margin: 0;
+		color: var(--color-on-surface);
+	}
+
+	.header-status {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.status-block {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.status-dot {
+		width: 0.5rem;
+		height: 0.5rem;
+		background: var(--color-primary);
+		border-radius: 50%;
+		animation: pulse 2s ease-in-out infinite;
+	}
+
+	@keyframes pulse {
+		0%,
+		100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0.5;
+		}
+	}
+
+	.status-block span:last-child {
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--color-primary);
+	}
+
+	.location-block {
+		text-align: right;
+	}
+
+	.location-main {
+		font-size: 0.875rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		margin: 0;
+		color: var(--color-on-surface);
+	}
+
+	.location-coords {
+		font-size: 0.6875rem;
+		font-family: var(--font-mono);
+		color: var(--color-on-surface-variant);
+		margin: 0.25rem 0 0 0;
+	}
+
+	/* Main Grid */
+	.main-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+
+	@media (min-width: 1024px) {
+		.main-grid {
+			grid-template-columns: 280px 1fr;
+		}
+	}
+
+	/* Sidebar */
+	.sidebar {
+		display: none;
+	}
+
+	@media (min-width: 1024px) {
+		.sidebar {
+			display: block;
+		}
+	}
+
+	.contact-card {
+		position: relative;
+		border: 1px solid var(--color-outline-variant);
+		background: var(--color-surface-container);
+		padding: 1.5rem;
+	}
+
+	.contact-id {
+		position: absolute;
+		top: 0.5rem;
+		right: 0.5rem;
+		font-size: 0.5625rem;
+		font-family: var(--font-mono);
+		color: var(--color-outline);
+	}
+
+	.contact-section {
+		margin-bottom: 1.25rem;
+	}
+
+	.contact-section:last-child {
+		margin-bottom: 0;
+	}
+
+	.contact-label {
+		display: block;
+		font-size: 0.625rem;
+		font-weight: 700;
+		color: var(--color-on-surface-variant);
+		text-transform: uppercase;
+		letter-spacing: 0.15em;
+		margin-bottom: 0.375rem;
+	}
+
+	.contact-value {
+		font-size: 0.875rem;
+		font-weight: 600;
+		margin: 0;
+		color: var(--color-on-surface);
+		word-break: break-word;
+	}
+
+	/* Cards Grid */
+	.cards-section {
+		width: 100%;
+	}
+
+	.cards-grid {
+		display: grid;
+		grid-template-columns: 1fr;
 		gap: 1rem;
 	}
 
-	.spec-item {
-		padding-left: 1rem;
-		border-left: 1px solid var(--stroke-outline);
+	@media (min-width: 768px) {
+		.cards-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
 	}
 
-	.spec-key {
-		font-size: 0.5625rem;
-		color: var(--fg-tertiary);
-		text-transform: uppercase;
-		display: block;
-	}
-
-	.spec-value {
-		font-size: 0.875rem;
-		font-family: var(--font-mono);
-	}
-
-	.download-btn {
+	/* Profile Card */
+	.profile-card {
+		position: relative;
+		border: 1px solid var(--color-outline-variant);
+		background: var(--color-surface-container);
+		padding: 1.5rem;
+		text-decoration: none;
+		color: inherit;
 		display: flex;
-		align-items: center;
-		gap: 0.75rem;
-		padding: 1rem 2rem;
-		background: var(--color-primary);
-		color: var(--bg-surface);
-		font-size: 0.75rem;
+		flex-direction: column;
+		min-height: 280px;
+		transition: all 0.3s ease;
+	}
+
+	.profile-card:hover {
+		background: var(--color-surface);
+		border-color: var(--color-primary);
+	}
+
+	.card-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		margin-bottom: auto;
+	}
+
+	.card-number {
+		font-size: clamp(2rem, 5vw, 3.5rem);
 		font-weight: 900;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		border: none;
-		cursor: pointer;
-		transition: background-color 0.2s ease;
+		color: var(--color-on-surface-variant);
+		opacity: 0.3;
+		line-height: 1;
+		transition:
+			opacity 0.3s ease,
+			color 0.3s ease;
 	}
 
-	.download-btn:hover {
-		background: var(--color-on-surface);
-	}
-
-	.download-btn .material-symbols-outlined {
-		font-size: 1rem;
-		transition: transform 0.2s ease;
-	}
-
-	.download-btn:hover .material-symbols-outlined {
-		transform: translateX(4px);
-	}
-
-	/* Blueprint Overlay */
-	.blueprint-overlay {
-		position: fixed;
-		inset: 0;
-		pointer-events: none;
-		opacity: 0.1;
-		z-index: 0;
-	}
-
-	.measure-line {
-		position: absolute;
-		background: var(--color-primary);
-	}
-
-	.measure-line.horizontal {
-		height: 1px;
-		left: 0;
-		right: 0;
-	}
-
-	.measure-line.horizontal.top-1 {
-		top: 25%;
-	}
-	.measure-line.horizontal.top-2 {
-		top: 75%;
-	}
-
-	.measure-line.vertical {
-		width: 1px;
-		top: 0;
-		bottom: 0;
-	}
-
-	.measure-line.vertical.left-1 {
-		left: 25%;
-	}
-	.measure-line.vertical.left-2 {
-		right: 25%;
-	}
-
-	.coord-marker {
-		position: absolute;
-		font-size: 0.5rem;
-		font-family: var(--font-mono);
+	.profile-card:hover .card-number {
+		opacity: 1;
 		color: var(--color-primary);
-		text-transform: uppercase;
-		line-height: 1.4;
 	}
 
-	.coord-marker.top-left {
-		top: 2.5rem;
-		left: 2.5rem;
+	.card-icon {
+		font-size: 1.5rem;
+		color: var(--color-on-surface-variant);
+		opacity: 0.4;
+		transition:
+			opacity 0.3s ease,
+			color 0.3s ease;
 	}
-	.coord-marker.top-right {
-		top: 2.5rem;
-		right: 2.5rem;
-		text-align: right;
+
+	.profile-card:hover .card-icon {
+		opacity: 1;
+		color: var(--color-primary);
 	}
-	.coord-marker.bottom-left {
-		bottom: 2.5rem;
-		left: 2.5rem;
+
+	.card-content {
+		margin-top: 1.5rem;
 	}
-	.coord-marker.bottom-right {
-		bottom: 2.5rem;
-		right: 2.5rem;
-		text-align: right;
+
+	.card-title {
+		font-size: 1rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.025em;
+		margin: 0 0 0.5rem 0;
+		color: var(--color-on-surface);
+		transition: color 0.3s ease;
+	}
+
+	.profile-card:hover .card-title {
+		color: var(--color-primary);
+	}
+
+	.card-subtitle {
+		font-size: 0.6875rem;
+		color: var(--color-on-surface-variant);
+		line-height: 1.5;
+		margin: 0 0 1rem 0;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.card-skills {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.375rem;
+	}
+
+	.skill-tag {
+		font-size: 0.5625rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		padding: 0.25rem 0.5rem;
+		background: var(--color-primary-container);
+		color: var(--color-primary);
+		border: 1px solid var(--color-outline-variant);
 	}
 </style>
