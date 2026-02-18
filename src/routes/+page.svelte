@@ -27,423 +27,445 @@
 </svelte:head>
 
 <PortalLayout {navItems}>
-	<div class="home-container">
-		<!-- Hero Section -->
-		<section class="hero-section">
-			<div class="hero-eyebrow">
-				<span class="eyebrow-line"></span>
-				<span class="eyebrow-text">{site.nav.hero_eyebrow}</span>
-			</div>
+	<div class="lobby-container">
+		<!-- ══ LOBBY HERO: Structural Narrative ══ -->
+		<section class="lobby-hero">
+			<div class="blueprint-frame">
+				<div class="joint joint--tl"></div>
+				<div class="joint joint--tr"></div>
+				<div class="joint joint--bl"></div>
+				<div class="joint joint--br"></div>
 
-			<h1 class="hero-name">{personal.name}</h1>
+				<div class="hero-label mono">SYS_AUTH_PORTAL_V2</div>
 
-			<p class="hero-tagline">
-				{site.meta.description}
-			</p>
+				<h1 class="hero-title">
+					<span class="stroke-text">{personal.name.split(' ')[0]}</span>
+					<span class="solid-text">{personal.name.split(' ')[1] || ''}</span>
+				</h1>
 
-			<div class="hero-contact">
-				<a href="mailto:{personal.email}" class="contact-chip">
-					<span class="material-symbols-outlined">mail</span>
-					{personal.email}
-				</a>
-				<a href={personal.maps} target="_blank" rel="noopener" class="contact-chip">
-					<span class="material-symbols-outlined">location_on</span>
-					{personal.location}
-				</a>
-				<a href={personal.linkedin} target="_blank" rel="noopener" class="contact-chip">
-					<span class="material-symbols-outlined">open_in_new</span>
-					LinkedIn
-				</a>
-				<a href={personal.github} target="_blank" rel="noopener" class="contact-chip">
-					<span class="material-symbols-outlined">code</span>
-					GitHub
-				</a>
-				<a href={personal.behance} target="_blank" rel="noopener" class="contact-chip">
-					<span class="material-symbols-outlined">palette</span>
-					Behance
-				</a>
+				<div class="hero-divider">
+					<div class="line"></div>
+					<span class="mono">{site.meta.tagline.toUpperCase()}</span>
+					<div class="line"></div>
+				</div>
+
+				<p class="hero-intro">{site.meta.description}</p>
 			</div>
 		</section>
 
-		<!-- Profiles Grid -->
-		<section class="profiles-section">
-			<div class="profiles-header">
-				<h2 class="profiles-title">{site.nav.home_label}</h2>
-				<span class="profiles-ref">{focuses.length} {site.nav.specializations_label}</span>
-			</div>
-
-			<div class="profiles-grid">
+		<!-- ══ PATHS: Grid-Boundary System ══ -->
+		<section class="paths-section">
+			<div class="section-tag mono">SELECT_PATH_MODALITY</div>
+			<div class="shared-boundary paths-grid">
 				{#each focuses as focus}
 					{@const sData = getFocusSiteData(focus.name)}
-					<a href={sData.href} class="profile-card">
-						<div class="card-top">
-							<span class="card-code">{sData.code}</span>
-							<span class="material-symbols-outlined card-icon">{sData.icon}</span>
+					<a
+						href={sData.href}
+						class="path-card"
+						class:dev={focus.name === 'developer'}
+						class:ux={focus.name === 'designer'}
+						class:gfx={focus.name === 'graphic'}
+					>
+						<header class="card-header">
+							<span class="path-code mono">{sData.code}</span>
+							<span class="material-symbols-outlined">{sData.icon}</span>
+						</header>
+
+						<div class="card-body">
+							<h3 class="path-title">{focus.title}</h3>
+							<p class="path-summary">{focus.summary.slice(0, 100)}...</p>
 						</div>
 
-						<h3 class="card-title">{focus.title}</h3>
+						<footer class="card-footer mono">
+							<span>EXECUTE_TRANSITION</span>
+							<span class="material-symbols-outlined">north_east</span>
+						</footer>
 
-						<p class="card-summary">{focus.summary.slice(0, 140)}…</p>
-
-						<div class="card-skills">
-							{#each focus.skills as skillGroup}
-								<div class="skill-group">
-									<span class="skill-category">{skillGroup.category}</span>
-									<div class="skill-tags">
-										{#each skillGroup.items.slice(0, 3) as item}
-											<span class="skill-tag">{item}</span>
-										{/each}
-									</div>
-								</div>
-							{/each}
-						</div>
-
-						<div class="card-cta">
-							<span>{site.nav.view_cv_label}</span>
-							<span class="material-symbols-outlined">arrow_forward</span>
+						<!-- Background path icon -->
+						<div class="path-glyph">
+							{#if focus.name === 'developer'}{'</>'}{:else if focus.name === 'designer'}{'[_]'}{:else}{'(*)'}{/if}
 						</div>
 					</a>
 				{/each}
 			</div>
 		</section>
 
-		<!-- Education -->
-		<section class="education-section">
-			<div class="section-header">
-				<h2 class="profiles-title">{site.nav.education_section_title}</h2>
-			</div>
-			<div class="education-grid">
-				{#each education as entry}
-					<div class="education-item">
-						<span class="material-symbols-outlined edu-icon">school</span>
-						<div class="edu-content">
-							<strong class="edu-degree">{entry.degree}</strong>
-							<span class="edu-university">{entry.institution} · {entry.year}</span>
-						</div>
+		<!-- ══ CONNECTIVE NODES: Linear Modules ══ -->
+		<section class="nodes-section">
+			<div class="shared-boundary nodes-grid">
+				<div class="node-box contact-module">
+					<h3 class="mono node-title">CONTACT_CHANNELS</h3>
+					<div class="link-stack">
+						<a href="mailto:{personal.email}" class="node-link">
+							<span class="mono">E-MAIL_PROTOCOL</span>
+							<span class="material-symbols-outlined">mail</span>
+						</a>
+						<a href={personal.linkedin} target="_blank" class="node-link">
+							<span class="mono">LINKEDIN_BRIDGE</span>
+							<span class="material-symbols-outlined">open_in_new</span>
+						</a>
 					</div>
-				{/each}
+				</div>
+
+				<div class="node-box education-module">
+					<h3 class="mono node-title">ACADEMIC_RECORD_SAMPLE</h3>
+					<div class="edu-bits">
+						{#each education.slice(0, 2) as edu}
+							<div class="edu-bit">
+								<span class="year mono">{edu.year}</span>
+								<span class="info">{edu.degree} // {edu.institution}</span>
+							</div>
+						{/each}
+					</div>
+				</div>
 			</div>
 		</section>
 	</div>
 </PortalLayout>
 
 <style>
-	.home-container {
+	.lobby-container {
 		display: flex;
 		flex-direction: column;
-		gap: 4rem;
+		gap: var(--space-12);
+	}
+	@media (min-width: 768px) {
+		.lobby-container {
+			gap: var(--space-20);
+		}
 	}
 
-	/* ── Hero ── */
-	.hero-section {
-		padding: 3rem 0 2rem;
-		border-bottom: 1px solid var(--color-outline-variant);
+	/* ── JOINTS (Structural CAD Detail) ── */
+	.joint {
+		position: absolute;
+		width: 16px;
+		height: 16px;
+		z-index: 2;
+	}
+	.joint::before,
+	.joint::after {
+		content: '';
+		position: absolute;
+		background: var(--color-on-surface);
+	}
+	.joint--tl {
+		top: -1px;
+		left: -1px;
+	}
+	.joint--tl::before {
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 2px;
+	}
+	.joint--tl::after {
+		top: 0;
+		left: 0;
+		width: 2px;
+		height: 100%;
 	}
 
-	.hero-eyebrow {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-		margin-bottom: 1.5rem;
+	.joint--tr {
+		top: -1px;
+		right: -1px;
+	}
+	.joint--tr::before {
+		top: 0;
+		right: 0;
+		width: 100%;
+		height: 2px;
+	}
+	.joint--tr::after {
+		top: 0;
+		right: 0;
+		width: 2px;
+		height: 100%;
 	}
 
-	.eyebrow-line {
-		display: block;
-		width: 2.5rem;
-		height: 1px;
-		background: var(--color-primary);
+	.joint--bl {
+		bottom: -1px;
+		left: -1px;
+	}
+	.joint--bl::before {
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 2px;
+	}
+	.joint--bl::after {
+		bottom: 0;
+		left: 0;
+		width: 2px;
+		height: 100%;
 	}
 
-	.eyebrow-text {
-		font-family: var(--font-mono);
-		font-size: 0.6875rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.2em;
-		color: var(--color-primary);
+	.joint--br {
+		bottom: -1px;
+		right: -1px;
+	}
+	.joint--br::before {
+		bottom: 0;
+		right: 0;
+		width: 100%;
+		height: 2px;
+	}
+	.joint--br::after {
+		bottom: 0;
+		right: 0;
+		width: 2px;
+		height: 100%;
 	}
 
-	.hero-name {
-		font-family: var(--font-display);
-		font-size: clamp(2.25rem, 6vw, 4.5rem);
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		line-height: 0.95;
-		margin: 0 0 1.5rem 0;
-		color: var(--color-on-surface);
-	}
-
-	.hero-tagline {
-		font-size: clamp(1rem, 2vw, 1.25rem);
-		font-weight: 300;
-		line-height: 1.65;
-		color: var(--color-on-surface-variant);
-		max-width: 52rem;
-		margin: 0 0 2rem 0;
-	}
-
-	.hero-contact {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-	}
-
-	.contact-chip {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.375rem;
-		padding: 0.375rem 0.875rem;
-		border: 1px solid var(--color-outline);
+	/* ── HERO ── */
+	.blueprint-frame {
+		position: relative;
+		padding: var(--space-10) var(--space-4);
+		border: 1px solid var(--color-outline-variant);
 		background: var(--color-surface);
-		color: var(--color-on-surface-variant);
-		font-family: var(--font-mono);
+		text-align: center;
+	}
+	@media (min-width: 768px) {
+		.blueprint-frame {
+			padding: var(--space-20) var(--space-8);
+		}
+	}
+
+	.hero-label {
 		font-size: 0.625rem;
-		font-weight: 700;
-		text-decoration: none;
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		border-radius: var(--radius-sm);
-		transition: all var(--duration-base) var(--ease-out);
+		opacity: 0.4;
+		letter-spacing: 0.2em;
+		margin-bottom: var(--space-6);
 	}
 
-	.contact-chip:hover {
-		border-color: var(--color-primary);
-		color: var(--color-primary);
-		box-shadow: var(--ring-primary);
-		background: var(--color-primary-container);
-	}
-
-	.contact-chip:active {
-		transform: scale(0.96);
-	}
-
-	.contact-chip .material-symbols-outlined {
-		font-size: 0.875rem;
-	}
-
-	/* ── Profiles ── */
-	.profiles-section {
+	.hero-title {
 		display: flex;
 		flex-direction: column;
-		gap: 2rem;
+		line-height: 0.85;
+		margin-bottom: var(--space-6);
 	}
 
-	.profiles-header {
-		display: flex;
-		align-items: baseline;
-		justify-content: space-between;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-	}
-
-	.profiles-title {
+	.stroke-text {
 		font-family: var(--font-display);
-		font-size: 1.125rem;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		margin: 0;
-		color: var(--color-on-surface);
+		font-size: clamp(2.5rem, 10vw, 8rem);
+		color: transparent;
+		-webkit-text-stroke: 1px var(--color-on-surface);
+		opacity: 0.4;
 	}
 
-	.profiles-ref {
-		font-family: var(--font-mono);
-		font-size: 0.6875rem;
-		color: var(--color-on-surface-variant);
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
+	.solid-text {
+		font-family: var(--font-display);
+		font-size: clamp(2rem, 8vw, 7rem);
 	}
 
-	.profiles-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 1px;
+	.hero-divider {
+		display: flex;
+		align-items: center;
+		gap: var(--space-4);
+		margin-bottom: var(--space-6);
+	}
+	.hero-divider .line {
+		flex: 1;
+		height: 1px;
 		background: var(--color-outline-variant);
+	}
+	.hero-divider span {
+		font-size: 0.625rem;
+		color: var(--color-primary);
+		font-weight: 700;
+	}
+
+	.hero-intro {
+		max-width: 50ch;
+		margin: 0 auto;
+		line-height: 1.6;
+		opacity: 0.7;
+		font-size: var(--text-base);
+	}
+
+	/* ── PATHS GRID (Shared Boundary) ── */
+	.paths-section {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-4);
+	}
+	.section-tag {
+		font-size: 0.625rem;
+		opacity: 0.4;
+		border-left: 3px solid var(--color-primary);
+		padding-left: var(--space-2);
+	}
+
+	.paths-grid {
+		grid-template-columns: 1fr;
 		border: 1px solid var(--color-outline-variant);
 	}
-
-	@media (min-width: 768px) {
-		.profiles-grid {
+	@media (min-width: 1024px) {
+		.paths-grid {
 			grid-template-columns: repeat(3, 1fr);
 		}
 	}
 
-	.profile-card {
+	.path-card {
+		padding: var(--space-8) var(--space-6);
 		display: flex;
 		flex-direction: column;
-		gap: 1.25rem;
-		padding: 2.5rem;
-		background: var(--color-surface);
+		gap: var(--space-6);
 		text-decoration: none;
 		color: inherit;
-		transition: all var(--duration-base) var(--ease-out);
 		position: relative;
 		overflow: hidden;
+		transition: transform var(--duration-fast) var(--ease-linear);
 	}
-
-	.profile-card:hover {
-		background: var(--color-surface-container-low);
-		z-index: 1;
-		box-shadow: inset 0 0 0 2px var(--color-primary);
-	}
-
-	.profile-card:hover .card-cta {
-		color: var(--color-primary);
-	}
-
-	.card-top {
-		display: flex;
-		justify-content: space-between;
-		align-items: flex-start;
-	}
-
-	.card-code {
-		font-family: var(--font-mono);
-		font-size: 0.625rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.15em;
-		color: var(--color-primary);
-	}
-
-	.card-icon {
-		font-size: 1.5rem;
-		color: var(--color-on-surface-variant);
-		opacity: 0.4;
-	}
-
-	.card-title {
-		font-size: 1.125rem;
-		font-weight: 900;
-		text-transform: uppercase;
-		letter-spacing: -0.02em;
-		line-height: 1.2;
-		margin: 0;
-		color: var(--color-on-surface);
-	}
-
-	.card-summary {
-		font-size: 0.8125rem;
-		line-height: 1.65;
-		color: var(--color-on-surface-variant);
-		margin: 0;
-		flex: 1;
-	}
-
-	.card-skills {
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
-		border-top: 1px solid var(--color-outline-variant);
-		padding-top: 1rem;
-	}
-
-	.skill-group {
-		display: flex;
-		flex-direction: column;
-		gap: 0.375rem;
-	}
-
-	.skill-category {
-		font-family: var(--font-mono);
-		font-size: 0.5625rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.15em;
-		color: var(--color-on-surface-variant);
-		opacity: 0.6;
-	}
-
-	.skill-tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.25rem;
-	}
-
-	.skill-tag {
-		font-family: var(--font-mono);
-		font-size: 0.625rem;
-		font-weight: 500;
-		padding: 0.125rem 0.5rem;
-		border: 1px solid var(--color-outline-variant);
-		color: var(--color-on-surface-variant);
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-	}
-
-	.card-cta {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		font-family: var(--font-mono);
-		font-size: 0.6875rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		color: var(--color-on-surface-variant);
-		transition: color 0.2s ease;
-		border-top: 1px solid var(--color-outline-variant);
-		padding-top: 1rem;
-	}
-
-	.card-cta .material-symbols-outlined {
-		font-size: 1rem;
-	}
-
-	/* ── Education ── */
-	.education-section {
-		display: flex;
-		flex-direction: column;
-		gap: 2rem;
-	}
-
-	.section-header {
-		border-bottom: 2px solid var(--color-on-surface);
-		padding-bottom: 0.5rem;
-	}
-
-	.education-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 1rem;
-	}
-
 	@media (min-width: 768px) {
-		.education-grid {
-			grid-template-columns: repeat(2, 1fr);
+		.path-card {
+			padding: var(--space-12) var(--space-8);
+			gap: var(--space-8);
 		}
 	}
 
-	.education-item {
+	.path-card:hover {
+		transform: translateY(-4px);
+		z-index: 10;
+	}
+	.path-card:hover::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		box-shadow: var(--ring-primary);
+		pointer-events: none;
+	}
+
+	.path-card.dev:hover {
+		border-top: 4px solid #ec4899;
+	}
+	.path-card.ux:hover {
+		border-top: 4px solid var(--color-primary);
+	}
+	.path-card.gfx:hover {
+		border-top: 4px solid #3b82f6;
+	}
+
+	.card-header {
 		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+	}
+	.path-code {
+		font-size: 0.625rem;
+		opacity: 0.4;
+	}
+
+	.path-title {
+		font-family: var(--font-display);
+		font-size: 1.25rem;
+		text-transform: uppercase;
+		line-height: 1.1;
+	}
+	@media (min-width: 768px) {
+		.path-title {
+			font-size: 1.5rem;
+		}
+	}
+
+	.path-summary {
+		font-size: 0.8125rem;
+		opacity: 0.6;
+		line-height: 1.5;
+	}
+
+	.card-footer {
+		display: flex;
+		justify-content: space-between;
 		align-items: center;
-		gap: 1.5rem;
-		padding: 1.5rem 2rem;
-		border: 1px solid var(--color-outline-variant);
-		background: var(--color-surface);
-	}
-
-	.edu-icon {
-		font-size: 2rem;
+		font-size: 0.5rem;
 		color: var(--color-primary);
-		flex-shrink: 0;
+		font-weight: 700;
+		border-top: 1px solid var(--color-outline-variant);
+		padding-top: var(--space-3);
+		margin-top: auto;
 	}
 
-	.edu-content {
+	.path-glyph {
+		position: absolute;
+		bottom: -10px;
+		right: -5px;
+		font-family: var(--font-mono);
+		font-size: 6rem;
+		font-weight: 900;
+		opacity: 0.02;
+		pointer-events: none;
+	}
+
+	/* ── NODES GRID ── */
+	.nodes-grid {
+		grid-template-columns: 1fr;
+		border: 1px solid var(--color-outline-variant);
+	}
+	@media (min-width: 768px) {
+		.nodes-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	.node-box {
+		padding: var(--space-6);
 		display: flex;
 		flex-direction: column;
-		gap: 0.125rem;
+		gap: var(--space-4);
+	}
+	@media (min-width: 768px) {
+		.node-box {
+			padding: var(--space-8);
+		}
 	}
 
-	.edu-degree {
-		font-size: 1rem;
-		font-weight: 900;
-		text-transform: uppercase;
-		color: var(--color-on-surface);
+	.node-title {
+		font-size: 0.625rem;
+		opacity: 0.4;
 	}
 
-	.edu-university {
-		font-family: var(--font-mono);
-		font-size: 0.75rem;
+	.link-stack {
+		display: flex;
+		flex-direction: column;
+		gap: 1px;
+		background: var(--color-outline-variant);
+		border: 1px solid var(--color-outline-variant);
+	}
+	.node-link {
+		background: var(--color-surface);
+		padding: var(--space-3) var(--space-4);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		text-decoration: none;
+		color: inherit;
+		transition: background 0.2s;
+	}
+	.node-link:hover {
+		background: var(--color-surface-container-low);
 		color: var(--color-primary);
+	}
+	.node-link span:first-child {
+		font-size: 0.6875rem;
+		font-weight: 700;
+	}
+
+	.edu-bits {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3);
+	}
+	.edu-bit {
+		display: flex;
+		flex-direction: column;
+	}
+	.edu-bit .year {
+		font-size: 0.6875rem;
+		color: var(--color-primary);
+		font-weight: 700;
+	}
+	.edu-bit .info {
+		font-size: 0.8125rem;
+		opacity: 0.8;
 	}
 </style>

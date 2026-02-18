@@ -57,128 +57,127 @@
 </script>
 
 <div class="portal-wrapper">
-	<header class="portal-header">
-		<div class="header-container">
-			<div class="header-left">
-				<a href="/" class="logo-link">
-					<div class="logo-icon">
-						<span class="material-symbols-outlined">architecture</span>
+	<!-- ══ PORTAL HEADER ══ -->
+	<header class="portal-toolbar">
+		<div class="toolbar-inner">
+			<div class="toolbar-left">
+				<a href="/" class="toolbar-logo">
+					<div class="logo-box">
+						<span class="material-symbols-outlined logo-ico">architecture</span>
 					</div>
-					<div class="logo-text">
-						<span class="logo-name">{personal.name}</span>
-						<span class="logo-sub">{site.meta.tagline}</span>
+					<div class="logo-info">
+						<span class="logo-main">{personal.name.toUpperCase()}</span>
+						<span class="logo-meta mono">V.2026 / {site.meta.tagline.toUpperCase()}</span>
 					</div>
 				</a>
 			</div>
 
-			<div class="header-right">
+			<div class="toolbar-right">
 				{#if showBackButton}
-					<a href="/" class="back-link">
+					<a href="/" class="toolbar-back">
 						<span class="material-symbols-outlined">arrow_back</span>
-						<span class="back-text">{site.nav.back_label}</span>
+						<span class="mono">{site.nav.back_label}</span>
 					</a>
 				{/if}
 
-				<nav class="header-nav">
+				<nav class="toolbar-nav">
 					{#each navItems as item}
-						<a href={item.href} class="nav-link" class:active={page.url.pathname === item.href}>
+						<a href={item.href} class="toolbar-link" class:active={page.url.pathname === item.href}>
 							{item.label}
 						</a>
 					{/each}
 				</nav>
 
-				<div class="header-actions">
-					<button class="lang-toggle" onclick={toggleLang} aria-label={site.nav.lang_toggle_aria}>
+				<div class="toolbar-actions">
+					<button
+						class="tool-btn lang-btn"
+						onclick={toggleLang}
+						aria-label={site.nav.lang_toggle_aria}
+					>
 						{lang.current.toUpperCase()}
 					</button>
 
 					<button
-						class="theme-toggle"
+						class="tool-btn theme-btn"
 						onclick={toggleTheme}
 						aria-label={site.nav.theme_toggle_aria}
-						id="theme-toggle-btn"
 					>
 						<span class="material-symbols-outlined">{isDark ? 'light_mode' : 'dark_mode'}</span>
 					</button>
 				</div>
 
-				<div class="status-indicator">
-					<span class="status-dot"></span>
-					<span class="status-text">{site.nav.available_label}</span>
+				<div class="toolbar-status">
+					<span class="status-pulse"></span>
+					<span class="status-msg mono">SYS_OPERATIONAL</span>
 				</div>
 			</div>
 		</div>
 	</header>
 
-	<main class="portal-main">
+	<main class="portal-content">
 		{@render children?.()}
 	</main>
 
-	<footer class="portal-footer">
-		<div class="footer-container">
-			<!-- Columna identidad -->
-			<div class="footer-col footer-col--identity">
-				<div class="footer-logo">
-					<span class="material-symbols-outlined footer-logo-icon">architecture</span>
-					<div>
-						<span class="footer-name">{personal.name}</span>
-						<span class="footer-tagline">{site.meta.tagline}</span>
-					</div>
+	<!-- ══ PORTAL FOOTER ══ -->
+	<footer class="portal-baseboard">
+		<div class="baseboard-grid">
+			<!-- Identity Section -->
+			<div class="baseboard-col info-col">
+				<div class="footer-brand">
+					<span class="material-symbols-outlined brand-icon">architecture</span>
+					<span class="font-display">{personal.name.toUpperCase()}</span>
 				</div>
-				<p class="footer-bio">{site.footer.bio}</p>
-			</div>
-
-			<!-- Portafolio -->
-			<div class="footer-col">
-				<h3 class="footer-col-title">{site.footer.sections.portfolio.title}</h3>
-				<ul class="footer-links">
+				<p class="brand-summary">{site.footer.bio}</p>
+				<div class="brand-links">
 					{#each site.footer.sections.portfolio.links as link}
-						<li>
-							<a href={resolveHref(link)} target="_blank" rel="noopener" class="footer-link">
-								<span class="material-symbols-outlined">{link.icon}</span>
-								{link.label}
-							</a>
-						</li>
+						<a href={resolveHref(link)} target="_blank" rel="noopener" class="footer-icon-link">
+							<span class="material-symbols-outlined">{link.icon}</span>
+						</a>
 					{/each}
-				</ul>
+				</div>
 			</div>
 
-			<!-- Contacto -->
-			<div class="footer-col">
-				<h3 class="footer-col-title">{site.footer.sections.contact.title}</h3>
-				<ul class="footer-links">
+			<!-- Quick Links -->
+			<div class="baseboard-col links-col">
+				<h3 class="col-heading">{site.footer.sections.contact.title.toUpperCase()}</h3>
+				<ul class="col-list">
 					{#each site.footer.sections.contact.links as link}
 						<li>
-							<a
-								href={resolveHref(link)}
-								target={link.mailto ? undefined : '_blank'}
-								rel="noopener"
-								class="footer-link"
-								class:footer-link--accent={link.accent}
-							>
-								<span class="material-symbols-outlined">{link.icon}</span>
-								{link.label}
+							<a href={resolveHref(link)} class="col-link">
+								<span class="material-symbols-outlined link-ico">{link.icon}</span>
+								<span class="link-txt">{link.label}</span>
 							</a>
 						</li>
 					{/each}
 				</ul>
+			</div>
+
+			<!-- Engineering Specs -->
+			<div class="baseboard-col spec-col">
+				<h3 class="col-heading">ENGINEERING SPECS</h3>
+				<div class="spec-matrix">
+					<div class="spec-row">
+						<span class="spec-key">BUILD_ID</span>
+						<span class="spec-val">0218-AF</span>
+					</div>
+					<div class="spec-row">
+						<span class="spec-key">LANGUAGE</span>
+						<span class="spec-val">{lang.current === 'es' ? 'SPANISH' : 'ENGLISH'}</span>
+					</div>
+					<div class="spec-row">
+						<span class="spec-key">ENGINE</span>
+						<span class="spec-val">SVELTE 5</span>
+					</div>
+				</div>
 			</div>
 		</div>
 
-		<div class="footer-bottom">
-			<div class="footer-bottom-inner">
-				<span class="footer-copy">© {new Date().getFullYear()} {personal.name}</span>
-				<div class="footer-profiles">
-					{#each site.nav.profiles as profile, i}
-						{#if i > 0}<span class="footer-sep">·</span>{/if}
-						<a
-							href={profile.href}
-							class="footer-profile-link"
-							class:active={page.url.pathname === profile.href}
-						>
-							{profile.label}
-						</a>
-					{/each}
+		<div class="baseboard-bottom">
+			<div class="bottom-inner">
+				<span class="copy mono">© {new Date().getFullYear()} ARCH_CORE</span>
+				<div class="footer-trace">
+					<div class="trace-line"></div>
+					<span class="mono opacity-40">STABLE_VERSION_0.9.2</span>
 				</div>
 			</div>
 		</div>
@@ -191,459 +190,330 @@
 		display: flex;
 		flex-direction: column;
 		background-color: var(--color-background);
-		color: var(--color-on-background);
-		background-image: var(--blueprint-grid-light);
-		background-size: 40px 40px;
 	}
 
-	:global([data-theme='dark']) .portal-wrapper {
-		background-image: var(--blueprint-grid-dark);
-	}
-
-	/* ── Header ── */
-	.portal-header {
+	/* ── TOOLBAR ── */
+	.portal-toolbar {
 		position: sticky;
 		top: 0;
-		z-index: 50;
-		background-color: var(--color-surface-container);
-		border-bottom: 1px solid var(--color-outline-variant);
-		backdrop-filter: blur(8px);
+		z-index: 100;
+		background: var(--color-surface);
+		border-bottom: 2px solid var(--color-on-surface);
+		backdrop-filter: blur(12px);
 	}
 
-	.header-container {
-		max-width: 80rem;
+	.toolbar-inner {
+		max-width: var(--container-xl);
 		margin: 0 auto;
-		padding: 0.875rem 1.5rem;
+		padding: var(--space-2) var(--space-4);
 		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
+		justify-content: space-between;
+		align-items: center;
 	}
 
-	@media (min-width: 768px) {
-		.header-container {
-			flex-direction: row;
-			justify-content: space-between;
-			align-items: center;
-			padding: 0.875rem 2rem;
-		}
-	}
-
-	.logo-link {
+	.toolbar-logo {
 		display: flex;
 		align-items: center;
-		gap: 0.75rem;
+		gap: var(--space-3);
 		text-decoration: none;
 		color: inherit;
 	}
 
-	.logo-text {
-		display: flex;
-		flex-direction: column;
-		gap: 0.125rem;
-	}
-
-	.logo-name {
-		font-family: var(--font-display);
-		font-size: 0.8125rem;
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		line-height: 1;
-		color: var(--color-on-surface);
-	}
-
-	.logo-sub {
-		font-family: var(--font-mono);
-		font-size: 0.5rem;
-		color: var(--color-primary);
-		font-weight: 700;
-		letter-spacing: 0.15em;
-		text-transform: uppercase;
-	}
-
-	.logo-icon {
-		width: 2.25rem;
-		height: 2.25rem;
-		border: var(--line-base) solid var(--color-primary);
+	.logo-box {
+		width: 36px;
+		height: 36px;
+		border: 1.5px solid var(--color-primary);
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		background: var(--color-primary-container);
-		flex-shrink: 0;
-		border-radius: var(--radius-sm);
 	}
 
-	.logo-icon .material-symbols-outlined {
-		font-size: 1.125rem;
+	.logo-ico {
+		font-size: 1.25rem;
 		color: var(--color-primary);
 	}
 
-	.header-right {
+	.logo-info {
 		display: flex;
-		align-items: center;
-		gap: 1.25rem;
+		flex-direction: column;
 	}
 
-	.back-link {
+	.logo-main {
+		font-family: var(--font-display);
+		font-size: 0.75rem;
+		color: var(--color-on-surface);
+		letter-spacing: 0.1em;
+	}
+
+	.logo-meta {
+		font-size: 0.5rem;
+		color: var(--color-primary);
+		font-weight: 700;
+		opacity: 0.7;
+	}
+
+	.toolbar-right {
 		display: flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: var(--space-8);
+	}
+
+	.toolbar-back {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
 		text-decoration: none;
-		color: var(--color-on-surface-variant);
-		font-family: var(--font-mono);
+		color: var(--color-primary);
 		font-size: 0.625rem;
 		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		transition: color 0.2s ease;
 	}
 
-	.back-link:hover {
-		color: var(--color-primary);
-	}
-	.back-link .material-symbols-outlined {
-		font-size: 0.875rem;
-	}
-
-	.header-nav {
+	.toolbar-nav {
 		display: none;
-		align-items: center;
-		gap: 1.25rem;
+		gap: var(--space-6);
 	}
-
-	@media (min-width: 768px) {
-		.header-nav {
+	@media (min-width: 1024px) {
+		.toolbar-nav {
 			display: flex;
 		}
 	}
 
-	.nav-link {
+	.toolbar-link {
 		font-family: var(--font-mono);
 		font-size: 0.625rem;
 		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.12em;
 		text-decoration: none;
 		color: var(--color-on-surface-variant);
-		padding: 0.25rem 0;
-		border-bottom: 1px solid transparent;
-		transition:
-			color 0.2s ease,
-			border-color 0.2s ease;
+		padding: var(--space-1) 0;
+		border-bottom: 1.5px solid transparent;
+		transition: all 0.2s;
 	}
-
-	.nav-link:hover {
+	.toolbar-link:hover {
 		color: var(--color-primary);
 	}
-	.nav-link.active {
-		color: var(--color-primary);
-		border-bottom-color: var(--color-primary);
-	}
-
-	.header-actions {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-	.lang-toggle {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		height: 2.25rem;
-		padding: 0 0.75rem;
-		background: var(--color-surface);
-		border: 1px solid var(--color-outline);
-		cursor: pointer;
-		font-family: var(--font-mono);
-		font-size: 0.625rem;
-		font-weight: 700;
+	.toolbar-link.active {
 		color: var(--color-on-surface);
-		transition: all var(--duration-base) var(--ease-out);
-		flex-shrink: 0;
-		border-radius: var(--radius-sm);
+		border-bottom-color: var(--color-on-surface);
 	}
 
-	.lang-toggle:hover {
-		border-color: var(--color-primary);
-		background: var(--color-primary-container);
-		box-shadow: var(--ring-primary);
-	}
-
-	.lang-toggle:active {
-		transform: scale(0.96);
-	}
-
-	.theme-toggle {
+	.toolbar-actions {
 		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 2.25rem;
-		height: 2.25rem;
-		background: var(--color-surface);
-		border: 1px solid var(--color-outline);
-		cursor: pointer;
-		transition: all var(--duration-base) var(--ease-out);
-		flex-shrink: 0;
-		border-radius: var(--radius-sm);
-	}
-
-	.theme-toggle:hover {
-		border-color: var(--color-primary);
-		background: var(--color-primary-container);
-		box-shadow: var(--ring-primary);
-	}
-
-	.theme-toggle:active {
-		transform: scale(0.96);
-	}
-
-	.theme-toggle .material-symbols-outlined {
-		font-size: 1.125rem;
-		color: var(--color-on-surface);
-	}
-
-	.status-indicator {
-		display: none;
-		align-items: center;
-		gap: 0.375rem;
-		padding: 0.25rem 0.625rem;
-		background: var(--color-surface);
+		gap: 1px;
+		background: var(--color-outline-variant);
 		border: 1px solid var(--color-outline-variant);
 	}
 
-	@media (min-width: 640px) {
-		.status-indicator {
+	.tool-btn {
+		background: var(--color-surface);
+		height: 32px;
+		padding: 0 var(--space-3);
+		border: none;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-family: var(--font-mono);
+		font-size: 0.625rem;
+		font-weight: 700;
+		color: var(--color-on-surface);
+		transition: background 0.2s;
+	}
+	.tool-btn:hover {
+		background: var(--color-surface-container-low);
+		color: var(--color-primary);
+	}
+	.tool-btn .material-symbols-outlined {
+		font-size: 1rem;
+	}
+
+	.toolbar-status {
+		display: none;
+		align-items: center;
+		gap: var(--space-2);
+		padding: 0 var(--space-3);
+		height: 32px;
+		border: 1px solid var(--color-outline-variant);
+	}
+	@media (min-width: 768px) {
+		.toolbar-status {
 			display: flex;
 		}
 	}
 
-	.status-dot {
-		width: 0.4375rem;
-		height: 0.4375rem;
+	.status-pulse {
+		width: 6px;
+		height: 6px;
 		background: #22c55e;
 		border-radius: 50%;
-		animation: blink 2s ease-in-out infinite;
+		box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+		animation: status-blink 2s infinite;
 	}
-
-	@keyframes blink {
+	@keyframes status-blink {
 		0%,
 		100% {
 			opacity: 1;
+			transform: scale(1);
 		}
 		50% {
-			opacity: 0.3;
+			opacity: 0.4;
+			transform: scale(0.8);
 		}
 	}
-
-	.status-text {
-		font-family: var(--font-mono);
+	.status-msg {
 		font-size: 0.5rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.12em;
 		color: #22c55e;
+		font-weight: 700;
 	}
 
-	/* ── Main ── */
-	.portal-main {
+	/* ── MAIN CONTENT ── */
+	.portal-content {
 		flex: 1;
 		width: 100%;
-		max-width: 72rem;
+		max-width: var(--container-xl);
 		margin: 0 auto;
-		padding: 2rem 1.5rem;
+		padding: var(--space-6) var(--space-4);
+	}
+
+	/* ── BASEBOARD (Footer) ── */
+	.portal-baseboard {
+		background: var(--color-surface-container-lowest);
+		border-top: 1px solid var(--color-on-surface);
+	}
+
+	.baseboard-grid {
+		max-width: var(--container-xl);
+		margin: 0 auto;
+		padding: var(--space-12) var(--space-4);
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--space-12);
 	}
 
 	@media (min-width: 768px) {
-		.portal-main {
-			padding: 3rem 2rem;
+		.baseboard-grid {
+			grid-template-columns: 2fr 1fr 1.2fr;
 		}
 	}
 
-	/* ── Footer ── */
-	.portal-footer {
-		border-top: 1px solid var(--color-outline-variant);
-		background-color: var(--color-surface-container-low);
-	}
-
-	.footer-container {
-		max-width: 80rem;
-		margin: 0 auto;
-		padding: 3rem 1.5rem 2rem;
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 2.5rem;
-	}
-
-	@media (min-width: 640px) {
-		.footer-container {
-			grid-template-columns: repeat(2, 1fr);
-			padding: 3rem 2rem 2rem;
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.footer-container {
-			grid-template-columns: 2fr 1fr 1fr;
-		}
-	}
-
-	.footer-col {
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-	}
-	.footer-col--identity {
-		gap: 1.25rem;
-	}
-
-	.footer-logo {
+	.footer-brand {
 		display: flex;
 		align-items: center;
-		gap: 0.75rem;
-	}
-
-	.footer-logo-icon {
-		font-size: 1.75rem;
-		color: var(--color-primary);
-		flex-shrink: 0;
-	}
-
-	.footer-name {
-		display: block;
-		font-family: var(--font-display);
-		font-size: 0.8125rem;
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
+		gap: var(--space-3);
+		margin-bottom: var(--space-4);
+		font-size: var(--text-base);
 		color: var(--color-on-surface);
-		line-height: 1;
 	}
-
-	.footer-tagline {
-		display: block;
-		font-family: var(--font-mono);
-		font-size: 0.5rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.15em;
+	.brand-icon {
 		color: var(--color-primary);
-		margin-top: 0.25rem;
 	}
-
-	.footer-bio {
-		font-size: 0.8125rem;
-		line-height: 1.65;
+	.brand-summary {
+		font-size: var(--text-sm);
+		line-height: 1.6;
 		color: var(--color-on-surface-variant);
-		margin: 0;
-		max-width: 28rem;
+		max-width: 35ch;
+		margin-bottom: var(--space-6);
+	}
+	.brand-links {
+		display: flex;
+		gap: var(--space-4);
 	}
 
-	.footer-col-title {
+	.footer-icon-link {
+		color: var(--color-on-surface-variant);
+		transition: color 0.2s;
+	}
+	.footer-icon-link:hover {
+		color: var(--color-primary);
+	}
+
+	.col-heading {
 		font-family: var(--font-mono);
-		font-size: 0.5625rem;
+		font-size: 0.625rem;
 		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.2em;
+		color: var(--color-primary);
+		margin-bottom: var(--space-6);
+		letter-spacing: 0.1em;
+	}
+
+	.col-list {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3);
+	}
+
+	.col-link {
+		display: flex;
+		align-items: center;
+		gap: var(--space-3);
+		text-decoration: none;
 		color: var(--color-on-surface-variant);
-		margin: 0;
-		padding-bottom: 0.625rem;
+		font-size: var(--text-sm);
+		transition:
+			transform 0.2s,
+			color 0.2s;
+	}
+	.col-link:hover {
+		color: var(--color-on-surface);
+		transform: translateX(4px);
+	}
+	.link-ico {
+		font-size: 1rem;
+		color: var(--color-primary);
+	}
+
+	.spec-matrix {
+		display: flex;
+		flex-direction: column;
+		border: 1px solid var(--color-outline-variant);
+	}
+	.spec-row {
+		display: flex;
+		justify-content: space-between;
+		padding: var(--space-3);
 		border-bottom: 1px solid var(--color-outline-variant);
 	}
-
-	.footer-links {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
+	.spec-row:last-child {
+		border-bottom: none;
 	}
-
-	.footer-link {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		font-size: 0.8125rem;
-		color: var(--color-on-surface-variant);
-		text-decoration: none;
-		padding: 0.25rem 0;
-		transition: all var(--duration-base) var(--ease-out);
-		border-radius: var(--radius-sm);
-	}
-
-	.footer-link:hover {
+	.spec-key {
+		font-family: var(--font-mono);
+		font-size: 0.5625rem;
 		color: var(--color-primary);
-		padding-left: 0.5rem;
+		font-weight: 700;
 	}
-
-	.footer-link .material-symbols-outlined {
-		font-size: 0.875rem;
-		color: var(--color-primary);
-		flex-shrink: 0;
-	}
-
-	.footer-link--accent {
+	.spec-val {
+		font-family: var(--font-mono);
+		font-size: 0.5625rem;
 		color: var(--color-on-surface);
 	}
 
-	/* Footer bottom */
-	.footer-bottom {
+	.baseboard-bottom {
 		border-top: 1px solid var(--color-outline-variant);
-		background: var(--color-surface-container);
+		background: var(--color-surface);
 	}
-
-	.footer-bottom-inner {
-		max-width: 80rem;
+	.bottom-inner {
+		max-width: var(--container-xl);
 		margin: 0 auto;
-		padding: 0.875rem 1.5rem;
+		padding: var(--space-4) var(--space-4);
 		display: flex;
-		flex-direction: column;
+		justify-content: space-between;
 		align-items: center;
-		gap: 0.5rem;
 	}
-
-	@media (min-width: 640px) {
-		.footer-bottom-inner {
-			flex-direction: row;
-			justify-content: space-between;
-			padding: 0.875rem 2rem;
-		}
-	}
-
-	.footer-copy {
-		font-family: var(--font-mono);
+	.copy {
 		font-size: 0.5625rem;
-		font-weight: 500;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		color: var(--color-on-surface-variant);
-		opacity: 0.6;
+		opacity: 0.5;
 	}
-
-	.footer-profiles {
+	.footer-trace {
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
+		gap: var(--space-4);
 	}
-
-	.footer-profile-link {
-		font-family: var(--font-mono);
-		font-size: 0.5625rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		color: var(--color-on-surface-variant);
-		text-decoration: none;
-		transition: color 0.2s ease;
-	}
-
-	.footer-profile-link:hover,
-	.footer-profile-link.active {
-		color: var(--color-primary);
-	}
-
-	.footer-sep {
-		font-size: 0.5625rem;
-		color: var(--color-on-surface-variant);
+	.trace-line {
+		width: 40px;
+		height: 1px;
+		background: var(--color-primary);
 		opacity: 0.3;
 	}
 </style>

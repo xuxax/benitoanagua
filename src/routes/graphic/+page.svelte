@@ -18,99 +18,97 @@
 				]
 			: []
 	);
+
+	function extractYear(period: string) {
+		const start = period.split('-')[0].trim();
+		const year = start.split(' ').pop();
+		return year;
+	}
 </script>
 
 <svelte:head>
 	<title>{focus?.title} — {cvData.personal.name}</title>
-	<meta
-		name="description"
-		content="{focus?.title} — {cvData.personal.name}. {site.meta.description}"
-	/>
 </svelte:head>
 
 <PortalLayout {navItems} showBackButton={true}>
-	<div class="cv-container">
-		<!-- ══ HEADER: Imprenta / Pliego ══ -->
-		<section class="cv-header" id="perfil">
-			<div class="header-top-rule">
-				<div class="rule-thick"></div>
-				<div class="rule-thin"></div>
-			</div>
+	<div class="cv-container graphic-portal">
+		<!-- ══ HEADER: Press Proof Spec ══ -->
+		<header class="press-header" id="perfil">
+			<div class="press-sheet-frame shared-boundary">
+				<div class="main-plate">
+					<!-- Registration Marks -->
+					<div class="reg-mark tl"></div>
+					<div class="reg-mark tr"></div>
+					<div class="reg-mark bl"></div>
+					<div class="reg-mark br"></div>
 
-			<div class="header-inner">
-				<div class="header-left">
-					<div class="header-label-col">
-						{#if focus?.subtitles}
-							{#each focus.subtitles as sub}
-								<span class="header-label">{sub}</span>
-							{/each}
-						{/if}
-						<span class="header-label">{site.nav.exp_label}</span>
-					</div>
-					<h1 class="header-title">{focus?.title}</h1>
-				</div>
-
-				<div class="header-right">
-					<div class="contact-block">
-						<div class="contact-row">
-							<span class="contact-key">{site.nav.location_label}</span>
-							<span class="contact-val">{cvData.personal.location}</span>
-						</div>
-						<div class="contact-row">
-							<span class="contact-key">{site.nav.phone_label}</span>
-							<span class="contact-val">{cvData.personal.phone}</span>
-						</div>
-						<div class="contact-row">
-							<span class="contact-key">{site.nav.email_label}</span>
-							<a class="contact-val contact-link" href="mailto:{cvData.personal.email}"
-								>{cvData.personal.email}</a
-							>
-						</div>
-						<div class="contact-row">
-							<span class="contact-key">{site.nav.web_label}</span>
-							<a class="contact-val contact-link" href={cvData.personal.website} target="_blank"
-								>benitoanagua.pages.dev</a
-							>
-						</div>
-						<div class="contact-row">
-							<span class="contact-key">{site.nav.behance_label}</span>
-							<a class="contact-val contact-link" href={cvData.personal.behance} target="_blank"
-								>behance.net/benitoanagua</a
-							>
+					<div class="press-info mono">
+						<span>REF::2026_GFX_PLATE_03</span>
+						<div class="color-control-strip">
+							<div class="c"></div>
+							<div class="m"></div>
+							<div class="y"></div>
+							<div class="k"></div>
 						</div>
 					</div>
+
+					<h1 class="hero-title">
+						<span class="stroke-text">{focus?.title.split(' ')[0]}</span>
+						<span class="solid-text">{focus?.title.split(' ').slice(1).join(' ')}</span>
+					</h1>
+
+					<div class="editorial-block">
+						<div class="plate-divider"></div>
+						<p class="summary">{focus?.summary}</p>
+					</div>
+
+					<div class="plate-base mono">
+						<span>RESOLUTION::300DPI</span>
+						<span>OUTPUT::EDITORIAL_PRESET</span>
+					</div>
 				</div>
+
+				<aside class="sidebar-plate shared-boundary">
+					<div class="meta-module">
+						<h3 class="mono label">PROD_LOCATION</h3>
+						<span class="val">{cvData.personal.location}</span>
+					</div>
+					<div class="meta-module">
+						<h3 class="mono label">OUTPUT_CHANNELS</h3>
+						<div class="channel-stack">
+							<a href={cvData.personal.behance} target="_blank" class="mono channel"
+								>//BEHANCE_PORTFOLIO</a
+							>
+							<a href={cvData.personal.website} target="_blank" class="mono channel">//PROD_SITE</a>
+						</div>
+					</div>
+					<div class="meta-module">
+						<h3 class="mono label">TECH_SPECS</h3>
+						<div class="spec-list mono">
+							<span>SCALE_1:1</span>
+							<span>COLOR_SPOT_PANTONE</span>
+						</div>
+					</div>
+				</aside>
 			</div>
+		</header>
 
-			<p class="header-summary">{focus?.summary}</p>
+		<!-- ══ SKILLS: Production Matrix ══ -->
+		<section class="section-blueprint" id="habilidades">
+			<header class="section-label-press">
+				<div class="box">CAPABILITIES_MATRIX</div>
+				<div class="rule"></div>
+			</header>
 
-			<div class="header-bottom-rule">
-				<div class="rule-thin"></div>
-				<div class="rule-thick"></div>
-			</div>
-		</section>
-
-		<!-- ══ CAPACIDADES ══ -->
-		<section class="skills-section" id="habilidades">
-			<h2 class="section-title">
-				<span class="title-number">I.</span>
-				{profileSite?.sections.habilidades}
-				{site.nav.technical_label}
-			</h2>
-
-			<div class="skills-grid">
+			<div class="shared-boundary skills-press">
 				{#if focus?.skills}
 					{#each focus.skills as skillGroup}
-						<div class="skill-card">
-							<div class="skill-card-top">
-								<h3 class="skill-category">{skillGroup.category}</h3>
-							</div>
-							<ul class="skill-list">
+						<div class="press-module">
+							<div class="module-overline"></div>
+							<h3 class="module-title-editorial">{skillGroup.category.toUpperCase()}</h3>
+							<ul class="module-list-press">
 								{#each skillGroup.items as item}
-									<li class="skill-item">
-										<span class="skill-marker">—</span>
-										{item}
-									</li>
+									<li><span class="bullet">+</span> {item}</li>
 								{/each}
 							</ul>
 						</div>
@@ -119,51 +117,45 @@
 			</div>
 		</section>
 
-		<!-- ══ HISTORIAL ══ -->
-		<section class="experience-section" id="experiencia">
-			<h2 class="section-title">
-				<span class="title-number">II.</span>
-				{profileSite?.sections.experiencia}
-				{site.nav.laboral_label}
-			</h2>
+		<!-- ══ EXPERIENCE: Production Log ══ -->
+		<section class="section-blueprint" id="experiencia">
+			<header class="section-label-press">
+				<div class="box">PRODUCTION_LOG_EXPERIENCE</div>
+				<div class="rule"></div>
+			</header>
 
-			<div class="timeline">
+			<div class="editorial-timeline">
 				{#each focus?.experiences || [] as exp, index}
-					<div class="timeline-item" class:is-current={index === 0}>
-						<div class="timeline-left">
-							<div class="timeline-marker">
-								<span class="marker-line"></span>
-								<span class="marker-dot" class:active={index === 0}></span>
-							</div>
-							<div class="timeline-period">
-								<span class="period-dates">{exp.period}</span>
-								<span class="period-role">{exp.position}</span>
-							</div>
+					<article class="timeline-article" class:active={index === 0}>
+						<div class="article-meta">
+							<span class="year-stamp mono">{extractYear(exp.period)}</span>
+							{#if index === 0}<div class="active-rule">RELEASED</div>{/if}
 						</div>
-						<div class="timeline-content">
-							<h3 class="company-name">{exp.company}</h3>
-							<p class="exp-description">{exp.description}</p>
+						<div class="article-main">
+							<h3 class="article-company">{exp.company}</h3>
+							<span class="article-role mono">{exp.position}</span>
+							<p class="article-desc">{exp.description}</p>
 						</div>
-					</div>
+					</article>
 				{/each}
 			</div>
 		</section>
 
-		<!-- ══ FORMACIÓN ══ -->
-		<section class="education-section" id="educacion">
-			<h2 class="section-title">
-				<span class="title-number">III.</span>
-				{profileSite?.sections.educacion} Académica
-			</h2>
+		<!-- ══ EDUCATION: Certified Press ══ -->
+		<section class="section-blueprint" id="educacion">
+			<header class="section-label-press">
+				<div class="box">ACCREDITATION_PLATES</div>
+				<div class="rule"></div>
+			</header>
 
-			<div class="education-grid">
+			<div class="shared-boundary edu-press">
 				{#each cvData.education as entry}
-					<div class="education-card">
-						<div class="edu-top-bar"></div>
-						<div class="edu-body">
-							<span class="edu-year">{entry.year}</span>
-							<h3 class="edu-degree">{entry.degree}</h3>
-							<p class="edu-institution">{entry.institution}</p>
+					<div class="press-ticket">
+						<div class="ticket-sidestrip"></div>
+						<div class="ticket-body">
+							<span class="mono year">PLATE_REF::{entry.year}</span>
+							<h4 class="degree">{entry.degree.toUpperCase()}</h4>
+							<p class="inst mono">{entry.institution.toUpperCase()}</p>
 						</div>
 					</div>
 				{/each}
@@ -173,394 +165,481 @@
 </PortalLayout>
 
 <style>
-	/* ... (mismos estilos que antes) ... */
-	.cv-container {
+	.graphic-portal {
 		display: flex;
 		flex-direction: column;
-		gap: 3.5rem;
+		gap: var(--space-12);
+	}
+	@media (min-width: 768px) {
+		.graphic-portal {
+			gap: var(--space-20);
+		}
 	}
 
-	.cv-header {
-		padding: 0;
+	/* ── REGISTRATION MARKS ── */
+	.reg-mark {
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		border: 0.5px solid var(--color-on-surface);
+		opacity: 0.3;
+	}
+	@media (min-width: 768px) {
+		.reg-mark {
+			width: 30px;
+			height: 30px;
+		}
 	}
 
-	.header-top-rule,
-	.header-bottom-rule {
-		display: flex;
-		flex-direction: column;
-		gap: 3px;
-		margin-bottom: 2rem;
-	}
-
-	.header-bottom-rule {
-		margin-top: 2rem;
-		margin-bottom: 0;
-	}
-
-	.rule-thick {
-		height: 4px;
+	.reg-mark::before,
+	.reg-mark::after {
+		content: '';
+		position: absolute;
 		background: var(--color-on-surface);
 	}
-
-	.rule-thin {
-		height: 1px;
-		background: var(--color-primary);
+	.reg-mark::before {
+		top: 50%;
+		left: 0;
+		width: 100%;
+		height: 0.5px;
+		transform: translateY(-50%);
 	}
-
-	.header-inner {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 2rem;
+	.reg-mark::after {
+		left: 50%;
+		top: 0;
+		width: 0.5px;
+		height: 100%;
+		transform: translateX(-50%);
+	}
+	.reg-mark.tl {
+		top: var(--space-2);
+		left: var(--space-2);
+	}
+	.reg-mark.tr {
+		top: var(--space-2);
+		right: var(--space-2);
+	}
+	.reg-mark.bl {
+		bottom: var(--space-2);
+		left: var(--space-2);
+	}
+	.reg-mark.br {
+		bottom: var(--space-2);
+		right: var(--space-2);
 	}
 
 	@media (min-width: 768px) {
-		.header-inner {
-			grid-template-columns: 1.5fr 1fr;
-			gap: 3rem;
+		.reg-mark.tl {
+			top: var(--space-4);
+			left: var(--space-4);
+		}
+		.reg-mark.tr {
+			top: var(--space-4);
+			right: var(--space-4);
+		}
+		.reg-mark.bl {
+			bottom: var(--space-4);
+			left: var(--space-4);
+		}
+		.reg-mark.br {
+			bottom: var(--space-4);
+			right: var(--space-4);
 		}
 	}
 
-	.header-left {
+	/* ── HEADER ── */
+	.press-sheet-frame {
+		grid-template-columns: 1fr;
+		border: 1px solid var(--color-on-surface);
+	}
+	@media (min-width: 1024px) {
+		.press-sheet-frame {
+			grid-template-columns: 1.6fr 1.4fr;
+		}
+	}
+
+	.main-plate {
+		position: relative;
+		padding: var(--space-10) var(--space-4);
+		background: var(--color-surface);
+	}
+	@media (min-width: 768px) {
+		.main-plate {
+			padding: var(--space-16) var(--space-10);
+		}
+	}
+
+	.press-info {
 		display: flex;
-		flex-direction: column;
-		gap: 1rem;
+		justify-content: space-between;
+		align-items: center;
+		font-size: 0.5rem;
+		opacity: 0.4;
+		margin-bottom: var(--space-8);
+	}
+	@media (min-width: 768px) {
+		.press-info {
+			font-size: 0.625rem;
+			margin-bottom: var(--space-12);
+		}
 	}
 
-	.header-label-col {
+	.color-control-strip {
 		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
+		gap: 1px;
 	}
-
-	.header-label {
-		display: inline-block;
-		padding: 0.25rem 0.75rem;
-		border: 1px solid var(--color-primary);
-		color: var(--color-primary);
-		font-size: 0.5625rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.2em;
-	}
-
-	.header-title {
-		font-family: var(--font-display);
-		font-size: clamp(1.5rem, 4vw, 2.75rem);
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		line-height: 1.05;
-		margin: 0;
-		color: var(--color-on-surface);
-	}
-
-	.header-right {
-		display: flex;
-		align-items: flex-start;
-	}
-
-	.contact-block {
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		gap: 0;
+	.color-control-strip div {
+		width: 8px;
+		height: 8px;
 		border: 1px solid var(--color-outline-variant);
 	}
-
-	.contact-row {
-		display: grid;
-		grid-template-columns: 5rem 1fr;
-		border-bottom: 1px solid var(--color-outline-variant);
+	@media (min-width: 768px) {
+		.color-control-strip div {
+			width: 12px;
+			height: 12px;
+		}
 	}
 
-	.contact-row:last-child {
-		border-bottom: none;
+	.c {
+		background: #00ffff;
+	}
+	.m {
+		background: #ff00ff;
+	}
+	.y {
+		background: #ffff00;
+	}
+	.k {
+		background: #000;
 	}
 
-	.contact-key {
-		padding: 0.5rem 0.75rem;
-		font-family: var(--font-mono);
-		font-size: 0.5625rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.15em;
-		color: var(--color-primary);
-		background: var(--color-surface-container-low);
-		border-right: 1px solid var(--color-outline-variant);
+	.hero-title {
 		display: flex;
-		align-items: center;
+		flex-direction: column;
+		line-height: 0.8;
+		margin-bottom: var(--space-8);
+	}
+	@media (min-width: 768px) {
+		.hero-title {
+			margin-bottom: var(--space-12);
+		}
 	}
 
-	.contact-val {
-		padding: 0.5rem 0.75rem;
-		font-size: 0.75rem;
-		font-weight: 500;
-		color: var(--color-on-surface);
-		display: flex;
-		align-items: center;
-	}
-
-	.contact-link {
-		color: var(--color-primary);
-		text-decoration: none;
-	}
-
-	.contact-link:hover {
-		text-decoration: underline;
-	}
-
-	.header-summary {
-		font-size: 0.9375rem;
-		line-height: 1.7;
-		color: var(--color-on-surface-variant);
-		margin: 0;
-		padding: 1.5rem 0;
-		border-top: 1px solid var(--color-outline-variant);
-	}
-
-	.section-title {
+	.stroke-text {
 		font-family: var(--font-display);
-		font-size: 1.375rem;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		margin: 0 0 1.75rem 0;
-		color: var(--color-on-surface);
+		font-size: clamp(2.5rem, 12vw, 6rem);
+		color: transparent;
+		-webkit-text-stroke: 1px var(--color-on-surface);
+		opacity: 0.5;
+	}
+	.solid-text {
+		font-family: var(--font-display);
+		font-size: clamp(2rem, 10vw, 5.5rem);
+	}
+
+	.editorial-block {
 		display: flex;
-		align-items: baseline;
-		gap: 0.75rem;
-		padding-bottom: 0.875rem;
-		border-bottom: 4px solid var(--color-on-surface);
+		gap: var(--space-4);
 	}
-
-	.title-number {
-		font-size: 0.875rem;
-		color: var(--color-primary);
-		font-weight: 900;
-	}
-
-	.skills-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 1.5rem;
-	}
-
-	@media (min-width: 640px) {
-		.skills-grid {
-			grid-template-columns: repeat(2, 1fr);
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.skills-grid {
-			grid-template-columns: repeat(4, 1fr);
-		}
-	}
-
-	.skill-card {
-		border: 1px solid var(--color-outline);
-		background: var(--color-surface);
-		border-radius: var(--radius-smart);
-		overflow: hidden;
-		transition: all var(--duration-base) var(--ease-out);
-	}
-
-	.skill-card:hover {
-		border-color: var(--color-primary);
-		box-shadow: var(--ring-primary);
-	}
-
-	.skill-card-top {
-		padding: 0.75rem 1rem;
-		background: var(--color-surface-container-low);
-		border-bottom: 1px solid var(--color-outline-variant);
-	}
-
-	.skill-category {
-		font-size: 0.625rem;
-		font-weight: 900;
-		text-transform: uppercase;
-		letter-spacing: 0.15em;
-		color: var(--color-primary);
-		margin: 0;
-	}
-
-	.skill-list {
-		list-style: none;
-		padding: 0.875rem 1rem;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.4375rem;
-	}
-
-	.skill-item {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		font-size: 0.8125rem;
-		color: var(--color-on-surface-variant);
-	}
-
-	.skill-marker {
-		color: var(--color-primary);
-		font-weight: 700;
-		flex-shrink: 0;
-	}
-
-	.timeline {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.timeline-item {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 0.75rem;
-		padding: 1.75rem 0;
-		border-bottom: 1px solid var(--color-outline-variant);
-	}
-
 	@media (min-width: 768px) {
-		.timeline-item {
-			grid-template-columns: 14rem 1fr;
-			gap: 2rem;
+		.editorial-block {
+			gap: var(--space-8);
 		}
 	}
 
-	.timeline-item:last-child {
+	.plate-divider {
+		width: 4px;
+		background: var(--color-on-surface);
+	}
+	@media (min-width: 768px) {
+		.plate-divider {
+			width: 8px;
+		}
+	}
+
+	.summary {
+		font-size: 1.125rem;
+		font-family: var(--font-body);
+		line-height: 1.5;
+		font-weight: 300;
+	}
+	@media (min-width: 768px) {
+		.summary {
+			font-size: 1.25rem;
+			line-height: 1.6;
+		}
+	}
+
+	.plate-base {
+		margin-top: var(--space-8);
+		border-top: 1px solid var(--color-outline-variant);
+		padding-top: var(--space-4);
+		display: flex;
+		justify-content: space-between;
+		font-size: 0.5rem;
+		opacity: 0.3;
+	}
+	@media (min-width: 768px) {
+		.plate-base {
+			margin-top: var(--space-12);
+		}
+	}
+
+	.sidebar-plate {
+		grid-template-columns: 1fr;
+	}
+	@media (max-width: 1024px) and (min-width: 640px) {
+		.sidebar-plate {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	.meta-module {
+		padding: var(--space-6);
+		border-bottom: 1px solid var(--color-on-surface);
+	}
+	@media (min-width: 768px) {
+		.meta-module {
+			padding: var(--space-8);
+		}
+	}
+
+	.meta-module:last-child {
 		border-bottom: none;
 	}
-
-	.timeline-left {
-		display: flex;
-		gap: 1rem;
+	.meta-module h3 {
+		font-size: 0.625rem;
+		opacity: 0.4;
+		margin-bottom: var(--space-3);
 	}
-
-	.timeline-marker {
-		display: none;
-		flex-direction: column;
-		align-items: center;
-		gap: 0;
-		flex-shrink: 0;
-	}
-
-	@media (min-width: 768px) {
-		.timeline-marker {
-			display: flex;
-		}
-	}
-
-	.marker-line {
-		width: 1px;
-		flex: 1;
-		background: var(--color-outline-variant);
-		min-height: 1rem;
-	}
-
-	.marker-dot {
-		width: 0.625rem;
-		height: 0.625rem;
-		border: 2px solid var(--color-outline-variant);
-		background: var(--color-surface);
-		flex-shrink: 0;
-	}
-
-	.marker-dot.active {
-		border-color: var(--color-primary);
-		background: var(--color-primary);
-	}
-
-	.timeline-period {
+	.channel-stack {
 		display: flex;
 		flex-direction: column;
-		gap: 0.25rem;
+		gap: var(--space-2);
 	}
-
-	.period-dates {
-		font-size: 0.8125rem;
-		font-weight: 700;
+	.channel {
+		font-size: 0.6875rem;
+		text-decoration: none;
 		color: var(--color-on-surface);
-		line-height: 1.4;
+		font-weight: 700;
+		transition: color 0.2s;
 	}
-
-	.timeline-item.is-current .period-dates {
+	.channel:hover {
 		color: var(--color-primary);
 	}
-
-	.period-role {
-		font-size: 0.625rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		color: var(--color-on-surface-variant);
+	.spec-list {
+		display: flex;
+		flex-direction: column;
+		font-size: 0.5rem;
 		opacity: 0.6;
 	}
 
-	.company-name {
-		font-size: 1rem;
+	/* ── SECTIONS ── */
+	.section-label-press {
+		display: flex;
+		align-items: center;
+		gap: var(--space-4);
+		margin-bottom: var(--space-6);
+	}
+	@media (min-width: 768px) {
+		.section-label-press {
+			margin-bottom: var(--space-8);
+		}
+	}
+
+	.section-label-press .box {
+		background: var(--color-on-surface);
+		color: var(--color-surface);
+		padding: 4px 10px;
+		font-family: var(--font-mono);
+		font-size: 0.625rem;
 		font-weight: 900;
+	}
+	.section-label-press .rule {
+		flex: 1;
+		height: 2px;
+		background: var(--color-on-surface);
+	}
+	@media (min-width: 768px) {
+		.section-label-press .rule {
+			height: 4px;
+		}
+	}
+
+	.skills-press {
+		grid-template-columns: 1fr;
+		border: 1px solid var(--color-on-surface);
+	}
+	@media (min-width: 640px) {
+		.skills-press {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media (min-width: 1024px) {
+		.skills-press {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	.press-module {
+		padding: var(--space-6);
+		position: relative;
+	}
+	@media (min-width: 768px) {
+		.press-module {
+			padding: var(--space-8);
+		}
+	}
+
+	.press-module:hover {
+		background: var(--color-surface-container-lowest);
+	}
+	.module-overline {
+		height: 4px;
+		background: var(--color-primary);
+		width: 30px;
+		margin-bottom: var(--space-3);
+	}
+	.module-title-editorial {
+		font-family: var(--font-display);
+		font-size: 1rem;
+		margin-bottom: var(--space-4);
 		text-transform: uppercase;
-		letter-spacing: -0.01em;
-		margin: 0 0 0.625rem 0;
-		color: var(--color-on-surface);
+	}
+	.module-list-press {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-1);
+		font-size: 0.75rem;
+	}
+	.bullet {
+		color: var(--color-primary);
+		font-weight: 900;
+		margin-right: 4px;
 	}
 
-	.exp-description {
-		font-size: 0.875rem;
-		line-height: 1.7;
-		color: var(--color-on-surface-variant);
-		margin: 0;
+	/* ── TIMELINE ── */
+	.editorial-timeline {
+		display: flex;
+		flex-direction: column;
 	}
-
-	.education-grid {
+	.timeline-article {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 1rem;
+		gap: var(--space-4);
+		padding: var(--space-6) 0;
+		border-bottom: 1px solid var(--color-on-surface);
+	}
+	@media (min-width: 768px) {
+		.timeline-article {
+			grid-template-columns: 100px 1fr;
+			gap: var(--space-12);
+			padding: var(--space-12) 0;
+		}
 	}
 
+	.article-meta {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	@media (min-width: 768px) {
+		.article-meta {
+			align-items: flex-end;
+		}
+	}
+
+	.year-stamp {
+		font-size: 2rem;
+		font-weight: 900;
+		opacity: 0.1;
+		line-height: 0.8;
+	}
+	@media (min-width: 768px) {
+		.year-stamp {
+			font-size: 3rem;
+		}
+	}
+
+	.active .year-stamp {
+		opacity: 1;
+		color: var(--color-primary);
+	}
+	.active-rule {
+		background: var(--color-primary);
+		color: var(--color-background);
+		font-family: var(--font-mono);
+		font-size: 0.5rem;
+		padding: 2px 6px;
+		margin-top: 4px;
+	}
+
+	.article-company {
+		font-family: var(--font-display);
+		font-size: 1.5rem;
+		text-transform: uppercase;
+		margin-bottom: 2px;
+	}
+	@media (min-width: 768px) {
+		.article-company {
+			font-size: 2rem;
+		}
+	}
+
+	.article-role {
+		font-size: 0.6875rem;
+		font-weight: 700;
+		color: var(--color-primary);
+		margin-bottom: var(--space-3);
+		display: block;
+	}
+	.article-desc {
+		font-size: 0.875rem;
+		line-height: 1.6;
+		opacity: 0.8;
+		max-width: 65ch;
+	}
+
+	/* ── EDU ── */
+	.edu-press {
+		grid-template-columns: 1fr;
+		border: 1px solid var(--color-on-surface);
+	}
 	@media (min-width: 640px) {
-		.education-grid {
+		.edu-press {
 			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 
-	.education-card {
-		border: 1px solid var(--color-outline-variant);
-		background: var(--color-surface);
-		overflow: hidden;
+	.press-ticket {
+		display: flex;
+		transition: background 0.3s;
 	}
-
-	.edu-top-bar {
-		height: 3px;
-		background: var(--color-primary);
+	.press-ticket:hover {
+		background: var(--color-surface-container-low);
 	}
-
-	.edu-body {
-		padding: 1.25rem;
+	.ticket-sidestrip {
+		width: 4px;
+		background: var(--color-on-surface);
+	}
+	.ticket-body {
+		padding: var(--space-6);
 		display: flex;
 		flex-direction: column;
-		gap: 0.25rem;
+		gap: var(--space-1);
 	}
-
-	.edu-year {
-		font-size: 0.625rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.2em;
-		color: var(--color-primary);
+	.ticket-body .year {
+		font-size: 0.5625rem;
+		opacity: 0.4;
 	}
-
-	.edu-degree {
-		font-size: 1rem;
-		font-weight: 900;
-		text-transform: uppercase;
-		margin: 0;
-		color: var(--color-on-surface);
-		line-height: 1.2;
-	}
-
-	.edu-institution {
+	.ticket-body .degree {
+		font-family: var(--font-display);
 		font-size: 0.8125rem;
-		color: var(--color-on-surface-variant);
-		margin: 0;
+	}
+	.ticket-body .inst {
+		font-size: 0.5625rem;
+		color: var(--color-primary);
+		font-weight: 700;
 	}
 </style>

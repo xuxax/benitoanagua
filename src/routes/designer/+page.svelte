@@ -18,90 +18,106 @@
 				]
 			: []
 	);
+
+	function extractYear(period: string) {
+		const start = period.split('-')[0].trim();
+		const year = start.split(' ').pop();
+		return year;
+	}
 </script>
 
 <svelte:head>
 	<title>{focus?.title} — {cvData.personal.name}</title>
-	<meta
-		name="description"
-		content="{focus?.title} — {cvData.personal.name}. {site.meta.description}"
-	/>
 </svelte:head>
 
 <PortalLayout {navItems} showBackButton={true}>
-	<div class="cv-container">
-		<!-- ══ HEADER: Editorial / Magazine ══ -->
-		<section class="cv-header" id="perfil">
-			<div class="header-eyebrow">
-				<span class="eyebrow-line"></span>
-				<span class="eyebrow-text">{focus?.title} · {site.nav.exp_yrs_label}</span>
-				<span class="eyebrow-line"></span>
-			</div>
+	<div class="cv-container designer-portal">
+		<!-- ══ HEADER: CAD Blueprint Spec ══ -->
+		<header class="blueprint-header" id="perfil">
+			<div class="blueprint-canvas">
+				<div class="joint joint--tl"></div>
+				<div class="joint joint--tr"></div>
+				<div class="joint joint--bl"></div>
+				<div class="joint joint--br"></div>
 
-			<h1 class="header-title">{focus?.title}</h1>
-
-			<div class="header-body">
-				<div class="header-left">
-					<p class="header-summary">{focus?.summary}</p>
-
-					<div class="header-links">
-						<a href="mailto:{cvData.personal.email}" class="link-item">
-							<span class="material-symbols-outlined">mail</span>
-							{cvData.personal.email}
-						</a>
-						<a href={cvData.personal.website} target="_blank" class="link-item">
-							<span class="material-symbols-outlined">language</span>
-							benitoanagua.pages.dev
-						</a>
-						<a href={cvData.personal.behance} target="_blank" class="link-item">
-							<span class="material-symbols-outlined">palette</span>
-							behance.net/benitoanagua
-						</a>
-						<a href={cvData.personal.linkedin} target="_blank" class="link-item">
-							<span class="material-symbols-outlined">open_in_new</span>
-							in/benito-anagua
-						</a>
+				<div class="canvas-header">
+					<span class="mono opacity-40">DOC_REF::ARCH_MOD_UX_02</span>
+					<div class="dim-ruler">
+						<div class="ruler-line"></div>
+						<span class="mono">1024_UNIT</span>
+						<div class="ruler-line"></div>
 					</div>
 				</div>
 
-				<div class="header-right">
-					<div class="info-block">
-						<span class="info-label">{site.nav.location_label}</span>
-						<span class="info-value">{cvData.personal.location}</span>
-					</div>
-					<div class="info-block">
-						<span class="info-label">{site.nav.phone_label}</span>
-						<span class="info-value">{cvData.personal.phone}</span>
-					</div>
-					<div class="info-block">
-						<span class="info-label">{site.nav.exp_title}</span>
-						<span class="info-value info-accent">{site.nav.exp_label}</span>
-					</div>
-					<div class="info-block">
-						<span class="info-label">{site.nav.grad_label}</span>
-						<span class="info-value">2012</span>
+				<h1 class="monumental-title">
+					<span class="stroke-text">{focus?.title.split(' ')[0]}</span>
+					<span class="solid-text">{focus?.title.split(' ').slice(1).join(' ')}</span>
+				</h1>
+
+				<div class="blueprint-summary">
+					<p>{focus?.summary}</p>
+					<div class="anchor-point"></div>
+				</div>
+
+				<div class="canvas-footer">
+					<div class="spec-matrix shared-boundary">
+						<div class="spec-cell">
+							<span class="mono label">LAT:</span>
+							<span class="val">-21.53</span>
+						</div>
+						<div class="spec-cell">
+							<span class="mono label">LNG:</span>
+							<span class="val">-64.72</span>
+						</div>
+						<div class="spec-cell">
+							<span class="mono label">SCALE:</span>
+							<span class="val">1:18_YRS</span>
+						</div>
 					</div>
 				</div>
 			</div>
-		</section>
 
-		<!-- ══ HERRAMIENTAS ══ -->
-		<section class="skills-section" id="habilidades">
-			<div class="section-header">
-				<h2 class="section-title">
-					{profileSite?.sections.habilidades} & {site.nav.methodology_label}
-				</h2>
-				<div class="section-rule"></div>
-			</div>
+			<aside class="sidebar-info">
+				<div class="info-card shared-boundary">
+					<div class="info-item">
+						<h3 class="mono">CONTACT_PROT</h3>
+						<div class="link-group">
+							<a href="mailto:{cvData.personal.email}" class="mono link">E-MAIL_TX</a>
+							<a href={cvData.personal.website} target="_blank" class="mono link">WWW_ENTRY</a>
+						</div>
+					</div>
+					<div class="info-item">
+						<h3 class="mono">SOCIAL_SIGNALS</h3>
+						<div class="link-group">
+							<a href={cvData.personal.behance} target="_blank" class="mono link">BEHANCE_REPO</a>
+							<a href={cvData.personal.linkedin} target="_blank" class="mono link">LINKEDIN_ID</a>
+						</div>
+					</div>
+				</div>
+			</aside>
+		</header>
 
-			<div class="skills-grid">
+		<!-- ══ SKILLS: Modular Grid ══ -->
+		<section class="section-blueprint" id="habilidades">
+			<header class="section-header-blueprint">
+				<h2 class="mono">01_MODULAR_STACK_SPEC</h2>
+				<div class="line"></div>
+			</header>
+
+			<div class="shared-boundary skills-grid">
 				{#if focus?.skills}
 					{#each focus.skills as skillGroup}
-						<div class="skill-card">
-							<h3 class="skill-category">{skillGroup.category}</h3>
-							<ul class="skill-list">
+						<div class="skill-module">
+							<div class="module-id mono">
+								NODE__{skillGroup.category.slice(0, 3).toUpperCase()}
+							</div>
+							<h3 class="module-title">{skillGroup.category}</h3>
+							<ul class="module-list">
 								{#each skillGroup.items as item}
-									<li class="skill-item">{item}</li>
+									<li class="item">
+										<span class="node"></span>
+										<span class="text">{item}</span>
+									</li>
 								{/each}
 							</ul>
 						</div>
@@ -110,52 +126,48 @@
 			</div>
 		</section>
 
-		<!-- ══ TRAYECTORIA ══ -->
-		<section class="experience-section" id="experiencia">
-			<div class="section-header">
-				<h2 class="section-title">
-					{profileSite?.sections.experiencia}
-					{site.nav.professional_label}
-				</h2>
-				<div class="section-rule"></div>
-			</div>
+		<!-- ══ EXPERIENCE: Linear Projection ══ -->
+		<section class="section-blueprint" id="experiencia">
+			<header class="section-header-blueprint">
+				<h2 class="mono">02_TRAJECTORY_PROJECTION</h2>
+				<div class="line"></div>
+			</header>
 
-			<div class="timeline">
+			<div class="projection-timeline">
 				{#each focus?.experiences || [] as exp, index}
-					<div class="timeline-item" class:is-current={index === 0}>
-						<div class="timeline-period">
-							<span class="period-dates">{exp.period}</span>
-							{#if index === 0}
-								<span class="period-badge">{site.nav.current_label}</span>
-							{/if}
-							<span class="period-role">{exp.position}</span>
+					<article class="projection-point" class:active={index === 0}>
+						<div class="point-side">
+							<div class="point-marker"></div>
+							<span class="mono year">{extractYear(exp.period)}</span>
 						</div>
-						<div class="timeline-content">
-							<h3 class="company-name">{exp.company}</h3>
-							<p class="exp-description">{exp.description}</p>
+						<div class="point-content">
+							<h3 class="company-title">{exp.company}</h3>
+							<span class="role-tag mono">{exp.position.toUpperCase()}</span>
+							<p class="desc">{exp.description}</p>
 						</div>
-					</div>
+					</article>
 				{/each}
+				<div class="axis-line"></div>
 			</div>
 		</section>
 
-		<!-- ══ FORMACIÓN ══ -->
-		<section class="education-section" id="educacion">
-			<div class="section-header">
-				<h2 class="section-title">{profileSite?.sections.educacion}</h2>
-				<div class="section-rule"></div>
-			</div>
+		<!-- ══ EDUCATION: Certified Nodes ══ -->
+		<section class="section-blueprint" id="educacion">
+			<header class="section-header-blueprint">
+				<h2 class="mono">03_CERTIFIED_NODES</h2>
+				<div class="line"></div>
+			</header>
 
-			<div class="education-list">
+			<div class="nodes-grid">
 				{#each cvData.education as entry}
-					<div class="education-item">
-						<div class="edu-year-col">
-							<span class="edu-year">{entry.year}</span>
+					<div class="node-card">
+						<div class="corner-l"></div>
+						<div class="node-meta">
+							<span class="mono year">[{entry.year}]</span>
+							<div class="node-line"></div>
 						</div>
-						<div class="edu-content-col">
-							<h3 class="edu-degree">{entry.degree}</h3>
-							<p class="edu-institution">{entry.institution}</p>
-						</div>
+						<h4 class="node-degree">{entry.degree.toUpperCase()}</h4>
+						<p class="node-inst mono">{entry.institution.toUpperCase()}</p>
 					</div>
 				{/each}
 			</div>
@@ -164,338 +176,585 @@
 </PortalLayout>
 
 <style>
-	/* ... (mismos estilos que antes) ... */
-	.cv-container {
+	.designer-portal {
 		display: flex;
 		flex-direction: column;
-		gap: 4rem;
+		gap: var(--space-12);
+	}
+	@media (min-width: 768px) {
+		.designer-portal {
+			gap: var(--space-20);
+		}
 	}
 
-	.cv-header {
-		padding: 3rem 0 2.5rem;
-		border-bottom: 3px solid var(--color-on-surface);
+	/* ── JOINTS ── */
+	.joint {
+		position: absolute;
+		width: 16px;
+		height: 16px;
+		z-index: 2;
+	}
+	@media (min-width: 768px) {
+		.joint {
+			width: 24px;
+			height: 24px;
+		}
 	}
 
-	.header-eyebrow {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-		margin-bottom: 2rem;
+	.joint::before,
+	.joint::after {
+		content: '';
+		position: absolute;
+		background: var(--color-on-surface);
+		opacity: 0.6;
 	}
-
-	.eyebrow-line {
-		flex: 1;
+	.joint--tl {
+		top: -1px;
+		left: -1px;
+	}
+	.joint--tl::before {
+		top: 0;
+		left: 0;
+		width: 100%;
 		height: 1px;
-		background: var(--color-primary);
+	}
+	.joint--tl::after {
+		top: 0;
+		left: 0;
+		width: 1px;
+		height: 100%;
 	}
 
-	.eyebrow-text {
-		font-size: 0.625rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.3em;
-		color: var(--color-primary);
-		white-space: nowrap;
+	.joint--tr {
+		top: -1px;
+		right: -1px;
+	}
+	.joint--tr::before {
+		top: 0;
+		right: 0;
+		width: 100%;
+		height: 1px;
+	}
+	.joint--tr::after {
+		top: 0;
+		right: 0;
+		width: 1px;
+		height: 100%;
 	}
 
-	.header-title {
-		font-family: var(--font-display);
-		font-size: clamp(2.5rem, 8vw, 6rem);
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		line-height: 0.9;
-		margin: 0;
-		text-align: center;
-		color: var(--color-on-surface);
+	.joint--bl {
+		bottom: -1px;
+		left: -1px;
+	}
+	.joint--bl::before {
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 1px;
+	}
+	.joint--bl::after {
+		bottom: 0;
+		left: 0;
+		width: 1px;
+		height: 100%;
 	}
 
-	.header-body {
+	.joint--br {
+		bottom: -1px;
+		right: -1px;
+	}
+	.joint--br::before {
+		bottom: 0;
+		right: 0;
+		width: 100%;
+		height: 1px;
+	}
+	.joint--br::after {
+		bottom: 0;
+		right: 0;
+		width: 2px;
+		height: 100%;
+	}
+
+	/* ── HEADER ── */
+	.blueprint-header {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 2rem;
+		gap: var(--space-6);
 	}
-
-	@media (min-width: 768px) {
-		.header-body {
+	@media (min-width: 1024px) {
+		.blueprint-header {
 			grid-template-columns: 2fr 1fr;
-			gap: 4rem;
+			gap: var(--space-8);
 		}
 	}
 
-	.header-summary {
-		font-size: 1rem;
-		line-height: 1.75;
-		color: var(--color-on-surface-variant);
-		margin: 0 0 2rem 0;
+	.blueprint-canvas {
+		position: relative;
+		padding: var(--space-10) var(--space-4);
+		border: 1px solid var(--color-outline-variant);
+		background: var(--color-surface);
 	}
-
-	.header-links {
-		display: flex;
-		flex-direction: column;
-		gap: 0.625rem;
-	}
-
-	.link-item {
-		display: flex;
-		align-items: center;
-		gap: 0.625rem;
-		font-size: 0.8125rem;
-		color: var(--color-on-surface-variant);
-		text-decoration: none;
-		transition: color 0.2s ease;
-	}
-
-	.link-item:hover {
-		color: var(--color-primary);
-	}
-
-	.link-item .material-symbols-outlined {
-		font-size: 1rem;
-		color: var(--color-primary);
-	}
-
-	.header-right {
-		display: flex;
-		flex-direction: column;
-		gap: 1.25rem;
-		padding-left: 0;
-		border-left: none;
-	}
-
 	@media (min-width: 768px) {
-		.header-right {
-			padding-left: 2rem;
-			border-left: 1px solid var(--color-outline-variant);
+		.blueprint-canvas {
+			padding: var(--space-12) var(--space-8);
 		}
 	}
 
-	.info-block {
+	.canvas-header {
 		display: flex;
-		flex-direction: column;
-		gap: 0.125rem;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: var(--space-8);
 	}
-
-	.info-label {
-		font-family: var(--font-mono);
-		font-size: 0.625rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.15em;
-		color: var(--color-primary);
-	}
-
-	.info-value {
-		font-family: var(--font-sans);
-		font-size: 0.8125rem;
-		font-weight: 700;
-		color: var(--color-on-surface);
-	}
-
-	.info-accent {
-		color: var(--color-primary);
-	}
-
-	.section-header {
+	.dim-ruler {
 		display: flex;
 		align-items: center;
-		gap: 1.5rem;
-		margin-bottom: 2rem;
+		gap: var(--space-4);
+		flex: 1;
+		margin-left: var(--space-4);
+		opacity: 0.3;
+	}
+	@media (max-width: 640px) {
+		.dim-ruler {
+			display: none;
+		}
 	}
 
-	.section-title {
+	.ruler-line {
+		flex: 1;
+		height: 1px;
+		background: var(--color-on-surface);
+		position: relative;
+	}
+	.ruler-line::before,
+	.ruler-line::after {
+		content: '';
+		position: absolute;
+		height: 8px;
+		width: 1px;
+		background: var(--color-on-surface);
+		top: -4px;
+	}
+
+	.monumental-title {
+		display: flex;
+		flex-direction: column;
+		line-height: 0.85;
+		margin-bottom: var(--space-8);
+	}
+	.stroke-text {
 		font-family: var(--font-display);
-		font-size: 1.5rem;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		margin: 0;
-		color: var(--color-on-surface);
-		white-space: nowrap;
+		font-size: clamp(2.5rem, 10vw, 7rem);
+		color: transparent;
+		-webkit-text-stroke: 1px var(--color-on-surface);
+	}
+	.solid-text {
+		font-family: var(--font-display);
+		font-size: clamp(2rem, 8vw, 5.5rem);
+		color: var(--color-primary);
 	}
 
-	.section-rule {
+	.blueprint-summary {
+		position: relative;
+		padding: var(--space-4);
+		border: 1px solid var(--color-outline-variant);
+		max-width: 60ch;
+	}
+	@media (min-width: 768px) {
+		.blueprint-summary {
+			padding: var(--space-8);
+		}
+	}
+
+	.blueprint-summary p {
+		font-size: 1rem;
+		line-height: 1.6;
+		opacity: 0.8;
+	}
+	@media (min-width: 768px) {
+		.blueprint-summary p {
+			font-size: 1.125rem;
+		}
+	}
+
+	.anchor-point {
+		position: absolute;
+		top: -5px;
+		left: -5px;
+		width: 10px;
+		height: 10px;
+		border: 1px solid var(--color-primary);
+		background: var(--color-background);
+	}
+
+	.canvas-footer {
+		margin-top: var(--space-8);
+	}
+	@media (min-width: 768px) {
+		.canvas-footer {
+			margin-top: var(--space-12);
+		}
+	}
+
+	.spec-matrix {
+		grid-template-columns: repeat(3, 1fr);
+		border: 1px solid var(--color-outline-variant);
+	}
+	.spec-cell {
+		padding: var(--space-3);
+		display: flex;
+		flex-direction: column;
+	}
+	@media (min-width: 768px) {
+		.spec-cell {
+			padding: var(--space-4);
+		}
+	}
+
+	.spec-cell .label {
+		font-size: 0.5rem;
+		opacity: 0.4;
+		color: var(--color-primary);
+	}
+	.spec-cell .val {
+		font-weight: 700;
+		font-size: 0.75rem;
+	}
+
+	.sidebar-info {
+		display: flex;
+		flex-direction: column;
+	}
+	.info-card {
+		grid-template-columns: 1fr;
+		height: 100%;
+		border: 1px solid var(--color-outline-variant);
+	}
+	@media (max-width: 1024px) {
+		.info-card {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+	@media (max-width: 640px) {
+		.info-card {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.info-item {
+		padding: var(--space-6);
+		border-bottom: 1px solid var(--color-outline-variant);
+	}
+	@media (min-width: 768px) {
+		.info-item {
+			padding: var(--space-8);
+		}
+	}
+
+	.info-item:last-child {
+		border-bottom: none;
+	}
+	.info-item h3 {
+		font-size: 0.625rem;
+		opacity: 0.4;
+		margin-bottom: var(--space-4);
+	}
+	.link-group {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+	}
+	.link-group a {
+		font-size: 0.6875rem;
+		text-decoration: none;
+		color: var(--color-on-surface);
+		transition: color 0.2s;
+		font-weight: 700;
+	}
+	.link-group a:hover {
+		color: var(--color-primary);
+	}
+
+	/* ── SECTIONS ── */
+	.section-blueprint {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-6);
+	}
+	@media (min-width: 768px) {
+		.section-blueprint {
+			gap: var(--space-10);
+		}
+	}
+
+	.section-header-blueprint {
+		display: flex;
+		align-items: center;
+		gap: var(--space-4);
+	}
+	.section-header-blueprint h2 {
+		font-size: 0.75rem;
+		font-weight: 700;
+		color: var(--color-on-surface);
+	}
+	.section-header-blueprint .line {
 		flex: 1;
 		height: 1px;
 		background: var(--color-outline-variant);
 	}
 
+	/* ── MODULES ── */
 	.skills-grid {
-		display: grid;
 		grid-template-columns: 1fr;
-		gap: 2rem;
+		border: 1px solid var(--color-outline-variant);
 	}
-
 	@media (min-width: 640px) {
 		.skills-grid {
 			grid-template-columns: repeat(2, 1fr);
 		}
 	}
-
 	@media (min-width: 1024px) {
 		.skills-grid {
-			grid-template-columns: repeat(4, 1fr);
+			grid-template-columns: repeat(3, 1fr);
 		}
 	}
 
-	.skill-card {
-		padding: 2rem;
-		border: 1px solid var(--color-outline-variant);
-		background: var(--color-surface);
-		border-radius: var(--radius-smart);
-		transition: all var(--duration-base) var(--ease-out);
+	.skill-module {
+		padding: var(--space-6);
+		transition: box-shadow var(--duration-fast);
+		position: relative;
 	}
-
-	.skill-card:hover {
-		border-color: var(--color-primary);
-		box-shadow: var(--ring-primary);
-		transform: translateY(-2px);
-	}
-
-	.skill-category {
-		font-size: 0.75rem;
-		font-weight: 900;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		color: var(--color-primary);
-		margin: 0 0 0.875rem 0;
-	}
-
-	.skill-list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-
-	.skill-item {
-		font-size: 0.875rem;
-		color: var(--color-on-surface-variant);
-		line-height: 1.4;
-	}
-
-	.timeline {
-		display: flex;
-		flex-direction: column;
-		gap: 0;
-	}
-
-	.timeline-item {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 0.75rem;
-		padding: 2rem 0;
-		border-bottom: 1px solid var(--color-outline-variant);
-	}
-
 	@media (min-width: 768px) {
-		.timeline-item {
-			grid-template-columns: 12rem 1fr;
-			gap: 3rem;
+		.skill-module {
+			padding: var(--space-8);
 		}
 	}
 
-	.timeline-item:last-child {
-		border-bottom: none;
+	.skill-module:hover {
+		z-index: 5;
+		box-shadow: var(--ring-primary);
+		background: var(--color-surface-container-lowest);
 	}
-
-	.timeline-period {
-		display: flex;
-		flex-direction: column;
-		gap: 0.375rem;
-	}
-
-	.period-dates {
-		font-size: 1rem;
-		font-weight: 900;
-		color: var(--color-on-surface);
-		line-height: 1.3;
-	}
-
-	.timeline-item.is-current .period-dates {
-		color: var(--color-primary);
-	}
-
-	.period-badge {
-		display: inline-block;
-		padding: 0.125rem 0.625rem;
-		background: var(--color-primary);
-		color: var(--color-on-primary);
-		font-size: 0.5625rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
+	.module-id {
+		font-size: 0.5rem;
+		opacity: 0.3;
+		margin-bottom: var(--space-4);
+		background: var(--color-primary-container);
 		width: fit-content;
+		padding: 2px 6px;
 	}
-
-	.period-role {
-		font-size: 0.6875rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		color: var(--color-on-surface-variant);
-		opacity: 0.6;
-	}
-
-	.company-name {
+	.module-title {
+		font-family: var(--font-display);
 		font-size: 1.125rem;
-		font-weight: 900;
 		text-transform: uppercase;
-		letter-spacing: -0.01em;
-		margin: 0 0 0.75rem 0;
-		color: var(--color-on-surface);
+		margin-bottom: var(--space-4);
 	}
-
-	.exp-description {
-		font-size: 0.9375rem;
-		line-height: 1.7;
-		color: var(--color-on-surface-variant);
-		margin: 0;
-	}
-
-	.education-list {
+	.module-list {
+		list-style: none;
 		display: flex;
 		flex-direction: column;
-		gap: 0;
+		gap: var(--space-1);
 	}
-
-	.education-item {
-		display: grid;
-		grid-template-columns: 5rem 1fr;
-		gap: 2rem;
-		padding: 1.5rem 0;
-		border-bottom: 1px solid var(--color-outline-variant);
-		align-items: start;
-	}
-
-	.education-item:last-child {
-		border-bottom: none;
-	}
-
-	.edu-year-col {
+	.item {
 		display: flex;
-		align-items: flex-start;
-		padding-top: 0.25rem;
+		align-items: center;
+		gap: var(--space-3);
+		font-size: 0.75rem;
+	}
+	.node {
+		width: 6px;
+		height: 6px;
+		border: 1.5px solid var(--color-primary);
 	}
 
-	.edu-year {
-		font-size: 1.5rem;
-		font-weight: 900;
+	/* ── PROJECTION ── */
+	.projection-timeline {
+		position: relative;
+		padding-left: var(--space-10);
+	}
+	@media (min-width: 768px) {
+		.projection-timeline {
+			padding-left: var(--space-16);
+		}
+	}
+
+	.axis-line {
+		position: absolute;
+		left: 8px;
+		top: 0;
+		bottom: 0;
+		width: 1px;
+		background: var(--color-outline-variant);
+	}
+	@media (min-width: 768px) {
+		.axis-line {
+			left: 10px;
+		}
+	}
+
+	.projection-point {
+		position: relative;
+		padding-bottom: var(--space-10);
+		display: flex;
+		gap: var(--space-6);
+	}
+	@media (min-width: 768px) {
+		.projection-point {
+			padding-bottom: var(--space-16);
+			gap: var(--space-12);
+		}
+	}
+
+	.point-side {
+		position: absolute;
+		left: -42px;
+		top: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	@media (min-width: 768px) {
+		.point-side {
+			left: -54px;
+		}
+	}
+
+	.point-marker {
+		width: 15px;
+		height: 15px;
+		border: 1px solid var(--color-on-surface);
+		background: var(--color-background);
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		z-index: 2;
+	}
+	@media (min-width: 768px) {
+		.point-marker {
+			width: 21px;
+			height: 21px;
+		}
+	}
+
+	.active .point-marker {
+		border-color: var(--color-primary);
+		box-shadow: 0 0 0 4px var(--color-primary-container);
+	}
+	.active .point-marker::after {
+		content: '';
+		width: 7px;
+		height: 7px;
+		background: var(--color-primary);
+		border-radius: 50%;
+	}
+	@media (min-width: 768px) {
+		.active .point-marker::after {
+			width: 9px;
+			height: 9px;
+		}
+	}
+
+	.point-side .year {
+		font-size: 0.625rem;
+		font-weight: 700;
+		margin-top: var(--space-1);
+		opacity: 0.5;
+	}
+	.active .year {
+		opacity: 1;
 		color: var(--color-primary);
-		line-height: 1;
 	}
 
-	.edu-degree {
-		font-size: 1rem;
-		font-weight: 900;
+	.company-title {
+		font-family: var(--font-display);
+		font-size: 1.25rem;
 		text-transform: uppercase;
-		margin: 0 0 0.25rem 0;
-		color: var(--color-on-surface);
+		line-height: 1.1;
+		margin-bottom: 2px;
+	}
+	@media (min-width: 768px) {
+		.company-title {
+			font-size: 1.75rem;
+		}
 	}
 
-	.edu-institution {
+	.role-tag {
+		font-size: 0.625rem;
+		color: var(--color-primary);
+		font-weight: 700;
+		opacity: 0.8;
+	}
+	.desc {
+		margin-top: var(--space-3);
 		font-size: 0.875rem;
-		color: var(--color-on-surface-variant);
-		margin: 0;
+		line-height: 1.6;
+		opacity: 0.7;
+		max-width: 65ch;
+	}
+
+	/* ── NODES ── */
+	.nodes-grid {
+		grid-template-columns: 1fr;
+		border: 1px solid var(--color-outline-variant);
+	}
+	@media (min-width: 640px) {
+		.nodes-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	.node-card {
+		padding: var(--space-6);
+		position: relative;
+		border-bottom: 1px solid var(--color-outline-variant);
+	}
+	@media (min-width: 768px) {
+		.node-card {
+			padding: var(--space-8);
+		}
+	}
+
+	@media (min-width: 640px) {
+		.node-card:nth-child(odd) {
+			border-right: 1px solid var(--color-outline-variant);
+		}
+	}
+
+	.corner-l {
+		position: absolute;
+		left: -1px;
+		top: var(--space-6);
+		width: 8px;
+		height: 1px;
+		background: var(--color-primary);
+	}
+	.node-meta {
+		display: flex;
+		align-items: center;
+		gap: var(--space-3);
+		margin-bottom: var(--space-3);
+	}
+	.node-meta .year {
+		font-size: 0.75rem;
+		font-weight: 700;
+		color: var(--color-primary);
+	}
+	.node-line {
+		flex: 1;
+		height: 1px;
+		background: var(--color-outline-variant);
+		border-bottom: 1px dashed var(--color-outline-variant);
+	}
+	.node-degree {
+		font-family: var(--font-display);
+		font-size: 0.875rem;
+		margin-bottom: 2px;
+	}
+	.node-inst {
+		font-size: 0.5625rem;
+		opacity: 0.5;
 	}
 </style>
