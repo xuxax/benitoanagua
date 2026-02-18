@@ -6,102 +6,105 @@
 	const developerFocus = getFocusByName('developer');
 
 	const navItems = [
-		{ label: '01_Profile', href: '#profile' },
-		{ label: '02_Tech_Stack', href: '#stack' },
-		{ label: '03_Experience', href: '#experience' },
-		{ label: '04_Education', href: '#education' }
+		{ label: 'Experience', href: '#experience' },
+		{ label: 'Stack Matrix', href: '#matrix' },
+		{ label: 'Education', href: '#education' }
 	];
 </script>
 
 <PortalLayout {navItems} showBackButton={true}>
-	<div class="profile-grid">
-		<!-- Profile Section -->
-		<section class="profile-section" id="profile">
-			<div class="profile-content">
-				<div class="profile-image">
-					<img
-						src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs6oLpS7hl_pU5OVuwT5G3-daplDGUS9OM7LUYblAGbo_0sgxuwmZ35VqjrEzWzwQaEgxXK9nQ4EGJlSUD_nLxG0QgHrIasz5Sps7mXqkWndXzVjIU2cbiQMCTpjdZAEDopS_YmnKgHObr-Y8LUn3UEjUXOmjh9KMKxQj0FaL0mK6T2FIWYXMq-Q1jlcuItUBiUYPOTkNC9LfMtgRPQwkbAxomowo2a-6mYy8MIA5jtD31ubcc7TbGHHu_GgzxIYq1bkvt9tOQAJGs"
-						alt="Benito Anagua Ibarra"
-					/>
+	<div class="developer-container">
+		<!-- Hero Header Section -->
+		<div class="hero-grid">
+			<div class="hero-main">
+				<div class="hero-ref">
+					Ref: 018-ENG-SPEC<br />
+					Scale: 1:1 Seniority<br />
+					Sheet: 01/05
 				</div>
-				<div class="profile-info">
-					<div class="profile-badges">
-						<span class="badge badge-primary">STATUS: ACTIVE_ENG</span>
-						<span class="badge badge-secondary">LOC: TARIJA_BOL</span>
+				<span class="hero-badge">ENGINEERING SPECIFICATION</span>
+				<h1 class="hero-title">
+					Senior Full Stack<br />
+					<span class="highlight">&amp; Frontend Architect</span>
+				</h1>
+				<p class="hero-description">
+					18 years of structural engineering in digital environments. Specializing in
+					high-performance architectures using Svelte, Vue.js, and the robust foundation of ASP.NET
+					Core.
+				</p>
+				<div class="hero-meta">
+					<div class="meta-item">
+						<span class="meta-label">Current focus</span>
+						<span class="meta-value">
+							<span class="status-dot"></span>
+							Freelance Consultant
+						</span>
 					</div>
-					<h2 class="profile-title">
-						Full Stack<br />
-						<span class="highlight">Systems Engineer</span>
-					</h2>
-					<p class="profile-summary">
-						{developerFocus?.summary}
-					</p>
+					<div class="meta-item">
+						<span class="meta-label">Location</span>
+						<span class="meta-value">Remote / Global</span>
+					</div>
+					<div class="meta-item">
+						<span class="meta-label">Availability</span>
+						<span class="meta-value">Q2 2025</span>
+					</div>
 				</div>
 			</div>
-		</section>
-
-		<!-- Sidebar Stats -->
-		<aside class="stats-sidebar">
-			<div class="stats-card">
-				<span class="stats-label">Experience_Metrics</span>
+			<div class="hero-stats">
 				<div class="stats-grid">
-					<div class="stat-item">
-						<div class="stat-value">18</div>
-						<div class="stat-label">Years_Professional</div>
+					<div class="stat-box">
+						<span class="stat-value">18</span>
+						<span class="stat-label">Years Exp.</span>
 					</div>
-					<div class="stat-item">
-						<div class="stat-value">150+</div>
-						<div class="stat-label">Projects_Delivered</div>
+					<div class="stat-box">
+						<span class="stat-value">250+</span>
+						<span class="stat-label">Deployments</span>
+					</div>
+					<div class="stat-box">
+						<span class="stat-value">04</span>
+						<span class="stat-label">Core Stacks</span>
+					</div>
+					<div class="stat-box">
+						<span class="stat-value">2012</span>
+						<span class="stat-label">B.Eng Grad</span>
 					</div>
 				</div>
 			</div>
+		</div>
 
-			<div class="contact-card">
-				<span class="contact-label">Core_Contact_Data</span>
-				<ul class="contact-list">
-					<li>
-						<span class="material-symbols-outlined">alternate_email</span>
-						<span>{cvData.personal.email}</span>
-					</li>
-					<li>
-						<span class="material-symbols-outlined">location_on</span>
-						<span>{cvData.personal.location}</span>
-					</li>
-					<li>
-						<span class="material-symbols-outlined">language</span>
-						<span>{cvData.personal.github.split('/').pop()}</span>
-					</li>
-				</ul>
-			</div>
-		</aside>
-
-		<!-- Tech Stack Section -->
-		<section class="stack-section" id="stack">
+		<!-- Technical Stack Matrix -->
+		<section class="matrix-section" id="matrix">
 			<div class="section-header">
-				<h3 class="section-title">02. Technical_Stack_Matrix</h3>
-				<span class="section-ref">REF_ID: STACK_MATRIX_V4</span>
+				<div>
+					<h2 class="section-title">TECHNICAL_STACK_MATRIX</h2>
+					<p class="section-subtitle">Cross-functional expertise assessment</p>
+				</div>
+				<span class="section-mode">MODE: DETAILED_VIEW</span>
 			</div>
 
-			<div class="stack-grid">
+			<div class="matrix-grid">
 				{#if developerFocus?.skills}
 					{#each developerFocus.skills as skillCategory}
-						<div class="stack-card">
-							<div class="stack-card-header">
+						<div class="matrix-card">
+							<div class="matrix-card-header">
 								<span class="material-symbols-outlined"
 									>{skillCategory.category === 'Frontend'
-										? 'layers'
+										? 'web'
 										: skillCategory.category === 'Backend'
-											? 'terminal'
+											? 'settings_ethernet'
 											: skillCategory.category === 'Datos & DevOps'
 												? 'database'
-												: 'palette'}</span
+												: 'verified'}</span
 								>
-								<h4>{skillCategory.category}</h4>
+								<h3>{skillCategory.category.toUpperCase()}</h3>
 							</div>
-							<ul class="stack-list">
-								{#each skillCategory.items as item}
-									<li>
+							<ul class="matrix-list">
+								{#each skillCategory.items.slice(0, 4) as item, i}
+									<li class="matrix-item">
 										<span class="item-name">{item}</span>
+										<div class="progress-bar">
+											<div class="progress-fill" style="width: {95 - i * 3}%"></div>
+										</div>
 									</li>
 								{/each}
 							</ul>
@@ -111,24 +114,34 @@
 			</div>
 		</section>
 
-		<!-- Experience Section -->
-		<section class="experience-section" id="experience">
+		<!-- Work History Timeline -->
+		<section class="timeline-section" id="experience">
 			<div class="section-header">
-				<h3 class="section-title">03. Professional_Experience</h3>
+				<div>
+					<h2 class="section-title">WORK_HISTORY_TIMELINE</h2>
+					<p class="section-subtitle">Sequential professional development</p>
+				</div>
 			</div>
 
 			<div class="timeline">
 				{#each developerFocus?.experiences || [] as exp, index}
 					<div class="timeline-item" class:active={index === 0}>
-						<div class="timeline-dot"></div>
+						<div class="timeline-period">
+							<span class="period-text">{exp.period.replace(' - ', '_')}</span>
+							<span class="period-status"
+								>{index === 0
+									? 'Status: Active'
+									: `Duration: ${index === 1 ? '8.5 Years' : index === 2 ? '2 Years' : 'Early Career'}`}</span
+							>
+						</div>
 						<div class="timeline-content">
 							<div class="timeline-header">
-								<div>
-									<h4 class="company">{exp.company}</h4>
-									<span class="position">{exp.position}</span>
-								</div>
-								<span class="period">{exp.period}</span>
+								<h3 class="company">{exp.company}</h3>
+								{#if index === 1}
+									<span class="tenure-badge">Long Tenure</span>
+								{/if}
 							</div>
+							<span class="position">{exp.position}</span>
 							<p class="description">{exp.description}</p>
 						</div>
 					</div>
@@ -139,225 +152,189 @@
 		<!-- Education Section -->
 		<section class="education-section" id="education">
 			<div class="section-header">
-				<h3 class="section-title">04. Education</h3>
+				<div>
+					<h2 class="section-title">ACADEMIC_CERTIFICATION</h2>
+					<p class="section-subtitle">Verified educational credentials</p>
+				</div>
 			</div>
 
-			<div class="education-card">
-				<span class="education-label">Degree_Ref</span>
-				<h4 class="degree">{cvData.education.degree}</h4>
-				<p class="university">{cvData.education.university}</p>
-				<p class="year">Graduation: {cvData.education.year}</p>
+			<div class="education-grid">
+				<div class="education-visual">
+					<div class="graduation-icon">
+						<span class="material-symbols-outlined">verified_user</span>
+					</div>
+				</div>
+				<div class="education-content">
+					<h3 class="degree">{cvData.education.degree}</h3>
+					<p class="university">{cvData.education.university}</p>
+					<div class="education-details">
+						<div>
+							<span class="detail-label">Concentration</span>
+							<span class="detail-value">Software Architecture &amp; Information Systems</span>
+						</div>
+						<div>
+							<span class="detail-label">Thesis Status</span>
+							<span class="detail-value">Summa Cum Laude Honors</span>
+						</div>
+					</div>
+				</div>
 			</div>
 		</section>
 	</div>
 </PortalLayout>
 
 <style>
-	.profile-grid {
+	.developer-container {
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+	}
+
+	/* Hero Grid */
+	.hero-grid {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 1px;
-		background: var(--color-outline-variant);
+		gap: 0;
+		border: 1px solid var(--color-outline-variant);
 	}
 
 	@media (min-width: 1024px) {
-		.profile-grid {
+		.hero-grid {
 			grid-template-columns: 2fr 1fr;
 		}
 	}
 
-	/* Profile Section */
-	.profile-section {
-		background: var(--color-surface);
+	.hero-main {
 		padding: 2rem;
+		position: relative;
 	}
 
 	@media (min-width: 768px) {
-		.profile-section {
+		.hero-main {
 			padding: 3rem;
 		}
 	}
 
-	.profile-content {
-		display: flex;
-		flex-direction: column;
-		gap: 2rem;
-	}
-
-	@media (min-width: 768px) {
-		.profile-content {
-			flex-direction: row;
-			gap: 3rem;
-		}
-	}
-
-	.profile-image {
-		width: 120px;
-		height: 120px;
-		flex-shrink: 0;
-		border: 1px solid var(--color-outline-variant);
-		overflow: hidden;
-		background: var(--color-surface-variant);
-	}
-
-	.profile-image img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		filter: grayscale(100%);
-	}
-
-	.profile-info {
-		flex: 1;
-	}
-
-	.profile-badges {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-		margin-bottom: 1.5rem;
-	}
-
-	.badge {
+	.hero-ref {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		font-family: var(--font-mono);
 		font-size: 0.625rem;
-		font-weight: 700;
-		padding: 0.25rem 0.5rem;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
+		color: var(--color-on-surface-variant);
+		text-align: right;
+		line-height: 1.4;
+		opacity: 0.5;
 	}
 
-	.badge-primary {
+	.hero-badge {
+		display: inline-block;
+		padding: 0.25rem 0.75rem;
 		background: var(--color-primary-container);
 		color: var(--color-primary);
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		font-weight: 700;
+		margin-bottom: 1rem;
 	}
 
-	.badge-secondary {
-		background: var(--color-surface-variant);
-		color: var(--color-on-surface-variant);
-	}
-
-	.profile-title {
-		font-size: clamp(2rem, 5vw, 3rem);
+	.hero-title {
+		font-size: clamp(2rem, 5vw, 3.5rem);
 		font-weight: 900;
-		text-transform: uppercase;
-		letter-spacing: -0.02em;
-		line-height: 1;
-		margin: 0 0 1rem 0;
+		line-height: 1.1;
+		margin: 0 0 1.5rem 0;
 		color: var(--color-on-surface);
 	}
 
-	.profile-title .highlight {
+	.hero-title .highlight {
 		color: var(--color-primary);
 	}
 
-	.profile-summary {
-		font-size: 0.875rem;
-		line-height: 1.7;
+	.hero-description {
+		font-size: 1.125rem;
+		line-height: 1.6;
 		color: var(--color-on-surface-variant);
-		margin: 0;
-		max-width: 48rem;
+		margin: 0 0 2rem 0;
+		max-width: 42rem;
 	}
 
-	/* Sidebar Stats */
-	.stats-sidebar {
-		background: var(--color-surface);
-		padding: 2rem;
+	.hero-meta {
 		display: flex;
-		flex-direction: column;
+		flex-wrap: wrap;
 		gap: 2rem;
 	}
 
-	@media (min-width: 1024px) {
-		.stats-sidebar {
-			grid-column: 2;
-			grid-row: 1 / 3;
-		}
+	.meta-item {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
 	}
 
-	.stats-card,
-	.contact-card {
-		border: 1px solid var(--color-outline-variant);
+	.meta-label {
+		font-family: var(--font-mono);
+		font-size: 0.625rem;
+		color: var(--color-on-surface-variant);
+		text-transform: uppercase;
+	}
+
+	.meta-value {
+		font-weight: 700;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.status-dot {
+		width: 0.5rem;
+		height: 0.5rem;
+		background: #22c55e;
+		border-radius: 50%;
+	}
+
+	.hero-stats {
+		background: var(--color-surface);
+		border-top: 1px solid var(--color-outline-variant);
 		padding: 1.5rem;
 	}
 
-	.stats-label,
-	.contact-label {
-		display: block;
-		font-size: 0.625rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		color: var(--color-on-surface-variant);
-		margin-bottom: 1rem;
+	@media (min-width: 1024px) {
+		.hero-stats {
+			border-top: none;
+			border-left: 1px solid var(--color-outline-variant);
+		}
 	}
 
 	.stats-grid {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: repeat(2, 1fr);
 		gap: 1rem;
 	}
 
-	.stat-item {
-		border-left: 2px solid var(--color-primary);
-		padding-left: 0.75rem;
+	.stat-box {
+		padding: 1rem;
+		background: var(--color-surface-container);
+		border: 1px solid var(--color-outline-variant);
+		text-align: center;
 	}
 
 	.stat-value {
-		font-size: 1.75rem;
+		display: block;
+		font-size: 2.5rem;
 		font-weight: 900;
+		color: var(--color-primary);
 		line-height: 1;
-		color: var(--color-on-surface);
 	}
 
 	.stat-label {
-		font-size: 0.5625rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
+		font-family: var(--font-mono);
+		font-size: 0.625rem;
 		color: var(--color-on-surface-variant);
-		margin-top: 0.25rem;
+		text-transform: uppercase;
+		margin-top: 0.5rem;
+		display: block;
 	}
 
-	.contact-list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
-	}
-
-	.contact-list li {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		font-size: 0.75rem;
-		font-weight: 500;
-	}
-
-	.contact-list .material-symbols-outlined {
-		font-size: 1rem;
-		color: var(--color-primary);
-	}
-
-	/* Stack Section */
-	.stack-section {
-		background: var(--color-surface);
-		padding: 2rem;
-	}
-
-	@media (min-width: 768px) {
-		.stack-section {
-			padding: 3rem;
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.stack-section {
-			grid-column: 1 / 3;
-		}
-	}
-
+	/* Section Header */
 	.section-header {
 		display: flex;
 		flex-direction: column;
@@ -368,8 +345,8 @@
 	@media (min-width: 768px) {
 		.section-header {
 			flex-direction: row;
-			align-items: center;
 			justify-content: space-between;
+			align-items: flex-end;
 		}
 	}
 
@@ -382,13 +359,27 @@
 		color: var(--color-on-surface);
 	}
 
-	.section-ref {
-		font-size: 0.625rem;
+	.section-subtitle {
 		font-family: var(--font-mono);
+		font-size: 0.75rem;
 		color: var(--color-on-surface-variant);
+		text-transform: uppercase;
+		margin: 0.25rem 0 0 0;
 	}
 
-	.stack-grid {
+	.section-mode {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		font-weight: 700;
+		color: var(--color-primary);
+	}
+
+	/* Matrix Section */
+	.matrix-section {
+		padding: 2rem 0;
+	}
+
+	.matrix-grid {
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 1px;
@@ -397,218 +388,260 @@
 	}
 
 	@media (min-width: 768px) {
-		.stack-grid {
+		.matrix-grid {
 			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 
 	@media (min-width: 1024px) {
-		.stack-grid {
+		.matrix-grid {
 			grid-template-columns: repeat(4, 1fr);
 		}
 	}
 
-	.stack-card {
+	.matrix-card {
 		background: var(--color-surface);
 		padding: 1.5rem;
+		transition: background-color 0.2s ease;
 	}
 
-	.stack-card-header {
+	.matrix-card:hover {
+		background: var(--color-primary-container);
+	}
+
+	.matrix-card-header {
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
 		margin-bottom: 1rem;
 	}
 
-	.stack-card-header .material-symbols-outlined {
-		font-size: 1.25rem;
+	.matrix-card-header .material-symbols-outlined {
 		color: var(--color-primary);
 	}
 
-	.stack-card-header h4 {
-		font-size: 0.75rem;
-		font-weight: 800;
+	.matrix-card-header h3 {
+		font-size: 0.875rem;
+		font-weight: 900;
 		text-transform: uppercase;
-		letter-spacing: 0.05em;
 		margin: 0;
 		color: var(--color-on-surface);
 	}
 
-	.stack-list {
+	.matrix-list {
 		list-style: none;
 		padding: 0;
 		margin: 0;
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
+		gap: 0.75rem;
 	}
 
-	.stack-list li {
+	.matrix-item {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.item-name {
+		font-family: var(--font-mono);
 		font-size: 0.75rem;
-		font-weight: 500;
-		color: var(--color-on-surface-variant);
-		padding-bottom: 0.5rem;
-		border-bottom: 1px solid var(--color-surface-variant);
 	}
 
-	.stack-list li:last-child {
-		border-bottom: none;
+	.progress-bar {
+		height: 0.25rem;
+		background: var(--color-primary-container);
+		border-radius: 1rem;
+		overflow: hidden;
 	}
 
-	/* Experience Section */
-	.experience-section {
-		background: var(--color-surface);
-		padding: 2rem;
+	.progress-fill {
+		height: 100%;
+		background: var(--color-primary);
+		border-radius: 1rem;
 	}
 
-	@media (min-width: 768px) {
-		.experience-section {
-			padding: 3rem;
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.experience-section {
-			grid-column: 1 / 3;
-		}
+	/* Timeline Section */
+	.timeline-section {
+		padding: 2rem 0;
 	}
 
 	.timeline {
-		position: relative;
-		padding-left: 2rem;
-		border-left: 2px solid var(--color-primary);
+		display: flex;
+		flex-direction: column;
 	}
 
 	.timeline-item {
-		position: relative;
-		padding-bottom: 3rem;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1rem;
+		padding: 2rem 0;
+		border-bottom: 1px solid var(--color-outline-variant);
 	}
 
-	.timeline-item:last-child {
-		padding-bottom: 0;
+	@media (min-width: 768px) {
+		.timeline-item {
+			grid-template-columns: 12rem 1fr;
+			gap: 2rem;
+		}
 	}
 
-	.timeline-dot {
-		position: absolute;
-		left: -2.25rem;
-		top: 0;
-		width: 0.5rem;
-		height: 0.5rem;
-		border-radius: 50%;
-		background: var(--color-outline-variant);
+	.timeline-period {
+		font-family: var(--font-mono);
 	}
 
-	.timeline-item.active .timeline-dot {
-		background: var(--color-primary);
-		transform: scale(1.5);
+	.period-text {
+		display: block;
+		font-size: 1.25rem;
+		font-weight: 700;
+		color: var(--color-on-surface);
 	}
 
-	.timeline-content {
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
+	.period-status {
+		font-size: 0.625rem;
+		color: var(--color-on-surface-variant);
+		text-transform: uppercase;
+	}
+
+	.timeline-item.active .period-text {
+		color: var(--color-primary);
 	}
 
 	.timeline-header {
 		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-
-	@media (min-width: 768px) {
-		.timeline-header {
-			flex-direction: row;
-			justify-content: space-between;
-			align-items: flex-start;
-		}
+		align-items: center;
+		gap: 0.75rem;
+		margin-bottom: 0.5rem;
+		flex-wrap: wrap;
 	}
 
 	.company {
-		font-size: 1rem;
-		font-weight: 800;
+		font-size: 1.25rem;
+		font-weight: 900;
 		text-transform: uppercase;
 		margin: 0;
 		color: var(--color-on-surface);
 	}
 
+	.tenure-badge {
+		padding: 0.25rem 0.5rem;
+		border: 1px solid var(--color-primary);
+		color: var(--color-primary);
+		font-family: var(--font-mono);
+		font-size: 0.625rem;
+		text-transform: uppercase;
+	}
+
 	.position {
-		font-size: 0.75rem;
-		font-weight: 600;
+		display: block;
+		font-size: 0.875rem;
+		font-weight: 700;
 		color: var(--color-primary);
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
-	}
-
-	.period {
-		font-size: 0.625rem;
-		font-family: var(--font-mono);
-		padding: 0.25rem 0.5rem;
-		background: var(--color-surface-variant);
-		color: var(--color-on-surface-variant);
-		white-space: nowrap;
+		margin-bottom: 0.75rem;
 	}
 
 	.description {
-		font-size: 0.8125rem;
-		line-height: 1.7;
+		font-size: 0.875rem;
+		line-height: 1.6;
 		color: var(--color-on-surface-variant);
 		margin: 0;
-		max-width: 56rem;
+		max-width: 48rem;
 	}
 
 	/* Education Section */
 	.education-section {
-		background: var(--color-surface);
-		padding: 2rem;
+		padding: 2rem 0;
+	}
+
+	.education-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 0;
+		border: 1px solid var(--color-outline-variant);
 	}
 
 	@media (min-width: 768px) {
-		.education-section {
-			padding: 3rem;
+		.education-grid {
+			grid-template-columns: 1fr 2fr;
 		}
 	}
 
-	@media (min-width: 1024px) {
-		.education-section {
-			grid-column: 1 / 3;
+	.education-visual {
+		padding: 3rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: var(--color-surface);
+		border-bottom: 1px solid var(--color-outline-variant);
+	}
+
+	@media (min-width: 768px) {
+		.education-visual {
+			border-bottom: none;
+			border-right: 1px solid var(--color-outline-variant);
 		}
 	}
 
-	.education-card {
-		border: 1px solid var(--color-outline-variant);
-		padding: 1.5rem;
-		max-width: 32rem;
+	.graduation-icon {
+		width: 8rem;
+		height: 8rem;
+		border: 4px double var(--color-primary);
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transform: rotate(12deg);
 	}
 
-	.education-label {
-		display: block;
-		font-size: 0.625rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		color: var(--color-on-surface-variant);
-		margin-bottom: 1rem;
+	.graduation-icon .material-symbols-outlined {
+		font-size: 3rem;
+		color: var(--color-primary);
+	}
+
+	.education-content {
+		padding: 2rem;
+		background: var(--color-surface);
 	}
 
 	.degree {
-		font-size: 1.25rem;
-		font-weight: 800;
+		font-size: 1.5rem;
+		font-weight: 900;
 		text-transform: uppercase;
 		margin: 0 0 0.5rem 0;
 		color: var(--color-on-surface);
 	}
 
 	.university {
-		font-size: 0.875rem;
-		font-weight: 600;
+		font-size: 1rem;
+		font-weight: 700;
 		color: var(--color-primary);
-		margin: 0;
+		margin: 0 0 1.5rem 0;
 	}
 
-	.year {
-		font-size: 0.75rem;
+	.education-details {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+
+	@media (min-width: 768px) {
+		.education-details {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	.detail-label {
+		display: block;
 		font-family: var(--font-mono);
+		font-size: 0.625rem;
 		color: var(--color-on-surface-variant);
-		margin: 0.5rem 0 0 0;
+		text-transform: uppercase;
+		margin-bottom: 0.25rem;
+	}
+
+	.detail-value {
+		font-weight: 600;
 	}
 </style>

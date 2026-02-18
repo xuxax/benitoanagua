@@ -8,7 +8,7 @@ export function loadCVData(): CVData {
 
 export function getFocusByName(name: string) {
 	const cvData = loadCVData();
-	return cvData.focuses.find(focus => focus.name === name);
+	return cvData.focuses.find((focus) => focus.name === name);
 }
 
 export function getAllFocuses() {

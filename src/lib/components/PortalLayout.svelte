@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import { onMount } from 'svelte';
 
 	interface NavItem {
 		label: string;
@@ -9,9 +10,30 @@
 	interface Props {
 		navItems?: NavItem[];
 		showBackButton?: boolean;
+		children?: import('svelte').Snippet;
 	}
 
-	let { navItems = [], showBackButton = false }: Props = $props();
+	let { navItems = [], showBackButton = false, children }: Props = $props();
+
+	let currentTheme = $state('dark');
+
+	onMount(() => {
+		const savedTheme = localStorage.getItem('theme');
+		if (savedTheme) {
+			currentTheme = savedTheme;
+		} else {
+			const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+			currentTheme = systemDark ? 'dark' : 'light';
+		}
+		document.documentElement.setAttribute('data-theme', currentTheme);
+	});
+
+	function toggleTheme() {
+		const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+		currentTheme = newTheme;
+		document.documentElement.setAttribute('data-theme', newTheme);
+		localStorage.setItem('theme', newTheme);
+	}
 </script>
 
 <div class="portal-wrapper">
@@ -45,6 +67,12 @@
 					{/each}
 				</nav>
 
+				<button class="theme-toggle" onclick={toggleTheme} aria-label="Toggle theme">
+					<span class="material-symbols-outlined"
+						>{currentTheme === 'dark' ? 'light_mode' : 'dark_mode'}</span
+					>
+				</button>
+
 				<div class="status-indicator">
 					<span class="status-dot"></span>
 					<span class="status-text">Available</span>
@@ -54,7 +82,7 @@
 	</header>
 
 	<main class="portal-main">
-		<slot />
+		{@render children?.()}
 	</main>
 
 	<footer class="portal-footer">
@@ -76,9 +104,13 @@
 		flex-direction: column;
 		background-color: var(--color-background);
 		color: var(--color-on-background);
-		background-image: var(--blueprint-grid);
+		background-image: var(--blueprint-grid-light);
 		background-size: 40px 40px;
 		position: relative;
+	}
+
+	:global([data-theme='dark']) .portal-wrapper {
+		background-image: var(--blueprint-grid-dark);
 	}
 
 	/* Header */
@@ -209,6 +241,27 @@
 		color: var(--color-primary);
 	}
 
+	.theme-toggle {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 2rem;
+		height: 2rem;
+		background: var(--color-surface);
+		border: 1px solid var(--color-outline-variant);
+		cursor: pointer;
+		transition: all 0.2s ease;
+	}
+
+	.theme-toggle:hover {
+		border-color: var(--color-primary);
+	}
+
+	.theme-toggle .material-symbols-outlined {
+		font-size: 1.25rem;
+		color: var(--color-on-surface);
+	}
+
 	.status-indicator {
 		display: flex;
 		align-items: center;
@@ -248,7 +301,7 @@
 	.portal-main {
 		flex: 1;
 		width: 100%;
-		max-width: 80rem;
+		max-width: 100%;
 		margin: 0 auto;
 		padding: 2rem 1.5rem;
 	}

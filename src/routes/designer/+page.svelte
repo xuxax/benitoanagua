@@ -6,553 +6,744 @@
 	const designerFocus = getFocusByName('designer');
 
 	const navItems = [
-		{ label: 'Profile', href: '#profile' },
-		{ label: 'Technical Specs', href: '#skills' },
-		{ label: 'Timeline', href: '#experience' },
-		{ label: 'Education', href: '#education' }
+		{ label: 'Skills Matrix', href: '#matrix' },
+		{ label: 'Methodology', href: '#methodology' },
+		{ label: 'Experience', href: '#experience' }
+	];
+
+	const skillsData = [
+		{ category: 'Tooling', skill: 'Figma', proficiency: 98 },
+		{ category: 'Systems', skill: 'Design Systems', proficiency: 95 },
+		{ category: 'Prototyping', skill: 'Hi-Fi Logic', proficiency: 92 },
+		{ category: 'Engineering', skill: 'Frontend Dev', proficiency: 85 }
 	];
 </script>
 
 <PortalLayout {navItems} showBackButton={true}>
-	<div class="profile-grid">
-		<!-- Profile Section -->
-		<section class="profile-section" id="profile">
-			<div class="profile-content">
-				<div class="profile-image">
-					<img
-						src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs6oLpS7hl_pU5OVuwT5G3-daplDGUS9OM7LUYblAGbo_0sgxuwmZ35VqjrEzWzwQaEgxXK9nQ4EGJlSUD_nLxG0QgHrIasz5Sps7mXqkWndXzVjIU2cbiQMCTpjdZAEDopS_YmnKgHObr-Y8LUn3UEjUXOmjh9KMKxQj0FaL0mK6T2FIWYXMq-Q1jlcuItUBiUYPOTkNC9LfMtgRPQwkbAxomowo2a-6mYy8MIA5jtD31ubcc7TbGHHu_GgzxIYq1bkvt9tOQAJGs"
-						alt="Benito Anagua Ibarra"
-					/>
-					<div class="image-overlay">
-						<span class="overlay-label">Location</span>
-						<span class="overlay-value">{cvData.personal.location}</span>
+	<div class="designer-container">
+		<!-- Hero Section -->
+		<section class="hero-section">
+			<div class="hero-label-row">
+				<span class="label-line"></span>
+				<span class="hero-label">Est. 2006 — Senior Professional</span>
+			</div>
+			<h1 class="hero-title">
+				18 YEARS OF <span class="highlight">SYSTEMATIC</span> DESIGN
+			</h1>
+			<p class="hero-description">
+				Specializing in Figma, Design Systems, and High-Fidelity Prototyping with a rigid
+				architectural approach to digital products.
+			</p>
+			<div class="hero-actions">
+				<a href="#contact" class="btn-primary">
+					View Portfolio
+					<span class="material-symbols-outlined">arrow_forward</span>
+				</a>
+				<div class="education-badge">
+					<span class="material-symbols-outlined">school</span>
+					<div>
+						<p class="badge-label">Licenciatura en Ingeniería de Informática</p>
+						<p class="badge-value">UNIVERSITY CLASS OF 2012</p>
 					</div>
 				</div>
+			</div>
+		</section>
 
-				<div class="profile-info">
-					<span class="profile-label">Professional Profile</span>
-					<h2 class="profile-title">Crafting functional digital architectures.</h2>
-					<p class="profile-summary">
-						{designerFocus?.summary}
+		<!-- Skills Matrix Section -->
+		<section class="matrix-section" id="matrix">
+			<div class="section-header">
+				<div>
+					<h2 class="section-title">Design Skills Matrix</h2>
+					<p class="section-subtitle">Cross-functional technical proficiency levels</p>
+				</div>
+				<span class="section-ref">REF: [DS_MATRIX_V4.0]</span>
+			</div>
+
+			<div class="matrix-content">
+				<div class="matrix-table-wrapper">
+					<table class="matrix-table">
+						<thead>
+							<tr>
+								<th>Category</th>
+								<th>Core Skill</th>
+								<th>Proficiency</th>
+							</tr>
+						</thead>
+						<tbody>
+							{#each skillsData as item}
+								<tr>
+									<td>{item.category}</td>
+									<td class="skill-name">{item.skill}</td>
+									<td>
+										<div class="proficiency-cell">
+											<div class="proficiency-bar">
+												<div class="proficiency-fill" style="width: {item.proficiency}%"></div>
+											</div>
+											<span class="proficiency-value">{item.proficiency}%</span>
+										</div>
+									</td>
+								</tr>
+							{/each}
+						</tbody>
+					</table>
+				</div>
+
+				<div class="matrix-visual">
+					<span class="visual-icon material-symbols-outlined">grid_view</span>
+					<div class="visual-card">
+						<h4>Architectural Approach</h4>
+						<p>
+							Design is not just visual; it's structural engineering for human interaction. Every
+							component is audited for scalability and logic.
+						</p>
+					</div>
+					<div class="visual-stats">
+						<div class="stat-card">
+							<span class="stat-value">18</span>
+							<span class="stat-label">Years Exp</span>
+						</div>
+						<div class="stat-card accent">
+							<span class="stat-value">50+</span>
+							<span class="stat-label">Design Systems</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Methodology Section -->
+		<section class="methodology-section" id="methodology">
+			<div class="methodology-header">
+				<h2 class="section-title">Methodology</h2>
+				<div class="title-underline"></div>
+			</div>
+
+			<div class="methodology-grid">
+				<div class="methodology-card">
+					<span class="card-number">01</span>
+					<span class="material-symbols-outlined card-icon">analytics</span>
+					<h3>Analysis</h3>
+					<p>
+						Stakeholder interviews, user research audits, and technical constraint mapping to define
+						the blueprint boundaries.
 					</p>
-
-					<div class="profile-meta">
-						<div class="meta-item">
-							<span class="meta-label">Role</span>
-							<span class="meta-value">Senior Designer</span>
-						</div>
-						<div class="meta-item">
-							<span class="meta-label">Focus</span>
-							<span class="meta-value">Technical Layout</span>
-						</div>
-						<div class="meta-item">
-							<span class="meta-label">Language</span>
-							<span class="meta-value">English / Spanish</span>
-						</div>
-						<div class="meta-item">
-							<span class="meta-label">Experience</span>
-							<span class="meta-value">18 Years</span>
-						</div>
-					</div>
+					<ul>
+						<li>User Persona Mapping</li>
+						<li>Competitive Audit</li>
+						<li>Tech Stack Alignment</li>
+					</ul>
+				</div>
+				<div class="methodology-card active">
+					<span class="card-number">02</span>
+					<span class="material-symbols-outlined card-icon">architecture</span>
+					<h3>Implementation</h3>
+					<p>
+						Constructing the design system, wireframing technical flows, and building high-fidelity
+						interactive prototypes.
+					</p>
+					<ul>
+						<li>Atomic Componentry</li>
+						<li>Prototyping Logic</li>
+						<li>Design Tokens</li>
+					</ul>
+				</div>
+				<div class="methodology-card">
+					<span class="card-number">03</span>
+					<span class="material-symbols-outlined card-icon">verified_user</span>
+					<h3>Verification</h3>
+					<p>
+						Usability testing, accessibility audits (WCAG), and engineering hand-off documentation
+						to ensure build integrity.
+					</p>
+					<ul>
+						<li>Accessibility Testing</li>
+						<li>Dev Specification</li>
+						<li>Performance Audit</li>
+					</ul>
 				</div>
 			</div>
 		</section>
 
-		<!-- Skills Section -->
-		<section class="skills-section" id="skills">
-			<div class="section-header">
-				<h3 class="section-title">Technical Specs</h3>
-				<span class="section-ref">V.2024.01</span>
-			</div>
-
-			<div class="skills-grid">
-				{#if designerFocus?.skills}
-					{#each designerFocus.skills as skillCategory}
-						<div class="skill-card">
-							<div class="skill-icon">
-								<span class="material-symbols-outlined">
-									{skillCategory.category === 'Diseño'
-										? 'pen_size_2'
-										: skillCategory.category === 'Visual'
-											? 'palette'
-											: skillCategory.category === 'Web'
-												? 'code'
-												: 'settings_account_box'}
-								</span>
-							</div>
-							<div class="skill-content">
-								<h4>{skillCategory.category}</h4>
-								<ul>
-									{#each skillCategory.items.slice(0, 3) as item}
-										<li>{item}</li>
-									{/each}
-								</ul>
-							</div>
-						</div>
-					{/each}
-				{/if}
-			</div>
-		</section>
-
-		<!-- Experience Section -->
-		<section class="experience-section" id="experience">
-			<div class="section-header">
-				<h3 class="section-title">Experience Timeline</h3>
-			</div>
-
-			<div class="timeline">
+		<!-- Work History Section -->
+		<section class="history-section" id="experience">
+			<h2 class="section-title">Work History</h2>
+			<div class="history-list">
 				{#each designerFocus?.experiences || [] as exp, index}
-					<div class="timeline-item">
-						<div class="timeline-header">
-							<h4 class="company">{exp.company}</h4>
-							<span class="period">{exp.period}</span>
+					<div class="history-item">
+						<div class="history-period">
+							<span class="period-dates">{exp.period.replace(' - ', ' — ')}</span>
+							<span class="period-role">{exp.position}</span>
 						</div>
-						<span class="position">{exp.position}</span>
-						<p class="description">{exp.description}</p>
+						<div class="history-content">
+							<h3>{exp.company}</h3>
+							<p>{exp.description}</p>
+						</div>
 					</div>
 				{/each}
 			</div>
 		</section>
 
-		<!-- Education Section -->
-		<section class="education-section" id="education">
-			<div class="section-header">
-				<h3 class="section-title">Academic Background</h3>
+		<!-- Education Banner -->
+		<section class="education-banner">
+			<div class="banner-content">
+				<span class="material-symbols-outlined banner-icon">terminal</span>
+				<div>
+					<h2>Technical Foundation</h2>
+					<p>{cvData.education.degree} • Class of {cvData.education.year}</p>
+				</div>
 			</div>
-
-			<div class="education-grid">
-				<div class="education-card">
-					<span class="education-label">Degree Conferred</span>
-					<h4>{cvData.education.degree}</h4>
-					<p class="university">{cvData.education.university}</p>
-				</div>
-
-				<div class="education-card">
-					<span class="education-label">Certifications</span>
-					<ul class="cert-list">
-						<li>Advanced UI/UX Specialization</li>
-						<li>Front-end Architecture</li>
-					</ul>
-				</div>
+			<div class="banner-decoration">
+				<span>Verified Academic Record</span>
+				<div class="banner-line"></div>
 			</div>
 		</section>
 	</div>
 </PortalLayout>
 
 <style>
-	.profile-grid {
+	.designer-container {
 		display: flex;
 		flex-direction: column;
-		gap: 1px;
-		background: var(--color-outline-variant);
 	}
 
-	/* Profile Section */
-	.profile-section {
-		background: var(--color-surface);
-		padding: 2rem;
-	}
-
-	@media (min-width: 768px) {
-		.profile-section {
-			padding: 3rem;
-		}
-	}
-
-	.profile-content {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 2rem;
-	}
-
-	@media (min-width: 1024px) {
-		.profile-content {
-			grid-template-columns: 300px 1fr;
-			gap: 3rem;
-		}
-	}
-
-	.profile-image {
+	/* Hero Section */
+	.hero-section {
+		padding: 4rem 0;
 		position: relative;
-		aspect-ratio: 1;
-		border: 1px solid var(--color-outline-variant);
-		overflow: hidden;
-		background: var(--color-surface-variant);
 	}
 
-	.profile-image img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		filter: grayscale(100%);
-		transition: filter 0.3s ease;
-	}
-
-	.profile-image:hover img {
-		filter: grayscale(0);
-	}
-
-	.image-overlay {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		padding: 1rem;
-		background: var(--color-surface);
-		border-top: 1px solid var(--color-outline-variant);
+	.hero-label-row {
 		display: flex;
-		flex-direction: column;
-		gap: 0.25rem;
+		align-items: center;
+		gap: 1rem;
+		margin-bottom: 1.5rem;
 	}
 
-	.overlay-label {
-		font-size: 0.625rem;
+	.label-line {
+		width: 3rem;
+		height: 1px;
+		background: var(--color-primary);
+	}
+
+	.hero-label {
+		font-size: 0.75rem;
 		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		color: var(--color-on-surface-variant);
-	}
-
-	.overlay-value {
-		font-size: 0.8125rem;
-		font-weight: 600;
-	}
-
-	.profile-info {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-	}
-
-	.profile-label {
-		font-size: 0.6875rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.2em;
 		color: var(--color-primary);
-		margin-bottom: 1rem;
+		text-transform: uppercase;
+		letter-spacing: 0.3em;
 	}
 
-	.profile-title {
-		font-size: clamp(1.75rem, 4vw, 2.5rem);
+	.hero-title {
+		font-size: clamp(2.5rem, 8vw, 5rem);
 		font-weight: 900;
 		text-transform: uppercase;
-		font-style: italic;
-		letter-spacing: -0.02em;
-		line-height: 1.1;
-		margin: 0 0 1.5rem 0;
+		letter-spacing: -0.03em;
+		line-height: 0.95;
+		margin: 0 0 2rem 0;
 		color: var(--color-on-surface);
 	}
 
-	.profile-summary {
-		font-size: 0.875rem;
-		line-height: 1.7;
+	.hero-title .highlight {
+		color: var(--color-primary);
+	}
+
+	.hero-description {
+		font-size: clamp(1rem, 2vw, 1.5rem);
+		font-weight: 300;
+		line-height: 1.6;
 		color: var(--color-on-surface-variant);
-		margin: 0 0 2rem 0;
+		margin: 0 0 3rem 0;
 		max-width: 48rem;
 	}
 
-	.profile-meta {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 1rem;
-	}
-
-	@media (min-width: 768px) {
-		.profile-meta {
-			grid-template-columns: repeat(4, 1fr);
-		}
-	}
-
-	.meta-item {
+	.hero-actions {
 		display: flex;
-		flex-direction: column;
-		gap: 0.25rem;
+		flex-wrap: wrap;
+		gap: 1rem;
+		align-items: flex-start;
 	}
 
-	.meta-label {
-		font-size: 0.5625rem;
-		font-weight: 700;
+	.btn-primary {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 1rem 2rem;
+		background: var(--color-primary);
+		color: var(--color-on-primary);
+		font-size: 0.875rem;
+		font-weight: 900;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
-		color: var(--color-on-surface-variant);
-		font-style: italic;
+		text-decoration: none;
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease;
 	}
 
-	.meta-value {
-		font-size: 0.75rem;
+	.btn-primary:hover {
+		transform: translateY(-0.25rem);
+		box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+	}
+
+	.education-badge {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 1rem 1.5rem;
+		border: 1px solid var(--color-primary);
+		background: var(--color-surface);
+	}
+
+	.education-badge .material-symbols-outlined {
+		font-size: 2rem;
+		color: var(--color-primary);
+	}
+
+	.badge-label {
+		font-size: 0.625rem;
 		font-weight: 700;
 		text-transform: uppercase;
-		letter-spacing: 0.025em;
+		opacity: 0.6;
+		margin: 0;
 	}
 
-	/* Skills Section */
-	.skills-section {
-		background: var(--color-surface);
-		padding: 2rem;
-		border-top: 1px solid var(--color-outline-variant);
+	.badge-value {
+		font-size: 0.875rem;
+		font-weight: 900;
+		text-transform: uppercase;
+		margin: 0;
 	}
 
-	@media (min-width: 768px) {
-		.skills-section {
-			padding: 3rem;
-		}
-	}
-
+	/* Section Header */
 	.section-header {
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
-		margin-bottom: 2rem;
+		margin-bottom: 3rem;
 	}
 
 	@media (min-width: 768px) {
 		.section-header {
 			flex-direction: row;
-			align-items: center;
 			justify-content: space-between;
+			align-items: flex-end;
 		}
 	}
 
 	.section-title {
-		font-size: 0.875rem;
+		font-size: clamp(2rem, 4vw, 3rem);
 		font-weight: 900;
 		text-transform: uppercase;
-		letter-spacing: 0.2em;
+		letter-spacing: -0.02em;
 		margin: 0;
 		color: var(--color-on-surface);
+	}
+
+	.section-subtitle {
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--color-on-surface-variant);
+		margin: 0.5rem 0 0 0;
 	}
 
 	.section-ref {
-		font-size: 0.625rem;
 		font-family: var(--font-mono);
-		color: var(--color-on-surface-variant);
-	}
-
-	.skills-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 1rem;
-	}
-
-	@media (min-width: 768px) {
-		.skills-grid {
-			grid-template-columns: repeat(2, 1fr);
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.skills-grid {
-			grid-template-columns: repeat(4, 1fr);
-		}
-	}
-
-	.skill-card {
-		border: 1px solid var(--color-outline-variant);
-		padding: 1.5rem;
-		display: flex;
-		flex-direction: column;
-		gap: 1rem;
-		transition: border-color 0.2s ease;
-	}
-
-	.skill-card:hover {
-		border-color: var(--color-primary);
-	}
-
-	.skill-icon {
-		width: 2.5rem;
-		height: 2.5rem;
-		border: 1px solid var(--color-outline-variant);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.skill-icon .material-symbols-outlined {
-		font-size: 1.25rem;
-		color: var(--color-primary);
-	}
-
-	.skill-content h4 {
 		font-size: 0.75rem;
-		font-weight: 800;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		margin: 0 0 0.75rem 0;
-		color: var(--color-on-surface);
-	}
-
-	.skill-content ul {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-
-	.skill-content li {
-		font-size: 0.6875rem;
-		font-weight: 600;
 		color: var(--color-on-surface-variant);
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
+		opacity: 0.5;
 	}
 
-	.skill-content li::before {
-		content: '';
-		width: 4px;
-		height: 4px;
-		background: var(--color-primary);
-	}
-
-	/* Experience Section */
-	.experience-section {
+	/* Matrix Section */
+	.matrix-section {
+		padding: 3rem 0;
 		background: var(--color-surface);
-		padding: 2rem;
 		border-top: 1px solid var(--color-outline-variant);
-	}
-
-	@media (min-width: 768px) {
-		.experience-section {
-			padding: 3rem;
-		}
-	}
-
-	.timeline {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.timeline-item {
-		padding: 1.5rem 0;
 		border-bottom: 1px solid var(--color-outline-variant);
 	}
 
-	.timeline-item:last-child {
-		border-bottom: none;
+	.matrix-content {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
 	}
 
-	.timeline-header {
+	@media (min-width: 1024px) {
+		.matrix-content {
+			grid-template-columns: 1.5fr 1fr;
+		}
+	}
+
+	.matrix-table-wrapper {
+		overflow-x: auto;
+	}
+
+	.matrix-table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	.matrix-table th {
+		padding: 1.5rem;
+		text-align: left;
+		font-size: 0.75rem;
+		font-weight: 900;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		border-bottom: 1px solid var(--color-outline-variant);
+		background: var(--color-primary-container);
+	}
+
+	.matrix-table td {
+		padding: 1.5rem;
+		border-bottom: 1px solid var(--color-outline-variant);
+	}
+
+	.matrix-table tr:hover td {
+		background: var(--color-primary-container);
+	}
+
+	.skill-name {
+		font-weight: 900;
+		color: var(--color-primary);
+		text-transform: uppercase;
+	}
+
+	.proficiency-cell {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.proficiency-bar {
+		flex: 1;
+		height: 0.375rem;
+		background: var(--color-primary-container);
+		border-radius: 1rem;
+		overflow: hidden;
+	}
+
+	.proficiency-fill {
+		height: 100%;
+		background: var(--color-primary);
+		border-radius: 1rem;
+	}
+
+	.proficiency-value {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		font-weight: 700;
+		min-width: 2.5rem;
+	}
+
+	.matrix-visual {
 		display: flex;
 		flex-direction: column;
+		gap: 1.5rem;
+		padding: 2rem;
+		border: 1px dashed var(--color-outline-variant);
+		background: var(--color-primary-container);
+	}
+
+	.visual-icon {
+		font-size: 10rem;
+		color: var(--color-on-surface);
+		opacity: 0.1;
+		position: absolute;
+	}
+
+	.matrix-visual {
+		position: relative;
+		min-height: 300px;
+		justify-content: center;
+	}
+
+	.visual-card {
+		background: var(--color-surface);
+		padding: 1.5rem;
+		border: 1px solid var(--color-outline-variant);
+	}
+
+	.visual-card h4 {
+		font-size: 0.875rem;
+		font-weight: 900;
+		text-transform: uppercase;
+		color: var(--color-primary);
+		margin: 0 0 0.5rem 0;
+	}
+
+	.visual-card p {
+		font-size: 0.875rem;
+		opacity: 0.7;
+		margin: 0;
+	}
+
+	.visual-stats {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+	}
+
+	.stat-card {
+		padding: 1.5rem;
+		background: var(--color-surface);
+		border: 1px solid var(--color-outline-variant);
+		text-align: center;
+	}
+
+	.stat-card.accent {
+		background: var(--color-primary);
+		color: var(--color-on-primary);
+	}
+
+	.stat-value {
+		display: block;
+		font-size: 2rem;
+		font-weight: 900;
+	}
+
+	.stat-label {
+		font-size: 0.625rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+	}
+
+	/* Methodology Section */
+	.methodology-section {
+		padding: 4rem 0;
+	}
+
+	.methodology-header {
+		text-align: center;
+		margin-bottom: 4rem;
+	}
+
+	.title-underline {
+		width: 4rem;
+		height: 0.25rem;
+		background: var(--color-primary);
+		margin: 1rem auto 0;
+	}
+
+	.methodology-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 0;
+	}
+
+	@media (min-width: 768px) {
+		.methodology-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	.methodology-card {
+		padding: 3rem 2rem;
+		border: 1px solid var(--color-outline-variant);
+		text-align: center;
+		position: relative;
+	}
+
+	@media (min-width: 768px) {
+		.methodology-card {
+			border-right: none;
+		}
+
+		.methodology-card:last-child {
+			border-right: 1px solid var(--color-outline-variant);
+		}
+	}
+
+	.methodology-card.active {
+		background: var(--color-primary-container);
+	}
+
+	.card-number {
+		position: absolute;
+		top: 0.5rem;
+		left: 50%;
+		transform: translateX(-50%);
+		font-size: 5rem;
+		font-weight: 900;
+		opacity: 0.05;
+		color: var(--color-primary);
+	}
+
+	.card-icon {
+		font-size: 3rem;
+		color: var(--color-primary);
+		margin-bottom: 1rem;
+	}
+
+	.methodology-card h3 {
+		font-size: 1.5rem;
+		font-weight: 900;
+		text-transform: uppercase;
+		margin: 0 0 1rem 0;
+		color: var(--color-on-surface);
+	}
+
+	.methodology-card p {
+		font-size: 0.875rem;
+		opacity: 0.7;
+		margin: 0 0 1.5rem 0;
+		max-width: 20rem;
+		margin-inline: auto;
+	}
+
+	.methodology-card ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		text-align: left;
+	}
+
+	.methodology-card li {
+		font-size: 0.625rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		display: flex;
+		align-items: center;
 		gap: 0.5rem;
 		margin-bottom: 0.5rem;
 	}
 
+	.methodology-card li::before {
+		content: '';
+		width: 0.375rem;
+		height: 0.375rem;
+		background: var(--color-primary);
+		border-radius: 50%;
+	}
+
+	/* History Section */
+	.history-section {
+		padding: 4rem 0;
+		background: var(--color-surface);
+		border-top: 1px solid var(--color-outline-variant);
+		border-bottom: 1px solid var(--color-outline-variant);
+	}
+
+	.history-list {
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+	}
+
+	.history-item {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1rem;
+		padding-bottom: 3rem;
+		border-bottom: 1px solid var(--color-outline-variant);
+	}
+
 	@media (min-width: 768px) {
-		.timeline-header {
+		.history-item {
+			grid-template-columns: 1fr 3fr;
+			gap: 3rem;
+		}
+	}
+
+	.history-item:last-child {
+		border-bottom: none;
+		padding-bottom: 0;
+	}
+
+	.period-dates {
+		display: block;
+		font-size: 1.25rem;
+		font-weight: 900;
+		color: var(--color-primary);
+	}
+
+	.period-role {
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		opacity: 0.5;
+	}
+
+	.history-content h3 {
+		font-size: 1.5rem;
+		font-weight: 900;
+		text-transform: uppercase;
+		margin: 0 0 1rem 0;
+		color: var(--color-on-surface);
+	}
+
+	.history-content p {
+		font-size: 0.9375rem;
+		line-height: 1.7;
+		color: var(--color-on-surface-variant);
+		margin: 0;
+	}
+
+	/* Education Banner */
+	.education-banner {
+		padding: 4rem;
+		background: var(--color-primary);
+		color: var(--color-on-primary);
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	@media (min-width: 768px) {
+		.education-banner {
 			flex-direction: row;
 			justify-content: space-between;
 			align-items: center;
 		}
 	}
 
-	.company {
-		font-size: 1rem;
-		font-weight: 800;
-		text-transform: uppercase;
-		margin: 0;
-		color: var(--color-on-surface);
-	}
-
-	.period {
-		font-size: 0.625rem;
-		font-family: var(--font-mono);
-		padding: 0.25rem 0.5rem;
-		background: var(--color-surface-variant);
-		color: var(--color-on-surface-variant);
-	}
-
-	.position {
-		display: block;
-		font-size: 0.6875rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		color: var(--color-primary);
-		margin-bottom: 0.75rem;
-	}
-
-	.description {
-		font-size: 0.8125rem;
-		line-height: 1.7;
-		color: var(--color-on-surface-variant);
-		margin: 0;
-		max-width: 48rem;
-	}
-
-	/* Education Section */
-	.education-section {
-		background: var(--color-surface);
-		padding: 2rem;
-		border-top: 1px solid var(--color-outline-variant);
-	}
-
-	@media (min-width: 768px) {
-		.education-section {
-			padding: 3rem;
-		}
-	}
-
-	.education-grid {
-		display: grid;
-		grid-template-columns: 1fr;
+	.banner-content {
+		display: flex;
+		align-items: center;
 		gap: 2rem;
 	}
 
-	@media (min-width: 768px) {
-		.education-grid {
-			grid-template-columns: repeat(2, 1fr);
-		}
+	.banner-icon {
+		font-size: 4rem;
 	}
 
-	.education-card {
-		border-left: 2px solid var(--color-primary);
-		padding-left: 1.5rem;
-	}
-
-	.education-label {
-		display: block;
-		font-size: 0.625rem;
-		font-family: var(--font-mono);
+	.banner-content h2 {
+		font-size: 1.5rem;
+		font-weight: 900;
 		text-transform: uppercase;
-		color: var(--color-primary);
+		margin: 0;
+	}
+
+	.banner-content p {
+		font-size: 0.875rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		opacity: 0.8;
+		margin: 0.25rem 0 0 0;
+	}
+
+	.banner-decoration {
+		text-align: right;
+	}
+
+	.banner-decoration span {
+		font-size: 0.625rem;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		opacity: 0.5;
+		display: block;
 		margin-bottom: 0.5rem;
 	}
 
-	.education-card h4 {
-		font-size: 1rem;
-		font-weight: 800;
-		text-transform: uppercase;
-		margin: 0 0 0.5rem 0;
-		color: var(--color-on-surface);
-	}
-
-	.university {
-		font-size: 0.8125rem;
-		font-weight: 600;
-		font-style: italic;
-		color: var(--color-on-surface-variant);
-		margin: 0;
-	}
-
-	.cert-list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
-	}
-
-	.cert-list li {
-		font-size: 0.75rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		color: var(--color-on-surface);
+	.banner-line {
+		width: 5rem;
+		height: 0.125rem;
+		background: var(--color-on-primary);
+		margin-left: auto;
 	}
 </style>
