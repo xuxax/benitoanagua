@@ -5,34 +5,23 @@
 	import '$lib/styles/app.css';
 
 	let { children } = $props();
-	let currentTheme = $state<'light' | 'dark'>('dark');
 
 	onMount(() => {
 		if (browser) {
-			const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
-			const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-				? 'dark'
-				: 'light';
+			const saved = localStorage.getItem('theme') as 'light' | 'dark' | null;
+			const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+			const theme = saved ?? (prefersDark ? 'dark' : 'light');
 
-			currentTheme = savedTheme || systemTheme;
-			applyTheme(currentTheme);
+			document.documentElement.setAttribute('data-theme', theme);
 
-			const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-			mediaQuery.addEventListener('change', (e) => {
+			// Escucha cambios del sistema solo si no hay preferencia guardada
+			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
 				if (!localStorage.getItem('theme')) {
-					currentTheme = e.matches ? 'dark' : 'light';
-					applyTheme(currentTheme);
+					document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
 				}
 			});
 		}
 	});
-
-	function applyTheme(theme: 'light' | 'dark') {
-		if (browser) {
-			document.documentElement.setAttribute('data-theme', theme);
-			localStorage.setItem('theme', theme);
-		}
-	}
 </script>
 
 <svelte:head>
@@ -45,6 +34,4 @@
 	/>
 </svelte:head>
 
-<div data-theme={currentTheme}>
-	{@render children()}
-</div>
+{@render children()}

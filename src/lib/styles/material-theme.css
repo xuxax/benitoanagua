@@ -35,11 +35,6 @@
 	--color-inverse-surface: #2f2b27;
 	--color-inverse-on-surface: #f4f1ed;
 	--color-inverse-primary: #ffb68c;
-	--stroke-primary: #ec5b13;
-	--stroke-secondary: #745a43;
-	--stroke-tertiary: #5f6348;
-	--stroke-outline: #817570;
-	--fg-tertiary: #4f4640;
 }
 
 [data-theme='dark'] {
@@ -79,9 +74,4 @@
 	--color-inverse-surface: #dde4e4;
 	--color-inverse-on-surface: #2b3232;
 	--color-inverse-primary: #006a6a;
-	--stroke-primary: #19e5e6;
-	--stroke-secondary: #b0cccb;
-	--stroke-tertiary: #b7c8e8;
-	--stroke-outline: #899392;
-	--fg-tertiary: #bec9c8;
 }

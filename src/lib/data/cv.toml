@@ -1,17 +1,25 @@
 [personal]
-name = "Benito Anagua Ibarra"
+name = "Benito Anagua"
 location = "Tarija, Bolivia"
 phone = "+591 72945548"
 email = "benito.anagua@gmail.com"
-website = "https://benitoanagua.me/"
+website = "https://benitoanagua.pages.dev/"
 linkedin = "https://www.linkedin.com/in/benito-anagua"
 github = "https://github.com/benitoanagua"
 behance = "https://behance.net/benitoanagua"
+whatsapp = "https://wa.me/59172945548"
+maps = "https://www.google.com/maps/place/Tarija,+Bolivia"
 
-[education]
+
+[[education]]
 degree = "Licenciatura en Ingeniería de Informática"
-university = "Universidad Autónoma Juan Misael Saracho"
+institution = "Universidad Autónoma Juan Misael Saracho"
 year = "2012"
+
+[[education]]
+degree = "Inglés — A2"
+institution = "Funval Internacional"
+year = "2025"
 
 [[focuses]]
 name = "developer"

@@ -7,11 +7,13 @@ export interface PersonalInfo {
 	linkedin: string;
 	github: string;
 	behance: string;
+	whatsapp: string;
+	maps: string;
 }
 
-export interface Education {
+export interface EducationEntry {
 	degree: string;
-	university: string;
+	institution: string;
 	year: string;
 }
 
@@ -37,6 +39,6 @@ export interface Focus {
 
 export interface CVData {
 	personal: PersonalInfo;
-	education: Education;
+	education: EducationEntry[];
 	focuses: Focus[];
 }

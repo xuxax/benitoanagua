@@ -1,0 +1,92 @@
+# site.toml — Datos del sitio, independientes del CV
+# Escalable para i18n: duplicar este archivo como site.en.toml, site.es.toml, etc.
+
+[meta]
+lang = "es"
+site_name = "Benito Anagua"
+tagline = "Full Stack · UI/UX · Gráfico"
+description = "18 años construyendo productos digitales con precisión estructural. Disponible para proyectos freelance y colaboraciones remotas."
+
+[nav]
+home_label = "Perfiles"
+back_label = "Perfiles"
+available_label = "Disponible"
+
+[[nav.profiles]]
+label = "Full Stack"
+href = "/developer"
+code = "01 / DEV"
+icon = "terminal"
+[nav.profiles.sections]
+perfil = "Perfil"
+habilidades = "Stack"
+experiencia = "Historial"
+educacion = "Formación"
+
+[[nav.profiles]]
+label = "UI/UX"
+href = "/designer"
+code = "02 / UX"
+icon = "layers"
+[nav.profiles.sections]
+perfil = "Perfil"
+habilidades = "Herramientas"
+experiencia = "Trayectoria"
+educacion = "Formación"
+
+[[nav.profiles]]
+label = "Gráfico"
+href = "/graphic"
+code = "03 / GFX"
+icon = "draw"
+[nav.profiles.sections]
+perfil = "Perfil"
+habilidades = "Capacidades"
+experiencia = "Historial"
+educacion = "Formación"
+
+[footer]
+bio = "18 años construyendo productos digitales con precisión estructural. Disponible para proyectos freelance y colaboraciones remotas."
+
+[footer.sections.portfolio]
+title = "Portafolio"
+
+[[footer.sections.portfolio.links]]
+label = "Website"
+href_key = "website"
+icon = "language"
+
+[[footer.sections.portfolio.links]]
+label = "Behance"
+href_key = "behance"
+icon = "palette"
+
+[[footer.sections.portfolio.links]]
+label = "GitHub"
+href_key = "github"
+icon = "code"
+
+[footer.sections.contact]
+title = "Contacto"
+
+[[footer.sections.contact.links]]
+label = "LinkedIn"
+href_key = "linkedin"
+icon = "open_in_new"
+
+[[footer.sections.contact.links]]
+label = "WhatsApp"
+href_key = "whatsapp"
+icon = "chat"
+accent = true
+
+[[footer.sections.contact.links]]
+label = "benito.anagua@gmail.com"
+href_key = "email"
+icon = "mail"
+mailto = true
+
+[[footer.sections.contact.links]]
+label = "Tarija, Bolivia"
+href_key = "maps"
+icon = "location_on"

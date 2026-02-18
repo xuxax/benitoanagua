@@ -1,133 +1,127 @@
 <script lang="ts">
-	import { loadCVData, getAllFocuses } from '$lib/data/cv-loader';
+	import { getAllFocuses, getPersonalInfo, getEducation } from '$lib/data/cv-loader';
+	import { loadSiteData } from '$lib/data/site-loader';
 	import PortalLayout from '$lib/components/PortalLayout.svelte';
 
-	const cvData = loadCVData();
+	const personal = getPersonalInfo();
 	const focuses = getAllFocuses();
+	const education = getEducation();
+	const site = loadSiteData();
 
-	const navItems = [
-		{ label: 'Full Stack', href: '/developer' },
-		{ label: 'UI/UX', href: '/designer' },
-		{ label: 'Graphic', href: '/graphic' }
-	];
+	const navItems = site.nav.profiles.map((p) => ({ label: p.label, href: p.href }));
 
-	function getFocusRoute(focusName: string): string {
-		switch (focusName) {
-			case 'developer':
-				return '/developer';
-			case 'designer':
-				return '/designer';
-			case 'graphic':
-				return '/graphic';
-			default:
-				return '/';
-		}
-	}
-
-	function getFocusIcon(focusName: string): string {
-		switch (focusName) {
-			case 'developer':
-				return 'terminal';
-			case 'designer':
-				return 'layers';
-			case 'graphic':
-				return 'draw';
-			default:
-				return 'architecture';
-		}
+	function getFocusSiteData(focusName: string) {
+		return (
+			site.nav.profiles.find((p) => p.href.includes(focusName)) || {
+				code: '00',
+				icon: 'architecture',
+				href: '/'
+			}
+		);
 	}
 </script>
+
+<svelte:head>
+	<title>{personal.name} — {site.meta.tagline}</title>
+	<meta name="description" content="{personal.name} — {site.meta.description}" />
+</svelte:head>
 
 <PortalLayout {navItems}>
 	<div class="home-container">
 		<!-- Hero Section -->
 		<section class="hero-section">
-			<div class="hero-grid">
-				<div class="hero-content">
-					<p class="hero-label">Structural Engineer of Digital Products</p>
-					<h1 class="hero-title">
-						Creative<br />Engineer
-					</h1>
-					<div class="hero-description">
-						<p>
-							Benito Anagua Ibarra. Senior Multidisciplinary professional with 18 years of technical
-							excellence in merging high-end engineering with precise visual clarity.
-						</p>
-					</div>
-				</div>
-				<div class="hero-image-wrapper">
-					<div class="hero-image-container">
-						<img
-							src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOa3g_o0vL575MU0ip0SrEUwfCGxMYA_WsDnXk8dnLFPUKBi5UwCsKEjCe3DvlSL5Tuss-BSlh3GWJL8nJ5s9e0D0HJFGjr_hULm0LTPn_BsNuHlnm6KktY48mwzfh_o9_SCs1A6rCn5VO9QET21IAZsWwD2Jmm0vjMYZB1BD5t7SKm-6RcSbQlez3PXLMZw8GO8vvRyvVqYF96UMbd00RniMs9d1U7rEASyAG0-f2VVxudABfVhg6KrCywYcBaHXf4CK3mD5VZA"
-							alt="Benito Anagua Ibarra"
-						/>
-						<div class="image-overlay">
-							<p class="image-ref">
-								Ref: B.A.I_2024.SYS<br />
-								Loc: Global / Remote<br />
-								Exp: 18.00 Years
-							</p>
-						</div>
-					</div>
-				</div>
+			<div class="hero-eyebrow">
+				<span class="eyebrow-line"></span>
+				<span class="eyebrow-text">Perfil Profesional Multidisciplinario</span>
+			</div>
+
+			<h1 class="hero-name">{personal.name}</h1>
+
+			<p class="hero-tagline">
+				{site.meta.description}
+			</p>
+
+			<div class="hero-contact">
+				<a href="mailto:{personal.email}" class="contact-chip">
+					<span class="material-symbols-outlined">mail</span>
+					{personal.email}
+				</a>
+				<a href={personal.maps} target="_blank" rel="noopener" class="contact-chip">
+					<span class="material-symbols-outlined">location_on</span>
+					{personal.location}
+				</a>
+				<a href={personal.linkedin} target="_blank" rel="noopener" class="contact-chip">
+					<span class="material-symbols-outlined">open_in_new</span>
+					LinkedIn
+				</a>
+				<a href={personal.github} target="_blank" rel="noopener" class="contact-chip">
+					<span class="material-symbols-outlined">code</span>
+					GitHub
+				</a>
+				<a href={personal.behance} target="_blank" rel="noopener" class="contact-chip">
+					<span class="material-symbols-outlined">palette</span>
+					Behance
+				</a>
 			</div>
 		</section>
 
-		<!-- Pillar Summary Section -->
-		<section class="pillars-section">
-			{#each focuses as focus, index}
-				<a href={getFocusRoute(focus.name)} class="pillar-card">
-					<div class="pillar-header">
-						<span class="pillar-number">0{index + 1}</span>
-						<span class="material-symbols-outlined pillar-icon">{getFocusIcon(focus.name)}</span>
-					</div>
-					<h3 class="pillar-title">{focus.title}</h3>
-					<p class="pillar-description">{focus.summary.slice(0, 100)}...</p>
-					<ul class="pillar-list">
-						{#each focus.skills.slice(0, 3) as skill}
-							<li>
-								<span class="list-dot"></span>
-								{skill.category}
-							</li>
-						{/each}
-					</ul>
-				</a>
-			{/each}
+		<!-- Profiles Grid -->
+		<section class="profiles-section">
+			<div class="profiles-header">
+				<h2 class="profiles-title">{site.nav.home_label}</h2>
+				<span class="profiles-ref">{focuses.length} especializaciones disponibles</span>
+			</div>
+
+			<div class="profiles-grid">
+				{#each focuses as focus}
+					{@const sData = getFocusSiteData(focus.name)}
+					<a href={sData.href} class="profile-card">
+						<div class="card-top">
+							<span class="card-code">{sData.code}</span>
+							<span class="material-symbols-outlined card-icon">{sData.icon}</span>
+						</div>
+
+						<h3 class="card-title">{focus.title}</h3>
+
+						<p class="card-summary">{focus.summary.slice(0, 140)}…</p>
+
+						<div class="card-skills">
+							{#each focus.skills as skillGroup}
+								<div class="skill-group">
+									<span class="skill-category">{skillGroup.category}</span>
+									<div class="skill-tags">
+										{#each skillGroup.items.slice(0, 3) as item}
+											<span class="skill-tag">{item}</span>
+										{/each}
+									</div>
+								</div>
+							{/each}
+						</div>
+
+						<div class="card-cta">
+							<span>Ver CV completo</span>
+							<span class="material-symbols-outlined">arrow_forward</span>
+						</div>
+					</a>
+				{/each}
+			</div>
 		</section>
 
-		<!-- Philosophy Section -->
-		<section class="philosophy-section">
-			<div class="philosophy-grid">
-				<div class="philosophy-content">
-					<h2 class="philosophy-title">
-						Architectural Outline<br />
-						<span class="highlight">Philosophy</span>
-					</h2>
-					<div class="philosophy-text">
-						<p>
-							My approach is defined by "The Structural Integrity of Pixels." Every element must
-							serve a functional purpose within the grid.
-						</p>
-						<p>
-							Drawing from 18 years of cross-disciplinary experience, I build digital products like
-							high-end engineering blueprints: with precision, technical clarity, and an
-							uncompromising focus on the core architecture.
-						</p>
+		<!-- Education -->
+		<section class="education-section">
+			<div class="section-header">
+				<h2 class="profiles-title">Formación académica</h2>
+			</div>
+			<div class="education-grid">
+				{#each education as entry}
+					<div class="education-item">
+						<span class="material-symbols-outlined edu-icon">school</span>
+						<div class="edu-content">
+							<strong class="edu-degree">{entry.degree}</strong>
+							<span class="edu-university">{entry.institution} · {entry.year}</span>
+						</div>
 					</div>
-					<div class="philosophy-actions">
-						<a href="/developer" class="btn-primary">Explore Work</a>
-						<a href="#contact" class="btn-secondary">View CV</a>
-					</div>
-				</div>
-				<div class="philosophy-visual">
-					<div class="visual-frame">
-						<img
-							src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvXg0QapluzvvpUCj9NOUBhyx5fFkSKyNHoOE8Taa0gvzc9i4W2lc9SDjp8S3EJ_5CwU7N6LNxXy6DMRVzHKPpTlJSYiyDTTeVvat-smXZz5NWWw7P0NCTo2hKHOfAiVV8cGDOfOPn3Ss4yv9zsp-Avn5GbE47qQJCu9TZkTk09gfIfxJW9CY08g8ZDZuoZmWZc9a148ppEFsezDX2GfRx7iLhbVYkLdjxoWVWI4wISh5PNKkO1Usp7nDMAMtHG-ALaS8E3ODfaw"
-							alt="Abstract architectural lines"
-						/>
-						<span class="visual-label">Structural_Blueprint_v02.dwg</span>
-					</div>
-				</div>
+				{/each}
 			</div>
 		</section>
 	</div>
@@ -137,311 +131,310 @@
 	.home-container {
 		display: flex;
 		flex-direction: column;
+		gap: 4rem;
 	}
 
-	/* Hero Section */
+	/* ── Hero ── */
 	.hero-section {
-		padding: 3rem 0;
+		padding: 3rem 0 2rem;
 		border-bottom: 1px solid var(--color-outline-variant);
 	}
 
-	.hero-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 3rem;
-		align-items: end;
+	.hero-eyebrow {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		margin-bottom: 1.5rem;
 	}
 
-	@media (min-width: 1024px) {
-		.hero-grid {
-			grid-template-columns: 2fr 1fr;
-			gap: 4rem;
-		}
+	.eyebrow-line {
+		display: block;
+		width: 2.5rem;
+		height: 1px;
+		background: var(--color-primary);
 	}
 
-	.hero-label {
-		font-size: 0.75rem;
+	.eyebrow-text {
 		font-family: var(--font-mono);
-		color: var(--color-primary);
-		text-transform: uppercase;
-		letter-spacing: 0.3em;
+		font-size: 0.6875rem;
 		font-weight: 700;
-		margin-bottom: 1rem;
+		text-transform: uppercase;
+		letter-spacing: 0.2em;
+		color: var(--color-primary);
 	}
 
-	.hero-title {
-		font-size: clamp(3rem, 10vw, 7.5rem);
+	.hero-name {
+		font-size: clamp(2.5rem, 7vw, 5.5rem);
 		font-weight: 900;
 		text-transform: uppercase;
-		letter-spacing: -0.02em;
-		line-height: 0.85;
-		margin: 0 0 2rem 0;
+		letter-spacing: -0.03em;
+		line-height: 0.9;
+		margin: 0 0 1.5rem 0;
 		color: var(--color-on-surface);
 	}
 
-	.hero-description {
-		max-width: 36rem;
-	}
-
-	.hero-description p {
-		font-size: 1.25rem;
+	.hero-tagline {
+		font-size: clamp(1rem, 2vw, 1.25rem);
 		font-weight: 300;
-		line-height: 1.6;
-		opacity: 0.8;
-		margin: 0;
+		line-height: 1.65;
+		color: var(--color-on-surface-variant);
+		max-width: 52rem;
+		margin: 0 0 2rem 0;
 	}
 
-	.hero-image-wrapper {
-		display: none;
+	.hero-contact {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
 	}
 
-	@media (min-width: 768px) {
-		.hero-image-wrapper {
-			display: block;
-		}
-	}
-
-	.hero-image-container {
-		border: 2px solid var(--color-on-surface);
-		padding: 0.5rem;
-	}
-
-	.hero-image-container img {
-		width: 100%;
-		aspect-ratio: 4/5;
-		object-fit: cover;
-		filter: grayscale(100%) contrast(1.25);
-	}
-
-	.image-overlay {
-		margin-top: 1rem;
-		padding: 1rem;
+	.contact-chip {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.375rem;
+		padding: 0.375rem 0.75rem;
+		border: 1px solid var(--color-outline-variant);
 		background: var(--color-surface);
+		color: var(--color-on-surface-variant);
+		font-family: var(--font-mono);
+		font-size: 0.6875rem;
+		font-weight: 500;
+		text-decoration: none;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		transition:
+			border-color 0.2s ease,
+			color 0.2s ease;
+	}
+
+	.contact-chip:hover {
+		border-color: var(--color-primary);
+		color: var(--color-primary);
+	}
+
+	.contact-chip .material-symbols-outlined {
+		font-size: 0.875rem;
+	}
+
+	/* ── Profiles ── */
+	.profiles-section {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	.profiles-header {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.profiles-title {
+		font-size: 1.25rem;
+		font-weight: 900;
+		text-transform: uppercase;
+		letter-spacing: -0.02em;
+		margin: 0;
+		color: var(--color-on-surface);
+	}
+
+	.profiles-ref {
+		font-family: var(--font-mono);
+		font-size: 0.6875rem;
+		color: var(--color-on-surface-variant);
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+	}
+
+	.profiles-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1px;
+		background: var(--color-outline-variant);
 		border: 1px solid var(--color-outline-variant);
 	}
 
-	.image-ref {
-		font-size: 0.625rem;
-		font-family: var(--font-mono);
-		line-height: 1.4;
-		text-transform: uppercase;
-		margin: 0;
-	}
-
-	/* Pillars Section */
-	.pillars-section {
-		display: grid;
-		grid-template-columns: 1fr;
-		border-bottom: 1px solid var(--color-outline-variant);
-	}
-
 	@media (min-width: 768px) {
-		.pillars-section {
+		.profiles-grid {
 			grid-template-columns: repeat(3, 1fr);
 		}
 	}
 
-	.pillar-card {
+	.profile-card {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
 		padding: 2rem;
-		border-bottom: 1px solid var(--color-outline-variant);
+		background: var(--color-surface);
 		text-decoration: none;
 		color: inherit;
 		transition: background-color 0.2s ease;
 	}
 
-	@media (min-width: 768px) {
-		.pillar-card {
-			border-bottom: none;
-			border-right: 1px solid var(--color-outline-variant);
-		}
-
-		.pillar-card:last-child {
-			border-right: none;
-		}
+	.profile-card:hover {
+		background: var(--color-surface-container-low);
 	}
 
-	.pillar-card:hover {
-		background: var(--color-primary-container);
+	.profile-card:hover .card-cta {
+		color: var(--color-primary);
 	}
 
-	.pillar-header {
+	.card-top {
 		display: flex;
 		justify-content: space-between;
 		align-items: flex-start;
-		margin-bottom: 3rem;
 	}
 
-	.pillar-number {
-		font-size: 2.5rem;
-		font-weight: 900;
-		opacity: 0.1;
-		line-height: 1;
-	}
-
-	.pillar-icon {
-		font-size: 1.5rem;
+	.card-code {
+		font-family: var(--font-mono);
+		font-size: 0.625rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.15em;
 		color: var(--color-primary);
 	}
 
-	.pillar-title {
+	.card-icon {
 		font-size: 1.5rem;
+		color: var(--color-on-surface-variant);
+		opacity: 0.4;
+	}
+
+	.card-title {
+		font-size: 1.125rem;
 		font-weight: 900;
 		text-transform: uppercase;
 		letter-spacing: -0.02em;
-		margin: 0 0 1rem 0;
+		line-height: 1.2;
+		margin: 0;
 		color: var(--color-on-surface);
 	}
 
-	.pillar-description {
-		font-size: 0.875rem;
-		line-height: 1.6;
-		opacity: 0.7;
-		margin: 0 0 2rem 0;
+	.card-summary {
+		font-size: 0.8125rem;
+		line-height: 1.65;
+		color: var(--color-on-surface-variant);
+		margin: 0;
+		flex: 1;
 	}
 
-	.pillar-list {
-		list-style: none;
-		padding: 0;
-		margin: 0;
+	.card-skills {
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
+		gap: 0.75rem;
+		border-top: 1px solid var(--color-outline-variant);
+		padding-top: 1rem;
 	}
 
-	.pillar-list li {
-		font-size: 0.625rem;
+	.skill-group {
+		display: flex;
+		flex-direction: column;
+		gap: 0.375rem;
+	}
+
+	.skill-category {
 		font-family: var(--font-mono);
+		font-size: 0.5625rem;
+		font-weight: 700;
 		text-transform: uppercase;
-		letter-spacing: 0.1em;
+		letter-spacing: 0.15em;
+		color: var(--color-on-surface-variant);
+		opacity: 0.6;
+	}
+
+	.skill-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem;
+	}
+
+	.skill-tag {
+		font-family: var(--font-mono);
+		font-size: 0.625rem;
+		font-weight: 500;
+		padding: 0.125rem 0.5rem;
+		border: 1px solid var(--color-outline-variant);
+		color: var(--color-on-surface-variant);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.card-cta {
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
+		justify-content: space-between;
+		font-family: var(--font-mono);
+		font-size: 0.6875rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--color-on-surface-variant);
+		transition: color 0.2s ease;
+		border-top: 1px solid var(--color-outline-variant);
+		padding-top: 1rem;
 	}
 
-	.list-dot {
-		width: 0.5rem;
-		height: 0.5rem;
-		background: var(--color-primary);
+	.card-cta .material-symbols-outlined {
+		font-size: 1rem;
 	}
 
-	/* Philosophy Section */
-	.philosophy-section {
-		padding: 4rem 0;
+	/* ── Education ── */
+	.education-section {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
 	}
 
-	.philosophy-grid {
+	.section-header {
+		border-bottom: 2px solid var(--color-on-surface);
+		padding-bottom: 0.5rem;
+	}
+
+	.education-grid {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 4rem;
-		align-items: center;
-	}
-
-	@media (min-width: 1024px) {
-		.philosophy-grid {
-			grid-template-columns: 1fr 1fr;
-		}
-	}
-
-	.philosophy-title {
-		font-size: clamp(2rem, 4vw, 3rem);
-		font-weight: 900;
-		text-transform: uppercase;
-		letter-spacing: -0.02em;
-		line-height: 1;
-		margin: 0 0 2rem 0;
-		color: var(--color-on-surface);
-	}
-
-	.philosophy-title .highlight {
-		color: var(--color-primary);
-	}
-
-	.philosophy-text {
-		display: flex;
-		flex-direction: column;
-		gap: 1.5rem;
-		margin-bottom: 2rem;
-	}
-
-	.philosophy-text p {
-		font-size: 1.125rem;
-		font-weight: 300;
-		line-height: 1.6;
-		margin: 0;
-	}
-
-	.philosophy-actions {
-		display: flex;
 		gap: 1rem;
-		flex-wrap: wrap;
-	}
-
-	.btn-primary {
-		padding: 1rem 2rem;
-		background: var(--color-primary);
-		color: var(--color-on-primary);
-		font-size: 0.875rem;
-		font-weight: 900;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		text-decoration: none;
-		transition: transform 0.2s ease;
-	}
-
-	.btn-primary:hover {
-		transform: translateX(0.25rem) translateY(-0.25rem);
-	}
-
-	.btn-secondary {
-		padding: 1rem 2rem;
-		border: 2px solid var(--color-on-surface);
-		color: var(--color-on-surface);
-		font-size: 0.875rem;
-		font-weight: 900;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		text-decoration: none;
-		transition: all 0.2s ease;
-	}
-
-	.btn-secondary:hover {
-		background: var(--color-on-surface);
-		color: var(--color-surface);
-	}
-
-	.philosophy-visual {
-		display: none;
 	}
 
 	@media (min-width: 768px) {
-		.philosophy-visual {
-			display: block;
+		.education-grid {
+			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 
-	.visual-frame {
-		position: relative;
+	.education-item {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+		padding: 1.5rem 2rem;
 		border: 1px solid var(--color-outline-variant);
-		padding: 1rem;
+		background: var(--color-surface);
 	}
 
-	.visual-frame img {
-		width: 100%;
-		aspect-ratio: 1;
-		object-fit: cover;
-		filter: grayscale(100%) opacity(0.5);
+	.edu-icon {
+		font-size: 2rem;
+		color: var(--color-primary);
+		flex-shrink: 0;
 	}
 
-	.visual-label {
-		position: absolute;
-		top: 1rem;
-		right: 1rem;
-		font-size: 0.5rem;
-		font-family: var(--font-mono);
+	.edu-content {
+		display: flex;
+		flex-direction: column;
+		gap: 0.125rem;
+	}
+
+	.edu-degree {
+		font-size: 1rem;
+		font-weight: 900;
 		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		transform: rotate(90deg);
-		transform-origin: right;
-		white-space: nowrap;
+		color: var(--color-on-surface);
+	}
+
+	.edu-university {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		color: var(--color-primary);
 	}
 </style>

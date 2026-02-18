@@ -1,1 +1,3 @@
-export type { CVData, Focus, Skill, Experience, Education, PersonalInfo } from './CV';
+export type { CVData, Focus, Skill, Experience, EducationEntry, PersonalInfo } from './CV';
+export type { SiteData, SiteProfile, SiteFooterLink, SiteFooterSection, SiteNav, SiteMeta } from './Site';
+

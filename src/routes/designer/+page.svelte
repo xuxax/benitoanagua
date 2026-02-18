@@ -1,749 +1,484 @@
 <script lang="ts">
 	import { loadCVData, getFocusByName } from '$lib/data/cv-loader';
+	import { loadSiteData } from '$lib/data/site-loader';
 	import PortalLayout from '$lib/components/PortalLayout.svelte';
 
 	const cvData = loadCVData();
-	const designerFocus = getFocusByName('designer');
+	const site = loadSiteData();
+	const focus = getFocusByName('designer');
+	const profileSite = site.nav.profiles.find((p) => p.href.includes('designer'));
 
-	const navItems = [
-		{ label: 'Skills Matrix', href: '#matrix' },
-		{ label: 'Methodology', href: '#methodology' },
-		{ label: 'Experience', href: '#experience' }
-	];
-
-	const skillsData = [
-		{ category: 'Tooling', skill: 'Figma', proficiency: 98 },
-		{ category: 'Systems', skill: 'Design Systems', proficiency: 95 },
-		{ category: 'Prototyping', skill: 'Hi-Fi Logic', proficiency: 92 },
-		{ category: 'Engineering', skill: 'Frontend Dev', proficiency: 85 }
-	];
+	const navItems = profileSite
+		? [
+				{ label: profileSite.sections.perfil, href: '#perfil' },
+				{ label: profileSite.sections.habilidades, href: '#habilidades' },
+				{ label: profileSite.sections.experiencia, href: '#experiencia' },
+				{ label: profileSite.sections.educacion, href: '#educacion' }
+			]
+		: [];
 </script>
 
+<svelte:head>
+	<title>{focus?.title} — {cvData.personal.name}</title>
+	<meta
+		name="description"
+		content="CV de {cvData.personal.name} como {focus?.title}. 18 años de experiencia."
+	/>
+</svelte:head>
+
 <PortalLayout {navItems} showBackButton={true}>
-	<div class="designer-container">
-		<!-- Hero Section -->
-		<section class="hero-section">
-			<div class="hero-label-row">
-				<span class="label-line"></span>
-				<span class="hero-label">Est. 2006 — Senior Professional</span>
+	<div class="cv-container">
+		<!-- ══ HEADER: Editorial / Magazine ══ -->
+		<section class="cv-header" id="perfil">
+			<div class="header-eyebrow">
+				<span class="eyebrow-line"></span>
+				<span class="eyebrow-text">{focus?.title} · 18 Años de Experiencia</span>
+				<span class="eyebrow-line"></span>
 			</div>
-			<h1 class="hero-title">
-				18 YEARS OF <span class="highlight">SYSTEMATIC</span> DESIGN
-			</h1>
-			<p class="hero-description">
-				Specializing in Figma, Design Systems, and High-Fidelity Prototyping with a rigid
-				architectural approach to digital products.
-			</p>
-			<div class="hero-actions">
-				<a href="#contact" class="btn-primary">
-					View Portfolio
-					<span class="material-symbols-outlined">arrow_forward</span>
-				</a>
-				<div class="education-badge">
-					<span class="material-symbols-outlined">school</span>
-					<div>
-						<p class="badge-label">Licenciatura en Ingeniería de Informática</p>
-						<p class="badge-value">UNIVERSITY CLASS OF 2012</p>
+
+			<h1 class="header-title">{focus?.title}</h1>
+
+			<div class="header-body">
+				<div class="header-left">
+					<p class="header-summary">{focus?.summary}</p>
+
+					<div class="header-links">
+						<a href="mailto:{cvData.personal.email}" class="link-item">
+							<span class="material-symbols-outlined">mail</span>
+							{cvData.personal.email}
+						</a>
+						<a href={cvData.personal.website} target="_blank" class="link-item">
+							<span class="material-symbols-outlined">language</span>
+							benitoanagua.pages.dev
+						</a>
+						<a href={cvData.personal.behance} target="_blank" class="link-item">
+							<span class="material-symbols-outlined">palette</span>
+							behance.net/benitoanagua
+						</a>
+						<a href={cvData.personal.linkedin} target="_blank" class="link-item">
+							<span class="material-symbols-outlined">open_in_new</span>
+							in/benito-anagua
+						</a>
+					</div>
+				</div>
+
+				<div class="header-right">
+					<div class="info-block">
+						<span class="info-label">Ubicación</span>
+						<span class="info-value">{cvData.personal.location}</span>
+					</div>
+					<div class="info-block">
+						<span class="info-label">Teléfono</span>
+						<span class="info-value">{cvData.personal.phone}</span>
+					</div>
+					<div class="info-block">
+						<span class="info-label">Experiencia</span>
+						<span class="info-value info-accent">18 años</span>
+					</div>
+					<div class="info-block">
+						<span class="info-label">Graduación</span>
+						<span class="info-value">2012</span>
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- Skills Matrix Section -->
-		<section class="matrix-section" id="matrix">
+		<!-- ══ HERRAMIENTAS ══ -->
+		<section class="skills-section" id="habilidades">
 			<div class="section-header">
-				<div>
-					<h2 class="section-title">Design Skills Matrix</h2>
-					<p class="section-subtitle">Cross-functional technical proficiency levels</p>
-				</div>
-				<span class="section-ref">REF: [DS_MATRIX_V4.0]</span>
+				<h2 class="section-title">{profileSite?.sections.habilidades} & Metodología</h2>
+				<div class="section-rule"></div>
 			</div>
 
-			<div class="matrix-content">
-				<div class="matrix-table-wrapper">
-					<table class="matrix-table">
-						<thead>
-							<tr>
-								<th>Category</th>
-								<th>Core Skill</th>
-								<th>Proficiency</th>
-							</tr>
-						</thead>
-						<tbody>
-							{#each skillsData as item}
-								<tr>
-									<td>{item.category}</td>
-									<td class="skill-name">{item.skill}</td>
-									<td>
-										<div class="proficiency-cell">
-											<div class="proficiency-bar">
-												<div class="proficiency-fill" style="width: {item.proficiency}%"></div>
-											</div>
-											<span class="proficiency-value">{item.proficiency}%</span>
-										</div>
-									</td>
-								</tr>
-							{/each}
-						</tbody>
-					</table>
-				</div>
-
-				<div class="matrix-visual">
-					<span class="visual-icon material-symbols-outlined">grid_view</span>
-					<div class="visual-card">
-						<h4>Architectural Approach</h4>
-						<p>
-							Design is not just visual; it's structural engineering for human interaction. Every
-							component is audited for scalability and logic.
-						</p>
-					</div>
-					<div class="visual-stats">
-						<div class="stat-card">
-							<span class="stat-value">18</span>
-							<span class="stat-label">Years Exp</span>
+			<div class="skills-grid">
+				{#if focus?.skills}
+					{#each focus.skills as skillGroup}
+						<div class="skill-card">
+							<h3 class="skill-category">{skillGroup.category}</h3>
+							<ul class="skill-list">
+								{#each skillGroup.items as item}
+									<li class="skill-item">{item}</li>
+								{/each}
+							</ul>
 						</div>
-						<div class="stat-card accent">
-							<span class="stat-value">50+</span>
-							<span class="stat-label">Design Systems</span>
-						</div>
-					</div>
-				</div>
+					{/each}
+				{/if}
 			</div>
 		</section>
 
-		<!-- Methodology Section -->
-		<section class="methodology-section" id="methodology">
-			<div class="methodology-header">
-				<h2 class="section-title">Methodology</h2>
-				<div class="title-underline"></div>
+		<!-- ══ TRAYECTORIA ══ -->
+		<section class="experience-section" id="experiencia">
+			<div class="section-header">
+				<h2 class="section-title">{profileSite?.sections.experiencia} Profesional</h2>
+				<div class="section-rule"></div>
 			</div>
 
-			<div class="methodology-grid">
-				<div class="methodology-card">
-					<span class="card-number">01</span>
-					<span class="material-symbols-outlined card-icon">analytics</span>
-					<h3>Analysis</h3>
-					<p>
-						Stakeholder interviews, user research audits, and technical constraint mapping to define
-						the blueprint boundaries.
-					</p>
-					<ul>
-						<li>User Persona Mapping</li>
-						<li>Competitive Audit</li>
-						<li>Tech Stack Alignment</li>
-					</ul>
-				</div>
-				<div class="methodology-card active">
-					<span class="card-number">02</span>
-					<span class="material-symbols-outlined card-icon">architecture</span>
-					<h3>Implementation</h3>
-					<p>
-						Constructing the design system, wireframing technical flows, and building high-fidelity
-						interactive prototypes.
-					</p>
-					<ul>
-						<li>Atomic Componentry</li>
-						<li>Prototyping Logic</li>
-						<li>Design Tokens</li>
-					</ul>
-				</div>
-				<div class="methodology-card">
-					<span class="card-number">03</span>
-					<span class="material-symbols-outlined card-icon">verified_user</span>
-					<h3>Verification</h3>
-					<p>
-						Usability testing, accessibility audits (WCAG), and engineering hand-off documentation
-						to ensure build integrity.
-					</p>
-					<ul>
-						<li>Accessibility Testing</li>
-						<li>Dev Specification</li>
-						<li>Performance Audit</li>
-					</ul>
-				</div>
-			</div>
-		</section>
-
-		<!-- Work History Section -->
-		<section class="history-section" id="experience">
-			<h2 class="section-title">Work History</h2>
-			<div class="history-list">
-				{#each designerFocus?.experiences || [] as exp, index}
-					<div class="history-item">
-						<div class="history-period">
-							<span class="period-dates">{exp.period.replace(' - ', ' — ')}</span>
+			<div class="timeline">
+				{#each focus?.experiences || [] as exp, index}
+					<div class="timeline-item" class:is-current={index === 0}>
+						<div class="timeline-period">
+							<span class="period-dates">{exp.period}</span>
+							{#if index === 0}
+								<span class="period-badge">Actual</span>
+							{/if}
 							<span class="period-role">{exp.position}</span>
 						</div>
-						<div class="history-content">
-							<h3>{exp.company}</h3>
-							<p>{exp.description}</p>
+						<div class="timeline-content">
+							<h3 class="company-name">{exp.company}</h3>
+							<p class="exp-description">{exp.description}</p>
 						</div>
 					</div>
 				{/each}
 			</div>
 		</section>
 
-		<!-- Education Banner -->
-		<section class="education-banner">
-			<div class="banner-content">
-				<span class="material-symbols-outlined banner-icon">terminal</span>
-				<div>
-					<h2>Technical Foundation</h2>
-					<p>{cvData.education.degree} • Class of {cvData.education.year}</p>
-				</div>
+		<!-- ══ FORMACIÓN ══ -->
+		<section class="education-section" id="educacion">
+			<div class="section-header">
+				<h2 class="section-title">{profileSite?.sections.educacion}</h2>
+				<div class="section-rule"></div>
 			</div>
-			<div class="banner-decoration">
-				<span>Verified Academic Record</span>
-				<div class="banner-line"></div>
+
+			<div class="education-list">
+				{#each cvData.education as entry}
+					<div class="education-item">
+						<div class="edu-year-col">
+							<span class="edu-year">{entry.year}</span>
+						</div>
+						<div class="edu-content-col">
+							<h3 class="edu-degree">{entry.degree}</h3>
+							<p class="edu-institution">{entry.institution}</p>
+						</div>
+					</div>
+				{/each}
 			</div>
 		</section>
 	</div>
 </PortalLayout>
 
 <style>
-	.designer-container {
+	/* ... (mismos estilos que antes) ... */
+	.cv-container {
 		display: flex;
 		flex-direction: column;
+		gap: 4rem;
 	}
 
-	/* Hero Section */
-	.hero-section {
-		padding: 4rem 0;
-		position: relative;
+	.cv-header {
+		padding: 3rem 0 2.5rem;
+		border-bottom: 3px solid var(--color-on-surface);
 	}
 
-	.hero-label-row {
+	.header-eyebrow {
 		display: flex;
 		align-items: center;
 		gap: 1rem;
-		margin-bottom: 1.5rem;
+		margin-bottom: 2rem;
 	}
 
-	.label-line {
-		width: 3rem;
+	.eyebrow-line {
+		flex: 1;
 		height: 1px;
 		background: var(--color-primary);
 	}
 
-	.hero-label {
-		font-size: 0.75rem;
+	.eyebrow-text {
+		font-size: 0.625rem;
 		font-weight: 700;
-		color: var(--color-primary);
 		text-transform: uppercase;
 		letter-spacing: 0.3em;
+		color: var(--color-primary);
+		white-space: nowrap;
 	}
 
-	.hero-title {
-		font-size: clamp(2.5rem, 8vw, 5rem);
+	.header-title {
+		font-size: clamp(2rem, 5vw, 3.75rem);
 		font-weight: 900;
 		text-transform: uppercase;
 		letter-spacing: -0.03em;
 		line-height: 0.95;
-		margin: 0 0 2rem 0;
+		margin: 0 0 2.5rem 0;
 		color: var(--color-on-surface);
 	}
 
-	.hero-title .highlight {
-		color: var(--color-primary);
-	}
-
-	.hero-description {
-		font-size: clamp(1rem, 2vw, 1.5rem);
-		font-weight: 300;
-		line-height: 1.6;
-		color: var(--color-on-surface-variant);
-		margin: 0 0 3rem 0;
-		max-width: 48rem;
-	}
-
-	.hero-actions {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 1rem;
-		align-items: flex-start;
-	}
-
-	.btn-primary {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.5rem;
-		padding: 1rem 2rem;
-		background: var(--color-primary);
-		color: var(--color-on-primary);
-		font-size: 0.875rem;
-		font-weight: 900;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		text-decoration: none;
-		transition:
-			transform 0.2s ease,
-			box-shadow 0.2s ease;
-	}
-
-	.btn-primary:hover {
-		transform: translateY(-0.25rem);
-		box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-	}
-
-	.education-badge {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-		padding: 1rem 1.5rem;
-		border: 1px solid var(--color-primary);
-		background: var(--color-surface);
-	}
-
-	.education-badge .material-symbols-outlined {
-		font-size: 2rem;
-		color: var(--color-primary);
-	}
-
-	.badge-label {
-		font-size: 0.625rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		opacity: 0.6;
-		margin: 0;
-	}
-
-	.badge-value {
-		font-size: 0.875rem;
-		font-weight: 900;
-		text-transform: uppercase;
-		margin: 0;
-	}
-
-	/* Section Header */
-	.section-header {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-		margin-bottom: 3rem;
-	}
-
-	@media (min-width: 768px) {
-		.section-header {
-			flex-direction: row;
-			justify-content: space-between;
-			align-items: flex-end;
-		}
-	}
-
-	.section-title {
-		font-size: clamp(2rem, 4vw, 3rem);
-		font-weight: 900;
-		text-transform: uppercase;
-		letter-spacing: -0.02em;
-		margin: 0;
-		color: var(--color-on-surface);
-	}
-
-	.section-subtitle {
-		font-size: 0.75rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		color: var(--color-on-surface-variant);
-		margin: 0.5rem 0 0 0;
-	}
-
-	.section-ref {
-		font-family: var(--font-mono);
-		font-size: 0.75rem;
-		color: var(--color-on-surface-variant);
-		opacity: 0.5;
-	}
-
-	/* Matrix Section */
-	.matrix-section {
-		padding: 3rem 0;
-		background: var(--color-surface);
-		border-top: 1px solid var(--color-outline-variant);
-		border-bottom: 1px solid var(--color-outline-variant);
-	}
-
-	.matrix-content {
+	.header-body {
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 2rem;
 	}
 
-	@media (min-width: 1024px) {
-		.matrix-content {
-			grid-template-columns: 1.5fr 1fr;
+	@media (min-width: 768px) {
+		.header-body {
+			grid-template-columns: 2fr 1fr;
+			gap: 4rem;
 		}
 	}
 
-	.matrix-table-wrapper {
-		overflow-x: auto;
+	.header-summary {
+		font-size: 1rem;
+		line-height: 1.75;
+		color: var(--color-on-surface-variant);
+		margin: 0 0 2rem 0;
 	}
 
-	.matrix-table {
-		width: 100%;
-		border-collapse: collapse;
-	}
-
-	.matrix-table th {
-		padding: 1.5rem;
-		text-align: left;
-		font-size: 0.75rem;
-		font-weight: 900;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		border-bottom: 1px solid var(--color-outline-variant);
-		background: var(--color-primary-container);
-	}
-
-	.matrix-table td {
-		padding: 1.5rem;
-		border-bottom: 1px solid var(--color-outline-variant);
-	}
-
-	.matrix-table tr:hover td {
-		background: var(--color-primary-container);
-	}
-
-	.skill-name {
-		font-weight: 900;
-		color: var(--color-primary);
-		text-transform: uppercase;
-	}
-
-	.proficiency-cell {
-		display: flex;
-		align-items: center;
-		gap: 0.75rem;
-	}
-
-	.proficiency-bar {
-		flex: 1;
-		height: 0.375rem;
-		background: var(--color-primary-container);
-		border-radius: 1rem;
-		overflow: hidden;
-	}
-
-	.proficiency-fill {
-		height: 100%;
-		background: var(--color-primary);
-		border-radius: 1rem;
-	}
-
-	.proficiency-value {
-		font-family: var(--font-mono);
-		font-size: 0.75rem;
-		font-weight: 700;
-		min-width: 2.5rem;
-	}
-
-	.matrix-visual {
+	.header-links {
 		display: flex;
 		flex-direction: column;
-		gap: 1.5rem;
-		padding: 2rem;
-		border: 1px dashed var(--color-outline-variant);
-		background: var(--color-primary-container);
+		gap: 0.625rem;
 	}
 
-	.visual-icon {
-		font-size: 10rem;
-		color: var(--color-on-surface);
-		opacity: 0.1;
-		position: absolute;
+	.link-item {
+		display: flex;
+		align-items: center;
+		gap: 0.625rem;
+		font-size: 0.8125rem;
+		color: var(--color-on-surface-variant);
+		text-decoration: none;
+		transition: color 0.2s ease;
 	}
 
-	.matrix-visual {
-		position: relative;
-		min-height: 300px;
-		justify-content: center;
-	}
-
-	.visual-card {
-		background: var(--color-surface);
-		padding: 1.5rem;
-		border: 1px solid var(--color-outline-variant);
-	}
-
-	.visual-card h4 {
-		font-size: 0.875rem;
-		font-weight: 900;
-		text-transform: uppercase;
+	.link-item:hover {
 		color: var(--color-primary);
-		margin: 0 0 0.5rem 0;
 	}
 
-	.visual-card p {
-		font-size: 0.875rem;
-		opacity: 0.7;
-		margin: 0;
+	.link-item .material-symbols-outlined {
+		font-size: 1rem;
+		color: var(--color-primary);
 	}
 
-	.visual-stats {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 1rem;
+	.header-right {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+		padding-left: 0;
+		border-left: none;
 	}
 
-	.stat-card {
-		padding: 1.5rem;
-		background: var(--color-surface);
-		border: 1px solid var(--color-outline-variant);
-		text-align: center;
+	@media (min-width: 768px) {
+		.header-right {
+			padding-left: 2rem;
+			border-left: 1px solid var(--color-outline-variant);
+		}
 	}
 
-	.stat-card.accent {
-		background: var(--color-primary);
-		color: var(--color-on-primary);
+	.info-block {
+		display: flex;
+		flex-direction: column;
+		gap: 0.125rem;
 	}
 
-	.stat-value {
-		display: block;
-		font-size: 2rem;
-		font-weight: 900;
-	}
-
-	.stat-label {
-		font-size: 0.625rem;
+	.info-label {
+		font-size: 0.5625rem;
 		font-weight: 700;
 		text-transform: uppercase;
-		letter-spacing: 0.1em;
+		letter-spacing: 0.2em;
+		color: var(--color-on-surface-variant);
+		opacity: 0.5;
 	}
 
-	/* Methodology Section */
-	.methodology-section {
-		padding: 4rem 0;
+	.info-value {
+		font-size: 0.9375rem;
+		font-weight: 700;
+		color: var(--color-on-surface);
 	}
 
-	.methodology-header {
-		text-align: center;
-		margin-bottom: 4rem;
-	}
-
-	.title-underline {
-		width: 4rem;
-		height: 0.25rem;
-		background: var(--color-primary);
-		margin: 1rem auto 0;
-	}
-
-	.methodology-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 0;
-	}
-
-	@media (min-width: 768px) {
-		.methodology-grid {
-			grid-template-columns: repeat(3, 1fr);
-		}
-	}
-
-	.methodology-card {
-		padding: 3rem 2rem;
-		border: 1px solid var(--color-outline-variant);
-		text-align: center;
-		position: relative;
-	}
-
-	@media (min-width: 768px) {
-		.methodology-card {
-			border-right: none;
-		}
-
-		.methodology-card:last-child {
-			border-right: 1px solid var(--color-outline-variant);
-		}
-	}
-
-	.methodology-card.active {
-		background: var(--color-primary-container);
-	}
-
-	.card-number {
-		position: absolute;
-		top: 0.5rem;
-		left: 50%;
-		transform: translateX(-50%);
-		font-size: 5rem;
-		font-weight: 900;
-		opacity: 0.05;
+	.info-accent {
 		color: var(--color-primary);
 	}
 
-	.card-icon {
-		font-size: 3rem;
-		color: var(--color-primary);
-		margin-bottom: 1rem;
+	.section-header {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+		margin-bottom: 2rem;
 	}
 
-	.methodology-card h3 {
+	.section-title {
 		font-size: 1.5rem;
 		font-weight: 900;
 		text-transform: uppercase;
-		margin: 0 0 1rem 0;
+		letter-spacing: -0.02em;
+		margin: 0;
 		color: var(--color-on-surface);
+		white-space: nowrap;
 	}
 
-	.methodology-card p {
-		font-size: 0.875rem;
-		opacity: 0.7;
-		margin: 0 0 1.5rem 0;
-		max-width: 20rem;
-		margin-inline: auto;
+	.section-rule {
+		flex: 1;
+		height: 1px;
+		background: var(--color-outline-variant);
 	}
 
-	.methodology-card ul {
+	.skills-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+
+	@media (min-width: 640px) {
+		.skills-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.skills-grid {
+			grid-template-columns: repeat(4, 1fr);
+		}
+	}
+
+	.skill-card {
+		padding: 0;
+		border-left: 2px solid var(--color-primary);
+		padding-left: 1.25rem;
+	}
+
+	.skill-category {
+		font-size: 0.75rem;
+		font-weight: 900;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--color-primary);
+		margin: 0 0 0.875rem 0;
+	}
+
+	.skill-list {
 		list-style: none;
 		padding: 0;
 		margin: 0;
-		text-align: left;
-	}
-
-	.methodology-card li {
-		font-size: 0.625rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		margin-bottom: 0.5rem;
-	}
-
-	.methodology-card li::before {
-		content: '';
-		width: 0.375rem;
-		height: 0.375rem;
-		background: var(--color-primary);
-		border-radius: 50%;
-	}
-
-	/* History Section */
-	.history-section {
-		padding: 4rem 0;
-		background: var(--color-surface);
-		border-top: 1px solid var(--color-outline-variant);
-		border-bottom: 1px solid var(--color-outline-variant);
-	}
-
-	.history-list {
 		display: flex;
 		flex-direction: column;
-		gap: 3rem;
+		gap: 0.5rem;
 	}
 
-	.history-item {
+	.skill-item {
+		font-size: 0.875rem;
+		color: var(--color-on-surface-variant);
+		line-height: 1.4;
+	}
+
+	.timeline {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+	}
+
+	.timeline-item {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 1rem;
-		padding-bottom: 3rem;
+		gap: 0.75rem;
+		padding: 2rem 0;
 		border-bottom: 1px solid var(--color-outline-variant);
 	}
 
 	@media (min-width: 768px) {
-		.history-item {
-			grid-template-columns: 1fr 3fr;
+		.timeline-item {
+			grid-template-columns: 12rem 1fr;
 			gap: 3rem;
 		}
 	}
 
-	.history-item:last-child {
+	.timeline-item:last-child {
 		border-bottom: none;
-		padding-bottom: 0;
+	}
+
+	.timeline-period {
+		display: flex;
+		flex-direction: column;
+		gap: 0.375rem;
 	}
 
 	.period-dates {
-		display: block;
-		font-size: 1.25rem;
+		font-size: 1rem;
 		font-weight: 900;
+		color: var(--color-on-surface);
+		line-height: 1.3;
+	}
+
+	.timeline-item.is-current .period-dates {
 		color: var(--color-primary);
 	}
 
-	.period-role {
-		font-size: 0.75rem;
+	.period-badge {
+		display: inline-block;
+		padding: 0.125rem 0.625rem;
+		background: var(--color-primary);
+		color: var(--color-on-primary);
+		font-size: 0.5625rem;
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
-		opacity: 0.5;
+		width: fit-content;
 	}
 
-	.history-content h3 {
-		font-size: 1.5rem;
+	.period-role {
+		font-size: 0.6875rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: var(--color-on-surface-variant);
+		opacity: 0.6;
+	}
+
+	.company-name {
+		font-size: 1.125rem;
 		font-weight: 900;
 		text-transform: uppercase;
-		margin: 0 0 1rem 0;
+		letter-spacing: -0.01em;
+		margin: 0 0 0.75rem 0;
 		color: var(--color-on-surface);
 	}
 
-	.history-content p {
+	.exp-description {
 		font-size: 0.9375rem;
 		line-height: 1.7;
 		color: var(--color-on-surface-variant);
 		margin: 0;
 	}
 
-	/* Education Banner */
-	.education-banner {
-		padding: 4rem;
-		background: var(--color-primary);
-		color: var(--color-on-primary);
+	.education-list {
 		display: flex;
 		flex-direction: column;
+		gap: 0;
+	}
+
+	.education-item {
+		display: grid;
+		grid-template-columns: 5rem 1fr;
 		gap: 2rem;
+		padding: 1.5rem 0;
+		border-bottom: 1px solid var(--color-outline-variant);
+		align-items: start;
 	}
 
-	@media (min-width: 768px) {
-		.education-banner {
-			flex-direction: row;
-			justify-content: space-between;
-			align-items: center;
-		}
+	.education-item:last-child {
+		border-bottom: none;
 	}
 
-	.banner-content {
+	.edu-year-col {
 		display: flex;
-		align-items: center;
-		gap: 2rem;
+		align-items: flex-start;
+		padding-top: 0.25rem;
 	}
 
-	.banner-icon {
-		font-size: 4rem;
-	}
-
-	.banner-content h2 {
+	.edu-year {
 		font-size: 1.5rem;
 		font-weight: 900;
-		text-transform: uppercase;
-		margin: 0;
+		color: var(--color-primary);
+		line-height: 1;
 	}
 
-	.banner-content p {
+	.edu-degree {
+		font-size: 1rem;
+		font-weight: 900;
+		text-transform: uppercase;
+		margin: 0 0 0.25rem 0;
+		color: var(--color-on-surface);
+	}
+
+	.edu-institution {
 		font-size: 0.875rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		opacity: 0.8;
-		margin: 0.25rem 0 0 0;
-	}
-
-	.banner-decoration {
-		text-align: right;
-	}
-
-	.banner-decoration span {
-		font-size: 0.625rem;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		opacity: 0.5;
-		display: block;
-		margin-bottom: 0.5rem;
-	}
-
-	.banner-line {
-		width: 5rem;
-		height: 0.125rem;
-		background: var(--color-on-primary);
-		margin-left: auto;
+		color: var(--color-on-surface-variant);
+		margin: 0;
 	}
 </style>
