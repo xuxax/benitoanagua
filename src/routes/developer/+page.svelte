@@ -280,11 +280,11 @@
 	}
 
 	.header-title {
+		font-family: var(--font-display);
 		font-size: clamp(1.375rem, 3.5vw, 2.25rem);
-		font-weight: 900;
-		line-height: 1.1;
+		line-height: 1.15;
 		text-transform: uppercase;
-		letter-spacing: -0.02em;
+		letter-spacing: 0.05em;
 		margin: 0 0 1.25rem 0;
 		color: var(--color-on-surface);
 	}
@@ -430,8 +430,8 @@
 		display: grid;
 		grid-template-columns: 1fr;
 		gap: 1px;
-		background: var(--color-on-surface);
-		border: 1px solid var(--color-on-surface);
+		background: var(--color-outline);
+		border: 1px solid var(--color-outline);
 	}
 
 	@media (min-width: 640px) {
@@ -571,10 +571,10 @@
 	}
 
 	.company-name {
+		font-family: var(--font-display);
 		font-size: 1rem;
-		font-weight: 900;
 		text-transform: uppercase;
-		letter-spacing: -0.01em;
+		letter-spacing: 0.05em;
 		margin: 0;
 		color: var(--color-on-surface);
 	}
@@ -598,9 +598,7 @@
 	.education-grid {
 		display: flex;
 		flex-direction: column;
-		gap: 1px;
-		background: var(--color-on-surface);
-		border: 1px solid var(--color-on-surface);
+		gap: 12px;
 	}
 
 	.education-card {
@@ -609,6 +607,14 @@
 		gap: 1.5rem;
 		padding: 1.5rem;
 		background: var(--color-surface);
+		border: 1px solid var(--color-outline-variant);
+		border-radius: var(--radius-smart);
+		transition: all var(--duration-base) var(--ease-out);
+	}
+
+	.education-card:hover {
+		border-color: var(--color-primary);
+		box-shadow: var(--ring-primary);
 	}
 
 	.edu-icon {

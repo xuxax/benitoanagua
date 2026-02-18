@@ -223,22 +223,6 @@
 		color: inherit;
 	}
 
-	.logo-icon {
-		width: 2.25rem;
-		height: 2.25rem;
-		border: 1px solid var(--color-primary);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		background: var(--color-primary-container);
-		flex-shrink: 0;
-	}
-
-	.logo-icon .material-symbols-outlined {
-		font-size: 1.125rem;
-		color: var(--color-primary);
-	}
-
 	.logo-text {
 		display: flex;
 		flex-direction: column;
@@ -246,10 +230,10 @@
 	}
 
 	.logo-name {
-		font-size: 0.9375rem;
-		font-weight: 900;
+		font-family: var(--font-display);
+		font-size: 0.8125rem;
 		text-transform: uppercase;
-		letter-spacing: 0.04em;
+		letter-spacing: 0.08em;
 		line-height: 1;
 		color: var(--color-on-surface);
 	}
@@ -259,8 +243,25 @@
 		font-size: 0.5rem;
 		color: var(--color-primary);
 		font-weight: 700;
-		letter-spacing: 0.2em;
+		letter-spacing: 0.15em;
 		text-transform: uppercase;
+	}
+
+	.logo-icon {
+		width: 2.25rem;
+		height: 2.25rem;
+		border: var(--line-base) solid var(--color-primary);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: var(--color-primary-container);
+		flex-shrink: 0;
+		border-radius: var(--radius-sm);
+	}
+
+	.logo-icon .material-symbols-outlined {
+		font-size: 1.125rem;
+		color: var(--color-primary);
 	}
 
 	.header-right {
@@ -329,20 +330,24 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 2rem;
-		height: 2rem;
+		width: 2.25rem;
+		height: 2.25rem;
 		background: var(--color-surface);
-		border: 1px solid var(--color-outline-variant);
+		border: 1px solid var(--color-outline);
 		cursor: pointer;
-		transition:
-			border-color 0.2s ease,
-			background-color 0.2s ease;
+		transition: all var(--duration-base) var(--ease-out);
 		flex-shrink: 0;
+		border-radius: var(--radius-sm);
 	}
 
 	.theme-toggle:hover {
 		border-color: var(--color-primary);
 		background: var(--color-primary-container);
+		box-shadow: var(--ring-primary);
+	}
+
+	.theme-toggle:active {
+		transform: scale(0.96);
 	}
 
 	.theme-toggle .material-symbols-outlined {
@@ -458,10 +463,10 @@
 
 	.footer-name {
 		display: block;
-		font-size: 0.875rem;
-		font-weight: 900;
+		font-family: var(--font-display);
+		font-size: 0.8125rem;
 		text-transform: uppercase;
-		letter-spacing: 0.04em;
+		letter-spacing: 0.08em;
 		color: var(--color-on-surface);
 		line-height: 1;
 	}
@@ -472,7 +477,7 @@
 		font-size: 0.5rem;
 		font-weight: 700;
 		text-transform: uppercase;
-		letter-spacing: 0.2em;
+		letter-spacing: 0.15em;
 		color: var(--color-primary);
 		margin-top: 0.25rem;
 	}
@@ -513,12 +518,14 @@
 		font-size: 0.8125rem;
 		color: var(--color-on-surface-variant);
 		text-decoration: none;
-		transition: color 0.2s ease;
-		padding: 0.125rem 0;
+		padding: 0.25rem 0;
+		transition: all var(--duration-base) var(--ease-out);
+		border-radius: var(--radius-sm);
 	}
 
 	.footer-link:hover {
 		color: var(--color-primary);
+		padding-left: 0.5rem;
 	}
 
 	.footer-link .material-symbols-outlined {

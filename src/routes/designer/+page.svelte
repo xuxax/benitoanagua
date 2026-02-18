@@ -192,12 +192,13 @@
 	}
 
 	.header-title {
-		font-size: clamp(2rem, 5vw, 3.75rem);
-		font-weight: 900;
+		font-family: var(--font-display);
+		font-size: clamp(2.5rem, 8vw, 6rem);
 		text-transform: uppercase;
-		letter-spacing: -0.03em;
-		line-height: 0.95;
-		margin: 0 0 2.5rem 0;
+		letter-spacing: 0.05em;
+		line-height: 0.9;
+		margin: 0;
+		text-align: center;
 		color: var(--color-on-surface);
 	}
 
@@ -268,16 +269,17 @@
 	}
 
 	.info-label {
-		font-size: 0.5625rem;
+		font-family: var(--font-mono);
+		font-size: 0.625rem;
 		font-weight: 700;
 		text-transform: uppercase;
-		letter-spacing: 0.2em;
-		color: var(--color-on-surface-variant);
-		opacity: 0.5;
+		letter-spacing: 0.15em;
+		color: var(--color-primary);
 	}
 
 	.info-value {
-		font-size: 0.9375rem;
+		font-family: var(--font-sans);
+		font-size: 0.8125rem;
 		font-weight: 700;
 		color: var(--color-on-surface);
 	}
@@ -294,10 +296,10 @@
 	}
 
 	.section-title {
+		font-family: var(--font-display);
 		font-size: 1.5rem;
-		font-weight: 900;
 		text-transform: uppercase;
-		letter-spacing: -0.02em;
+		letter-spacing: 0.1em;
 		margin: 0;
 		color: var(--color-on-surface);
 		white-space: nowrap;
@@ -328,9 +330,17 @@
 	}
 
 	.skill-card {
-		padding: 0;
-		border-left: 2px solid var(--color-primary);
-		padding-left: 1.25rem;
+		padding: 2rem;
+		border: 1px solid var(--color-outline-variant);
+		background: var(--color-surface);
+		border-radius: var(--radius-smart);
+		transition: all var(--duration-base) var(--ease-out);
+	}
+
+	.skill-card:hover {
+		border-color: var(--color-primary);
+		box-shadow: var(--ring-primary);
+		transform: translateY(-2px);
 	}
 
 	.skill-category {

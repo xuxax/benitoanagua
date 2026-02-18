@@ -237,10 +237,10 @@
 	}
 
 	.header-title {
+		font-family: var(--font-display);
 		font-size: clamp(1.5rem, 4vw, 2.75rem);
-		font-weight: 900;
 		text-transform: uppercase;
-		letter-spacing: -0.02em;
+		letter-spacing: 0.05em;
 		line-height: 1.05;
 		margin: 0;
 		color: var(--color-on-surface);
@@ -271,11 +271,12 @@
 
 	.contact-key {
 		padding: 0.5rem 0.75rem;
+		font-family: var(--font-mono);
 		font-size: 0.5625rem;
 		font-weight: 700;
 		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		color: var(--color-on-surface-variant);
+		letter-spacing: 0.15em;
+		color: var(--color-primary);
 		background: var(--color-surface-container-low);
 		border-right: 1px solid var(--color-outline-variant);
 		display: flex;
@@ -310,10 +311,10 @@
 	}
 
 	.section-title {
+		font-family: var(--font-display);
 		font-size: 1.375rem;
-		font-weight: 900;
 		text-transform: uppercase;
-		letter-spacing: -0.01em;
+		letter-spacing: 0.05em;
 		margin: 0 0 1.75rem 0;
 		color: var(--color-on-surface);
 		display: flex;
@@ -348,8 +349,16 @@
 	}
 
 	.skill-card {
-		border: 1px solid var(--color-outline-variant);
+		border: 1px solid var(--color-outline);
 		background: var(--color-surface);
+		border-radius: var(--radius-smart);
+		overflow: hidden;
+		transition: all var(--duration-base) var(--ease-out);
+	}
+
+	.skill-card:hover {
+		border-color: var(--color-primary);
+		box-shadow: var(--ring-primary);
 	}
 
 	.skill-card-top {

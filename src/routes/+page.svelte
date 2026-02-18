@@ -164,11 +164,11 @@
 	}
 
 	.hero-name {
-		font-size: clamp(2.5rem, 7vw, 5.5rem);
-		font-weight: 900;
+		font-family: var(--font-display);
+		font-size: clamp(2.25rem, 6vw, 4.5rem);
 		text-transform: uppercase;
-		letter-spacing: -0.03em;
-		line-height: 0.9;
+		letter-spacing: 0.05em;
+		line-height: 0.95;
 		margin: 0 0 1.5rem 0;
 		color: var(--color-on-surface);
 	}
@@ -192,24 +192,29 @@
 		display: inline-flex;
 		align-items: center;
 		gap: 0.375rem;
-		padding: 0.375rem 0.75rem;
-		border: 1px solid var(--color-outline-variant);
+		padding: 0.375rem 0.875rem;
+		border: 1px solid var(--color-outline);
 		background: var(--color-surface);
 		color: var(--color-on-surface-variant);
 		font-family: var(--font-mono);
-		font-size: 0.6875rem;
-		font-weight: 500;
+		font-size: 0.625rem;
+		font-weight: 700;
 		text-decoration: none;
 		text-transform: uppercase;
-		letter-spacing: 0.05em;
-		transition:
-			border-color 0.2s ease,
-			color 0.2s ease;
+		letter-spacing: 0.08em;
+		border-radius: var(--radius-sm);
+		transition: all var(--duration-base) var(--ease-out);
 	}
 
 	.contact-chip:hover {
 		border-color: var(--color-primary);
 		color: var(--color-primary);
+		box-shadow: var(--ring-primary);
+		background: var(--color-primary-container);
+	}
+
+	.contact-chip:active {
+		transform: scale(0.96);
 	}
 
 	.contact-chip .material-symbols-outlined {
@@ -232,10 +237,10 @@
 	}
 
 	.profiles-title {
-		font-size: 1.25rem;
-		font-weight: 900;
+		font-family: var(--font-display);
+		font-size: 1.125rem;
 		text-transform: uppercase;
-		letter-spacing: -0.02em;
+		letter-spacing: 0.05em;
 		margin: 0;
 		color: var(--color-on-surface);
 	}
@@ -266,15 +271,19 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1.25rem;
-		padding: 2rem;
+		padding: 2.5rem;
 		background: var(--color-surface);
 		text-decoration: none;
 		color: inherit;
-		transition: background-color 0.2s ease;
+		transition: all var(--duration-base) var(--ease-out);
+		position: relative;
+		overflow: hidden;
 	}
 
 	.profile-card:hover {
 		background: var(--color-surface-container-low);
+		z-index: 1;
+		box-shadow: inset 0 0 0 2px var(--color-primary);
 	}
 
 	.profile-card:hover .card-cta {
