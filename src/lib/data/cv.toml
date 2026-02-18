@@ -1,0 +1,185 @@
+[personal]
+name = "Benito Anagua Ibarra"
+location = "Tarija, Bolivia"
+phone = "+591 72945548"
+email = "benito.anagua@gmail.com"
+website = "https://benitoanagua.me/"
+linkedin = "https://www.linkedin.com/in/benito-anagua"
+github = "https://github.com/benitoanagua"
+behance = "https://behance.net/benitoanagua"
+
+[education]
+degree = "Licenciatura en Ingeniería de Informática"
+university = "Universidad Autónoma Juan Misael Saracho"
+year = "2012"
+
+[[focuses]]
+name = "developer"
+title = "Desarrollador Full Stack & Frontend Senior"
+summary = "Desarrollador Full Stack Senior con 18 años de experiencia en desarrollo web moderno, especializado en Frontend. Experto en la creación de interfaces de usuario escalables, responsivas y de alto rendimiento utilizando Svelte, Vue.js y Blazor. Amplia experiencia en arquitectura frontend, optimización de aplicaciones web y desarrollo de sistemas de componentes reutilizables. Experiencia liderando proyectos técnicos, implementando mejores prácticas de desarrollo y colaborando con equipos multidisciplinarios en el ciclo completo SDLC."
+
+[[focuses.skills]]
+category = "Frontend"
+items = ["Svelte", "Vue.js", "Blazor", "Astro.js", "Flutter", "HTML5", "CSS3/SASS", "JavaScript", "TypeScript"]
+
+[[focuses.skills]]
+category = "Backend"
+items = ["C#", "ASP.NET MVC", "Entity Framework", "PHP", "Node.js", "RESTful APIs"]
+
+[[focuses.skills]]
+category = "Datos & DevOps"
+items = ["PostgreSQL", "MySQL", "Docker", "Ubuntu Server", "Nginx", "Git", "GitLab", "CI/CD"]
+
+[[focuses.skills]]
+category = "Diseño"
+items = ["Figma", "Design Systems", "Prototipado", "Responsive Design"]
+
+[[focuses.experiences]]
+company = "Desarrollador Freelance & Actualización Tecnológica"
+position = "Freelance Developer"
+period = "Ene 2025 - Dic 2025"
+description = "Trabajé como desarrollador independiente en proyectos web mientras me especializaba en herramientas de inteligencia artificial aplicadas al desarrollo de software. Invertí tiempo en aprendizaje de tecnologías emergentes, frameworks modernos y sistemas de IA para automatización y optimización de código. Exploré implementaciones prácticas de IA en desarrollo frontend. Completé formación intensiva en inglés técnico alcanzando nivel A2, mejorando mis capacidades de comunicación en entornos internacionales y preparándome para colaboraciones globales."
+
+[[focuses.experiences]]
+company = "ITGroup Systems"
+position = "Desarrollador Full Stack / Líder Frontend"
+period = "Oct 2016 - Dic 2024"
+description = "Lideré el desarrollo frontend de aplicaciones web empresariales utilizando Svelte, Vue.js y Blazor, logrando interfaces de alto rendimiento y tiempos de carga optimizados. Diseñé e implementé un sistema de diseño integral con componentes reutilizables que aceleró los ciclos de desarrollo. Desarrollé servicios backend robustos con C#, ASP.NET y Entity Framework, estableciendo arquitecturas escalables para aplicaciones empresariales. Optimicé el rendimiento mediante lazy loading, code splitting y administración de contenedores Docker con PostgreSQL."
+
+[[focuses.experiences]]
+company = "SSUT Tarija"
+position = "Ingeniero de Software"
+period = "Nov 2023 - May 2024"
+description = "Desarrollé aplicaciones móviles con Flutter implementando funcionalidades complejas y UI responsiva con widgets personalizados adaptados a diferentes tamaños de pantalla. Creé y mantuve biblioteca de componentes reutilizables con Widgetbook para pruebas visuales, documentación técnica y aseguramiento de calidad del código. Programé la lógica del servidor con C# y ASP.NET MVC integrándose con PostgreSQL para servicios web robustos. Gestioné control de versiones y flujos CI/CD con Git y GitLab, implementando pipelines automatizados para testing y deployment continuo."
+
+[[focuses.experiences]]
+company = "UAJMS"
+position = "Desarrollador Web / UI Engineer"
+period = "Jul 2014 - Sep 2016"
+description = "Desarrollé y mantuve sitios web institucionales dinámicos utilizando PHP, JavaScript, CSS y CMS como WordPress y Drupal. Administré y configuré servidores web Linux (Apache, Nginx) para optimizar disponibilidad, rendimiento y seguridad. Gestioné bases de datos MySQL asegurando integridad de datos y optimización de consultas. Creé interfaces personalizadas transformando diseños en código HTML5/CSS3 semántico y accesible, asegurando compatibilidad cross-browser y experiencia de usuario óptima en diferentes dispositivos."
+
+[[focuses.experiences]]
+company = "GRAPHICART"
+position = "Desarrollador Frontend"
+period = "Oct 2011 - Jun 2014"
+description = "Desarrollé aplicaciones web dinámicas integrando PHP, Ruby on Rails y JavaScript con MySQL para soluciones empresariales robustas. Transformé diseños gráficos de Photoshop e Illustrator a maquetaciones web semánticas en HTML5/CSS3 con SASS, asegurando fidelidad visual. Optimicé el rendimiento frontend mediante minificación, compresión de assets y estrategias de caché. Resolví problemas de compatibilidad cross-browser mientras creaba interfaces intuitivas y responsivas que se adaptaban a diferentes dispositivos y tamaños de pantalla."
+
+[[focuses.experiences]]
+company = "EL NACIONAL"
+position = "Junior DevOps Engineer"
+period = "Mar 2008 - Sep 2011"
+description = "Desarrollé y personalicé sistemas de gestión de contenidos (CMS) basados en PHP para publicación diaria de noticias. Administré servidores Linux Debian realizando configuraciones de seguridad, monitoreo de rendimiento y mantenimiento preventivo. Ejecuté copias de seguridad automatizadas y restauración de bases de datos MySQL, garantizando integridad de información crítica. Documenté procesos técnicos y solucioné incidencias críticas del sistema bajo presión de deadlines de publicación diaria del periódico."
+
+[[focuses]]
+name = "designer"
+title = "Diseñador UI/UX & Product Designer"
+summary = "Diseñador UI/UX y Product Designer con 18 años de experiencia creando experiencias digitales centradas en el usuario. Especializado en diseño de interfaces intuitivas, sistemas de diseño escalables y prototipado interactivo de alta fidelidad. Experto en herramientas modernas de diseño incluyendo Figma, Affinity (Canva) y Adobe Creative Suite para producción profesional y colaborativa. Experiencia traduciendo necesidades del negocio en soluciones visuales efectivas que mejoran la usabilidad y satisfacción del usuario en proyectos web y móviles."
+
+[[focuses.skills]]
+category = "Diseño"
+items = ["Figma", "Affinity (Canva)", "Adobe XD", "Sketch", "Wireframing", "Prototipado Interactivo", "Design Systems"]
+
+[[focuses.skills]]
+category = "Visual"
+items = ["Photoshop", "Illustrator", "InDesign", "Teoría del Color", "Tipografía", "Composición Visual"]
+
+[[focuses.skills]]
+category = "Web"
+items = ["HTML5", "CSS3", "Svelte", "Vue.js", "JavaScript", "Responsive Design"]
+
+[[focuses.skills]]
+category = "Metodología"
+items = ["Design Thinking", "Scrum", "User Research", "Arquitectura de Información", "Usability Testing"]
+
+[[focuses.experiences]]
+company = "Diseñador Freelance & Actualización Tecnológica"
+position = "Freelance Designer"
+period = "Ene 2025 - Dic 2025"
+description = "Trabajé como diseñador independiente en proyectos de identidad visual y diseño digital mientras me especializaba en herramientas de inteligencia artificial aplicadas al diseño. Invertí tiempo en aprendizaje de sistemas de IA generativa para creación de assets visuales, optimización de workflows creativos y nuevas herramientas emergentes de diseño. Completé formación intensiva en inglés técnico alcanzando nivel A2, expandiendo significativamente mis capacidades profesionales en contextos internacionales."
+
+[[focuses.experiences]]
+company = "ITGroup Systems"
+position = "Product Designer / UI Lead"
+period = "Oct 2016 - Dic 2024"
+description = "Definí lineamientos visuales, identidad de marca y estrategia de diseño para productos digitales asegurando consistencia. Diseñé y desarrollé un sistema de diseño completo en Figma con componentes y documentación que aceleró el proceso de diseño-desarrollo. Creé prototipos interactivos de alta fidelidad para validar conceptos, lideré workshops de Design Thinking y realicé investigación de usuarios para resolver problemas complejos de UX."
+
+[[focuses.experiences]]
+company = "SSUT Tarija"
+position = "Diseñador UI/UX"
+period = "Nov 2023 - May 2024"
+description = "Diseñé experiencias de usuario completas para aplicaciones móviles en Flutter, desde wireframes hasta prototipos finales de alta fidelidad en Figma. Creé user flows, journey maps e información arquitectónica para identificar puntos de dolor y optimizar la experiencia del usuario final. Desarrollé biblioteca de componentes UI reutilizables con documentación detallada, realicé pruebas de usabilidad iterativas y coordiné la entrega de assets y especificaciones técnicas al equipo de desarrollo."
+
+[[focuses.experiences]]
+company = "UAJMS"
+position = "Diseñador UI/UX & Web"
+period = "Jul 2014 - Sep 2016"
+description = "Diseñé interfaces de usuario para sitios web institucionales asegurando accesibilidad y usabilidad óptima. Creé wireframes, mockups y prototipos visuales con Photoshop e Illustrator, validando conceptos antes del desarrollo. Gestioné contenido y optimicé la experiencia de usuario en WordPress para portales de alta concurrencia, desarrollando guías de estilo visual y piezas de comunicación digital manteniendo consistencia en la identidad visual."
+
+[[focuses.experiences]]
+company = "GRAPHICART"
+position = "Diseñador Web / Gráfico"
+period = "Oct 2011 - Jun 2014"
+description = "Conceptualicé y diseñé interfaces web intuitivas para sitios corporativos y aplicaciones comerciales, optimizadas para conversión y engagement. Desarrollé identidades de marca completas incluyendo logotipos, paletas de colores y papelería corporativa. Diseñé material publicitario digital aplicando principios de diseño responsivo para diferentes dispositivos, colaborando estrechamente con clientes para traducir necesidades del negocio en soluciones visuales efectivas."
+
+[[focuses.experiences]]
+company = "EL NACIONAL"
+position = "Diseñador Web"
+period = "Mar 2008 - Sep 2011"
+description = "Gestioné el diseño visual, maquetación y actualización de contenido en el portal web institucional del periódico digital. Creé banners publicitarios, piezas gráficas para campañas digitales y newsletters optimizadas para web. Edité y optimicé imágenes digitales con Photoshop para mejorar el rendimiento de carga, manteniendo la identidad visual del periódico y asegurando coherencia estética en todas las plataformas."
+
+[[focuses]]
+name = "graphic"
+title = "Diseñador Gráfico Integral (Digital & Off-set)"
+summary = "Diseñador Gráfico Multimedia con 18 años de experiencia en diseño digital y producción impresa. Especializado en creación de identidades visuales de marca, diseño editorial y producción para imprenta offset y serigrafía. Experto en Adobe Creative Suite y Affinity (Canva) para producción profesional de alto nivel. Amplia experiencia gestionando proyectos desde la conceptualización hasta la producción final, coordinando con proveedores de imprenta y asegurando calidad técnica en medios digitales, offset y serigrafía."
+
+[[focuses.skills]]
+category = "Diseño Gráfico"
+items = ["Adobe Photoshop", "Illustrator", "InDesign", "Affinity (Canva)"]
+
+[[focuses.skills]]
+category = "Producción Impresa"
+items = ["Preprensa", "Offset", "Serigrafía", "CMYK/Pantone", "Separación de colores", "Tipografía", "Diagramación editorial"]
+
+[[focuses.skills]]
+category = "Web & Digital"
+items = ["WordPress", "Figma", "Edición de imagen para web"]
+
+[[focuses.skills]]
+category = "Branding"
+items = ["Diseño de logotipos", "Identidad corporativa", "Papelería"]
+
+[[focuses.experiences]]
+company = "Diseñador Gráfico Freelance & Actualización Tecnológica"
+position = "Freelance Graphic Designer"
+period = "Ene 2025 - Dic 2025"
+description = "Trabajé como diseñador gráfico independiente en proyectos de branding y producción gráfica mientras me especializaba en herramientas de inteligencia artificial aplicadas al diseño visual. Invertí tiempo en aprendizaje de IA generativa para creación de assets gráficos, optimización de procesos creativos y nuevas herramientas de diseño emergentes. Completé formación intensiva en inglés técnico alcanzando nivel A2, ampliando significativamente mis competencias para colaboraciones internacionales."
+
+[[focuses.experiences]]
+company = "GRAPHICART"
+position = "Diseñador Gráfico"
+period = "Oct 2011 - Jun 2014"
+description = "Creé identidades de marca completas incluyendo logotipos, manuales de identidad corporativa y material promocional para diversos clientes. Diseñé y diagramé material publicitario para impresión offset, serigrafía y gran formato: folletos, catálogos, vallas, vinilos y textiles estampados. Gestioné el proceso de preprensa y producción en serigrafía con separación de colores, preparando archivos con especificaciones técnicas para sangrado, resolución y gestión de color CMYK/Pantone. Coordiné con proveedores para asegurar calidad de impresión final."
+
+[[focuses.experiences]]
+company = "ITGroup Systems"
+position = "Diseñador de Producto"
+period = "Oct 2016 - Dic 2024"
+description = "Definí y mantuve la identidad visual corporativa, lineamientos de marca y guías de estilo para todos los productos y comunicaciones de la empresa. Creé sistemas de diseño visuales, assets gráficos, iconografía y elementos visuales para interfaces de software y aplicaciones web. Diseñé material gráfico digital incluyendo banners, gráficos para redes sociales y presentaciones corporativas, supervisando la calidad estética de todos los entregables digitales y asegurando coherencia visual en toda la marca."
+
+[[focuses.experiences]]
+company = "SSUT Tarija"
+position = "Diseñador de Interfaces"
+period = "Nov 2023 - May 2024"
+description = "Diseñé interfaces visuales, iconografía personalizada y elementos gráficos cohesivos para aplicaciones móviles en Flutter. Creé composiciones visuales, layouts de pantallas y mockups de alta calidad para guiar el desarrollo del software. Adapté y optimicé gráficos y assets digitales para asegurar su correcto renderizado en diferentes dispositivos, colaborando en la definición de paleta de colores, tipografía y sistema visual completo del producto digital."
+
+[[focuses.experiences]]
+company = "UAJMS"
+position = "Diseñador Gráfico / Web"
+period = "Jul 2014 - Sep 2016"
+description = "Diseñé material promocional universitario para eventos académicos y campañas institucionales: flyers, afiches, banners y pendones. Realicé retoque fotográfico profesional, composición digital y manipulación creativa de imágenes en Adobe Photoshop para contenido web y publicaciones. Gestioné el diseño visual y maquetación de contenidos del portal web institucional, manteniendo la coherencia visual de la identidad gráfica universitaria en diversos medios digitales e impresos."
+
+[[focuses.experiences]]
+company = "EL NACIONAL"
+position = "Diseñador Digital / Producción Offset"
+period = "Mar 2008 - Sep 2011"
+description = "Diseñé banners publicitarios, infografías periodísticas y piezas gráficas para el periódico digital y campañas online bajo plazos ajustados diarios. Preparé archivos y coordiné la producción offset del periódico impreso, asegurando especificaciones técnicas de registro de color, sangrado y marcas de corte. Optimicé y edité imágenes fotográficas para publicación digital e impresa, manteniendo el diseño visual del sitio web y creando diagramaciones para documentos y boletines informativos con coherencia de marca."
