@@ -210,6 +210,7 @@
 		font-size: clamp(3rem, 12vw, 8rem);
 		line-height: 1;
 		color: var(--color-primary);
+		letter-spacing: 0.05em;
 	}
 
 	.hero-divider {
@@ -243,10 +244,12 @@
 		animation: blink 1s infinite;
 	}
 	.hero-intro {
-		font-size: 1rem;
+		font-family: var(--font-mono);
+		font-size: 0.875rem;
 		line-height: 1.6;
 		opacity: 0.9;
 		text-align: left;
+		letter-spacing: -0.02em;
 	}
 
 	/* ── PATHS GRID (Shared Boundary) ── */
@@ -264,7 +267,9 @@
 
 	.paths-grid {
 		grid-template-columns: 1fr;
-		border: 1px solid var(--color-outline-variant);
+		border-top: 1px solid var(--color-outline-variant);
+		border-left: 1px solid var(--color-outline-variant);
+		gap: 0;
 	}
 	@media (min-width: 1024px) {
 		.paths-grid {
@@ -273,32 +278,30 @@
 	}
 
 	.path-card {
-		padding: var(--space-8) var(--space-6);
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-6);
+		padding: var(--space-6);
+		background: var(--color-surface);
+		border-right: 1px solid var(--color-outline-variant);
+		border-bottom: 1px solid var(--color-outline-variant);
 		text-decoration: none;
 		color: inherit;
 		position: relative;
 		overflow: hidden;
-		transition: transform var(--duration-fast) var(--ease-linear);
-	}
-	@media (min-width: 768px) {
-		.path-card {
-			padding: var(--space-12) var(--space-8);
-			gap: var(--space-8);
-		}
+		transition: none; /* Anti-Reflow: Instant or GPU only */
 	}
 
 	.path-card:hover {
-		transform: translateY(-4px);
-		z-index: 10;
+		z-index: 2;
+		background: var(--color-surface-container-lowest);
+		box-shadow:
+			0 0 0 2px var(--color-surface),
+			0 0 0 4px var(--color-primary);
 	}
 	.path-card:hover::after {
 		content: '';
 		position: absolute;
 		inset: 0;
-		box-shadow: var(--ring-primary);
 		pointer-events: none;
 	}
 
@@ -366,11 +369,13 @@
 	/* ── NODES GRID ── */
 	.nodes-grid {
 		grid-template-columns: 1fr;
-		border: 1px solid var(--color-outline-variant);
+		border-top: 1px solid var(--color-outline-variant);
+		border-left: 1px solid var(--color-outline-variant);
+		gap: 0;
 	}
 	@media (min-width: 768px) {
 		.nodes-grid {
-			grid-template-columns: 1fr 1fr;
+			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 
@@ -378,12 +383,11 @@
 		padding: var(--space-6);
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-4);
-	}
-	@media (min-width: 768px) {
-		.node-box {
-			padding: var(--space-8);
-		}
+		gap: var(--space-6);
+		border-right: 1px solid var(--color-outline-variant);
+		border-bottom: 1px solid var(--color-outline-variant);
+		position: relative;
+		background: var(--color-surface);
 	}
 
 	.node-title {
