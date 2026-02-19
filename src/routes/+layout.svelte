@@ -1,5 +1,4 @@
 <script lang="ts">
-	import favicon from '$lib/assets/favicon.svg';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	import { SOCIAL_LINKS } from '$lib/config';
@@ -27,7 +26,7 @@
 
 <svelte:head>
 	<!-- Favicon and icons -->
-	<link rel="icon" href={favicon} />
+	<link rel="icon" href="/favicon.svg" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 	<meta name="apple-mobile-web-app-title" content="Benito Anagua" />
