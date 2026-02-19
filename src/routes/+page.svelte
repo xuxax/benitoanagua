@@ -306,13 +306,22 @@
 	}
 
 	.path-card.dev:hover {
-		border-top: 4px solid #ec4899;
+		box-shadow:
+			inset 0 2px 0 0 #ec4899,
+			0 0 0 2px var(--color-surface),
+			0 0 0 4px var(--color-primary);
 	}
 	.path-card.ux:hover {
-		border-top: 4px solid var(--color-primary);
+		box-shadow:
+			inset 0 2px 0 0 var(--color-primary),
+			0 0 0 2px var(--color-surface),
+			0 0 0 4px var(--color-primary);
 	}
 	.path-card.gfx:hover {
-		border-top: 4px solid #3b82f6;
+		box-shadow:
+			inset 0 2px 0 0 #3b82f6,
+			0 0 0 2px var(--color-surface),
+			0 0 0 4px var(--color-primary);
 	}
 
 	.card-header {
