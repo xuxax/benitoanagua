@@ -42,16 +42,6 @@
 					<div class="reg-mark bl"></div>
 					<div class="reg-mark br"></div>
 
-					<div class="press-info mono">
-						<span>REF::2026_GFX_PLATE_03</span>
-						<div class="color-control-strip">
-							<div class="c"></div>
-							<div class="m"></div>
-							<div class="y"></div>
-							<div class="k"></div>
-						</div>
-					</div>
-
 					<h1 class="hero-title">
 						<span class="stroke-text">{focus?.title.split(' ')[0]}</span>
 						<span class="solid-text">{focus?.title.split(' ').slice(1).join(' ')}</span>
@@ -61,26 +51,12 @@
 						<div class="plate-divider"></div>
 						<p class="summary">{focus?.summary}</p>
 					</div>
-
-					<div class="plate-base mono">
-						<span>RESOLUTION::300DPI</span>
-						<span>OUTPUT::EDITORIAL_PRESET</span>
-					</div>
 				</div>
 
 				<aside class="sidebar-plate shared-boundary">
 					<div class="meta-module">
 						<h3 class="mono label">PROD_LOCATION</h3>
 						<span class="val">{cvData.personal.location}</span>
-					</div>
-					<div class="meta-module">
-						<h3 class="mono label">OUTPUT_CHANNELS</h3>
-						<div class="channel-stack">
-							<a href={cvData.personal.behance} target="_blank" class="mono channel"
-								>//BEHANCE_PORTFOLIO</a
-							>
-							<a href={cvData.personal.website} target="_blank" class="mono channel">//PROD_SITE</a>
-						</div>
 					</div>
 					<div class="meta-module">
 						<h3 class="mono label">TECH_SPECS</h3>
@@ -269,50 +245,6 @@
 		}
 	}
 
-	.press-info {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		font-size: 0.5rem;
-		opacity: 0.4;
-		margin-bottom: var(--space-8);
-	}
-	@media (min-width: 768px) {
-		.press-info {
-			font-size: 0.625rem;
-			margin-bottom: var(--space-12);
-		}
-	}
-
-	.color-control-strip {
-		display: flex;
-		gap: 1px;
-	}
-	.color-control-strip div {
-		width: 8px;
-		height: 8px;
-		border: 1px solid var(--color-outline-variant);
-	}
-	@media (min-width: 768px) {
-		.color-control-strip div {
-			width: 12px;
-			height: 12px;
-		}
-	}
-
-	.c {
-		background: #00ffff;
-	}
-	.m {
-		background: #ff00ff;
-	}
-	.y {
-		background: #ffff00;
-	}
-	.k {
-		background: #000;
-	}
-
 	.hero-title {
 		display: flex;
 		flex-direction: column;
@@ -370,21 +302,6 @@
 		}
 	}
 
-	.plate-base {
-		margin-top: var(--space-8);
-		border-top: 1px solid var(--color-outline-variant);
-		padding-top: var(--space-4);
-		display: flex;
-		justify-content: space-between;
-		font-size: 0.5rem;
-		opacity: 0.3;
-	}
-	@media (min-width: 768px) {
-		.plate-base {
-			margin-top: var(--space-12);
-		}
-	}
-
 	.sidebar-plate {
 		grid-template-columns: 1fr;
 	}
@@ -412,21 +329,7 @@
 		opacity: 0.4;
 		margin-bottom: var(--space-3);
 	}
-	.channel-stack {
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-2);
-	}
-	.channel {
-		font-size: 0.6875rem;
-		text-decoration: none;
-		color: var(--color-on-surface);
-		font-weight: 700;
-		transition: color 0.2s;
-	}
-	.channel:hover {
-		color: var(--color-primary);
-	}
+
 	.spec-list {
 		display: flex;
 		flex-direction: column;

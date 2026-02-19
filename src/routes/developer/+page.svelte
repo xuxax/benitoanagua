@@ -39,8 +39,6 @@
 					<div class="joint joint--tl"></div>
 					<div class="joint joint--br"></div>
 
-					<div class="spec-id mono">CODE_SPEC_ASSEMBLY_B.ENG_2012</div>
-
 					<h1 class="hero-title">
 						<span class="stroke-text">{focus?.title.split(' ')[0]}</span>
 						<span class="solid-text">{focus?.title.split(' ').slice(1).join(' ')}</span>
@@ -63,11 +61,8 @@
 							<span class="val">{site.nav.exp_label}</span>
 						</div>
 						<div class="spec-item">
-							<span class="mono label">IDENTITY_NODES</span>
-							<div class="node-links">
-								<a href={cvData.personal.github} target="_blank" class="mono">//GITHUB</a>
-								<a href={cvData.personal.linkedin} target="_blank" class="mono">//LINKEDIN</a>
-							</div>
+							<span class="mono label">ENGINEERING_EXP</span>
+							<span class="val">{site.nav.exp_label}</span>
 						</div>
 					</div>
 				</aside>
@@ -203,12 +198,6 @@
 		}
 	}
 
-	.spec-id {
-		font-size: 0.5rem;
-		opacity: 0.4;
-		margin-bottom: var(--space-4);
-	}
-
 	.hero-title {
 		display: flex;
 		flex-direction: column;
@@ -268,20 +257,6 @@
 	.spec-item .val {
 		font-weight: 700;
 		font-size: 0.75rem;
-	}
-	.node-links {
-		display: flex;
-		flex-direction: column;
-		gap: 2px;
-	}
-	.node-links a {
-		font-size: 0.6875rem;
-		text-decoration: none;
-		color: var(--color-on-surface);
-		transition: color 0.2s;
-	}
-	.node-links a:hover {
-		color: var(--color-primary);
 	}
 
 	/* ── SECTIONS ── */

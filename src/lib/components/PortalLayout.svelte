@@ -120,64 +120,46 @@
 
 	<!-- ══ PORTAL FOOTER ══ -->
 	<footer class="portal-baseboard">
-		<div class="baseboard-grid">
-			<!-- Identity Section -->
-			<div class="baseboard-col info-col">
-				<div class="footer-brand">
-					<span class="material-symbols-outlined brand-icon">architecture</span>
-					<span class="font-display">{personal.name.toUpperCase()}</span>
+		<div class="shared-boundary">
+			<!-- Identity Node -->
+			<div class="baseboard-module module--identity">
+				<div class="module-header">
+					<span class="material-symbols-outlined module-ico">architecture</span>
+					<span class="font-display module-name">{personal.name.toUpperCase()}</span>
 				</div>
-				<p class="brand-summary">{site.footer.bio}</p>
-				<div class="brand-links">
+				<p class="module-bio">{site.footer.bio}</p>
+				<div class="module-signals">
 					{#each site.footer.sections.portfolio.links as link}
-						<a href={resolveHref(link)} target="_blank" rel="noopener" class="footer-icon-link">
+						<a href={resolveHref(link)} target="_blank" rel="noopener" class="signal-link mono">
 							<span class="material-symbols-outlined">{link.icon}</span>
+							<span class="link-label">{link.label.toUpperCase()}</span>
 						</a>
 					{/each}
 				</div>
 			</div>
 
-			<!-- Quick Links -->
-			<div class="baseboard-col links-col">
-				<h3 class="col-heading">{site.footer.sections.contact.title.toUpperCase()}</h3>
-				<ul class="col-list">
+			<!-- Communication Channels -->
+			<div class="baseboard-module module--channels">
+				<h3 class="module-label mono">{site.footer.sections.contact.title.toUpperCase()}</h3>
+				<ul class="channel-list">
 					{#each site.footer.sections.contact.links as link}
 						<li>
-							<a href={resolveHref(link)} class="col-link">
-								<span class="material-symbols-outlined link-ico">{link.icon}</span>
-								<span class="link-txt">{link.label}</span>
+							<a href={resolveHref(link)} class="channel-node">
+								<span class="material-symbols-outlined">{link.icon}</span>
+								<span class="mono label-txt">{link.label}</span>
 							</a>
 						</li>
 					{/each}
 				</ul>
 			</div>
-
-			<!-- Engineering Specs -->
-			<div class="baseboard-col spec-col">
-				<h3 class="col-heading">ENGINEERING SPECS</h3>
-				<div class="spec-matrix">
-					<div class="spec-row">
-						<span class="spec-key">BUILD_ID</span>
-						<span class="spec-val">0218-AF</span>
-					</div>
-					<div class="spec-row">
-						<span class="spec-key">LANGUAGE</span>
-						<span class="spec-val">{lang.current === 'es' ? 'SPANISH' : 'ENGLISH'}</span>
-					</div>
-					<div class="spec-row">
-						<span class="spec-key">ENGINE</span>
-						<span class="spec-val">SVELTE 5</span>
-					</div>
-				</div>
-			</div>
 		</div>
 
-		<div class="baseboard-bottom">
-			<div class="bottom-inner">
-				<span class="copy mono">© {new Date().getFullYear()} ARCH_CORE</span>
-				<div class="footer-trace">
-					<div class="trace-line"></div>
-					<span class="mono opacity-40">STABLE_VERSION_0.9.2</span>
+		<div class="baseboard-lower">
+			<div class="lower-inner">
+				<span class="legal mono">© {new Date().getFullYear()} ARCHITECTURAL_CORE</span>
+				<div class="lower-trace">
+					<div class="line"></div>
+					<span class="mono opacity-40">AUTO_LOG::OK</span>
 				</div>
 			</div>
 		</div>
@@ -378,57 +360,96 @@
 	/* ── BASEBOARD (Footer) ── */
 	.portal-baseboard {
 		background: var(--color-surface-container-lowest);
-		border-top: 1px solid var(--color-on-surface);
+		border-top: 2px solid var(--color-on-surface);
+		margin-top: var(--space-12);
 	}
 
-	.baseboard-grid {
+	.shared-boundary {
 		max-width: var(--container-xl);
 		margin: 0 auto;
-		padding: var(--space-12) var(--space-4);
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: var(--space-12);
 	}
 
 	@media (min-width: 768px) {
-		.baseboard-grid {
-			grid-template-columns: 2fr 1fr 1.2fr;
+		.shared-boundary {
+			grid-template-columns: 2fr 1fr;
 		}
 	}
 
-	.footer-brand {
+	.baseboard-module {
+		padding: var(--space-12) var(--space-6);
+	}
+
+	.module--identity {
+		border-bottom: 1px solid var(--color-outline-variant);
+	}
+
+	@media (min-width: 768px) {
+		.module--identity {
+			border-bottom: none;
+			border-right: 1px solid var(--color-outline-variant);
+		}
+	}
+
+	.module-header {
 		display: flex;
 		align-items: center;
 		gap: var(--space-3);
 		margin-bottom: var(--space-4);
-		font-size: var(--text-base);
+	}
+
+	.module-ico {
+		color: var(--color-primary);
+		font-size: 1.5rem;
+	}
+
+	.module-name {
+		font-size: 1.25rem;
 		color: var(--color-on-surface);
 	}
-	.brand-icon {
-		color: var(--color-primary);
-	}
-	.brand-summary {
-		font-size: var(--text-sm);
+
+	.module-bio {
+		font-size: 0.875rem;
 		line-height: 1.6;
 		color: var(--color-on-surface-variant);
-		max-width: 35ch;
-		margin-bottom: var(--space-6);
-	}
-	.brand-links {
-		display: flex;
-		gap: var(--space-4);
+		max-width: 45ch;
+		margin-bottom: var(--space-8);
 	}
 
-	.footer-icon-link {
+	.module-signals {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3);
+	}
+
+	@media (min-width: 640px) {
+		.module-signals {
+			flex-direction: row;
+			gap: var(--space-6);
+		}
+	}
+
+	.signal-link {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+		text-decoration: none;
 		color: var(--color-on-surface-variant);
+		font-size: 0.6875rem;
+		font-weight: 700;
 		transition: color 0.2s;
 	}
-	.footer-icon-link:hover {
+
+	.signal-link:hover {
 		color: var(--color-primary);
 	}
 
-	.col-heading {
-		font-family: var(--font-mono);
+	.signal-link .material-symbols-outlined {
+		font-size: 1rem;
+	}
+
+	.module-label {
 		font-size: 0.625rem;
 		font-weight: 700;
 		color: var(--color-primary);
@@ -436,81 +457,59 @@
 		letter-spacing: 0.1em;
 	}
 
-	.col-list {
+	.channel-list {
 		list-style: none;
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-3);
+		gap: var(--space-4);
 	}
 
-	.col-link {
+	.channel-node {
 		display: flex;
 		align-items: center;
 		gap: var(--space-3);
 		text-decoration: none;
 		color: var(--color-on-surface-variant);
-		font-size: var(--text-sm);
-		transition:
-			transform 0.2s,
-			color 0.2s;
+		font-size: 0.8125rem;
+		transition: all 0.2s;
 	}
-	.col-link:hover {
+
+	.channel-node:hover {
 		color: var(--color-on-surface);
 		transform: translateX(4px);
 	}
-	.link-ico {
-		font-size: 1rem;
+
+	.channel-node .material-symbols-outlined {
+		font-size: 1.125rem;
 		color: var(--color-primary);
 	}
 
-	.spec-matrix {
-		display: flex;
-		flex-direction: column;
-		border: 1px solid var(--color-outline-variant);
-	}
-	.spec-row {
-		display: flex;
-		justify-content: space-between;
-		padding: var(--space-3);
-		border-bottom: 1px solid var(--color-outline-variant);
-	}
-	.spec-row:last-child {
-		border-bottom: none;
-	}
-	.spec-key {
-		font-family: var(--font-mono);
-		font-size: 0.5625rem;
-		color: var(--color-primary);
-		font-weight: 700;
-	}
-	.spec-val {
-		font-family: var(--font-mono);
-		font-size: 0.5625rem;
-		color: var(--color-on-surface);
-	}
-
-	.baseboard-bottom {
+	.baseboard-lower {
 		border-top: 1px solid var(--color-outline-variant);
 		background: var(--color-surface);
 	}
-	.bottom-inner {
+
+	.lower-inner {
 		max-width: var(--container-xl);
 		margin: 0 auto;
-		padding: var(--space-4) var(--space-4);
+		padding: var(--space-4) var(--space-6);
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 	}
-	.copy {
+
+	.legal {
 		font-size: 0.5625rem;
 		opacity: 0.5;
 	}
-	.footer-trace {
+
+	.lower-trace {
 		display: flex;
 		align-items: center;
 		gap: var(--space-4);
 	}
-	.trace-line {
+
+	.lower-trace .line {
 		width: 40px;
 		height: 1px;
 		background: var(--color-primary);

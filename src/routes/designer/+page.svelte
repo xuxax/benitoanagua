@@ -40,14 +40,7 @@
 				<div class="joint joint--bl"></div>
 				<div class="joint joint--br"></div>
 
-				<div class="canvas-header">
-					<span class="mono opacity-40">DOC_REF::ARCH_MOD_UX_02</span>
-					<div class="dim-ruler">
-						<div class="ruler-line"></div>
-						<span class="mono">1024_UNIT</span>
-						<div class="ruler-line"></div>
-					</div>
-				</div>
+				<div class="canvas-header"></div>
 
 				<h1 class="monumental-title">
 					<span class="stroke-text">{focus?.title.split(' ')[0]}</span>
@@ -76,25 +69,6 @@
 					</div>
 				</div>
 			</div>
-
-			<aside class="sidebar-info">
-				<div class="info-card shared-boundary">
-					<div class="info-item">
-						<h3 class="mono">CONTACT_PROT</h3>
-						<div class="link-group">
-							<a href="mailto:{cvData.personal.email}" class="mono link">E-MAIL_TX</a>
-							<a href={cvData.personal.website} target="_blank" class="mono link">WWW_ENTRY</a>
-						</div>
-					</div>
-					<div class="info-item">
-						<h3 class="mono">SOCIAL_SIGNALS</h3>
-						<div class="link-group">
-							<a href={cvData.personal.behance} target="_blank" class="mono link">BEHANCE_REPO</a>
-							<a href={cvData.personal.linkedin} target="_blank" class="mono link">LINKEDIN_ID</a>
-						</div>
-					</div>
-				</div>
-			</aside>
 		</header>
 
 		<!-- ══ SKILLS: Modular Grid ══ -->
@@ -307,35 +281,6 @@
 		align-items: center;
 		margin-bottom: var(--space-8);
 	}
-	.dim-ruler {
-		display: flex;
-		align-items: center;
-		gap: var(--space-4);
-		flex: 1;
-		margin-left: var(--space-4);
-		opacity: 0.3;
-	}
-	@media (max-width: 640px) {
-		.dim-ruler {
-			display: none;
-		}
-	}
-
-	.ruler-line {
-		flex: 1;
-		height: 1px;
-		background: var(--color-on-surface);
-		position: relative;
-	}
-	.ruler-line::before,
-	.ruler-line::after {
-		content: '';
-		position: absolute;
-		height: 8px;
-		width: 1px;
-		background: var(--color-on-surface);
-		top: -4px;
-	}
 
 	.monumental-title {
 		display: flex;
@@ -420,60 +365,6 @@
 	.spec-cell .val {
 		font-weight: 700;
 		font-size: 0.75rem;
-	}
-
-	.sidebar-info {
-		display: flex;
-		flex-direction: column;
-	}
-	.info-card {
-		grid-template-columns: 1fr;
-		height: 100%;
-		border: 1px solid var(--color-outline-variant);
-	}
-	@media (max-width: 1024px) {
-		.info-card {
-			grid-template-columns: 1fr 1fr;
-		}
-	}
-	@media (max-width: 640px) {
-		.info-card {
-			grid-template-columns: 1fr;
-		}
-	}
-
-	.info-item {
-		padding: var(--space-6);
-		border-bottom: 1px solid var(--color-outline-variant);
-	}
-	@media (min-width: 768px) {
-		.info-item {
-			padding: var(--space-8);
-		}
-	}
-
-	.info-item:last-child {
-		border-bottom: none;
-	}
-	.info-item h3 {
-		font-size: 0.625rem;
-		opacity: 0.4;
-		margin-bottom: var(--space-4);
-	}
-	.link-group {
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-2);
-	}
-	.link-group a {
-		font-size: 0.6875rem;
-		text-decoration: none;
-		color: var(--color-on-surface);
-		transition: color 0.2s;
-		font-weight: 700;
-	}
-	.link-group a:hover {
-		color: var(--color-primary);
 	}
 
 	/* ── SECTIONS ── */

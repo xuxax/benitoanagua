@@ -10,7 +10,6 @@ behance = "https://behance.net/benitoanagua"
 whatsapp = "https://wa.me/59172945548"
 maps = "https://www.google.com/maps/place/Tarija,+Bolivia"
 
-
 [[education]]
 degree = "Bachelor's Degree in Computer Engineering"
 institution = "Universidad Autónoma Juan Misael Saracho"
@@ -21,6 +20,9 @@ degree = "English — A2"
 institution = "Funval International"
 year = "2025"
 
+# ══════════════════════════════════════════════════════════════════════════════
+# 01. DEVELOPER PROFILE
+# ══════════════════════════════════════════════════════════════════════════════
 [[focuses]]
 name = "developer"
 title = "Senior Full Stack & Frontend Developer"
@@ -45,40 +47,43 @@ items = ["Figma", "Design Systems", "Prototyping", "Responsive Design"]
 
 [[focuses.experiences]]
 company = "Freelance Developer & Technology Updates"
-position = "Freelance Developer"
 period = "Jan 2025 - Dec 2025"
+position = "Freelance Developer"
 description = "Worked as an independent developer on web projects while specializing in artificial intelligence tools applied to software development. Invested time in learning emerging technologies, modern frameworks, and AI systems for code automation and optimization. Explored practical AI implementations in frontend development. Completed intensive technical English training reaching A2 level, improving communication capabilities in international environments and preparing for global collaborations."
 
 [[focuses.experiences]]
 company = "ITGroup Systems"
-position = "Full Stack Developer / Frontend Lead"
 period = "Oct 2016 - Dec 2024"
+position = "Full Stack Developer / Frontend Lead"
 description = "Led frontend development of enterprise web applications using Svelte, Vue.js, and Blazor, achieving high-performance interfaces and optimized load times. Designed and implemented a comprehensive design system with reusable components that accelerated development cycles. Developed robust backend services with C#, ASP.NET, and Entity Framework, establishing scalable architectures for enterprise applications. Optimized performance through lazy loading, code splitting, and Docker container management with PostgreSQL."
 
 [[focuses.experiences]]
 company = "SSUT Tarija"
-position = "Software Engineer"
 period = "Nov 2023 - May 2024"
+position = "Software Engineer"
 description = "Developed mobile applications with Flutter implementing complex functionalities and responsive UI with custom widgets adapted to different screen sizes. Created and maintained a library of reusable components with Widgetbook for visual testing, technical documentation, and code quality assurance. Programmed server logic with C# and ASP.NET MVC integrating with PostgreSQL for robust web services. Managed version control and CI/CD workflows with Git and GitLab, implementing automated pipelines for testing and continuous deployment."
 
 [[focuses.experiences]]
 company = "UAJMS"
-position = "Web Developer / UI Engineer"
 period = "Jul 2014 - Sep 2016"
-description = "Developed and maintained dynamic institutional websites using PHP, JavaScript, CSS and CMS platforms like WordPress and Drupal. Administered and configured Linux web servers (Apache, Nginx) to optimize availability, performance, and security. Managed MySQL databases ensuring data integrity and query optimization. Created custom interfaces transforming designs into semantic and accessible HTML5/CSS3 code, ensuring cross-browser compatibility and optimal user experience across different devices."
+position = "Web Developer / UI Engineer"
+description = "Developed and maintained dynamic institutional websites using PHP, JavaScript, CSS, and CMS platforms like WordPress and Drupal. Administered and configured Linux web servers (Apache, Nginx) to optimize availability, performance, and security. Managed MySQL databases ensuring data integrity and query optimization. Created custom interfaces transforming designs into semantic and accessible HTML5/CSS3 code, ensuring cross-browser compatibility and optimal user experience across different devices."
 
 [[focuses.experiences]]
 company = "GRAPHICART"
-position = "Frontend Developer"
 period = "Oct 2011 - Jun 2014"
-description = "Developed dynamic web applications integrating PHP, Ruby on Rails and JavaScript with MySQL for robust enterprise solutions. Transformed graphic designs from Photoshop and Illustrator into semantic HTML5/CSS3 web layouts with SASS, ensuring visual fidelity. Optimized frontend performance through minification, asset compression, and caching strategies. Resolved cross-browser compatibility issues while creating intuitive and responsive interfaces that adapted to different devices and screen sizes."
+position = "Frontend Developer"
+description = "Developed dynamic web applications integrating PHP, Ruby on Rails, and JavaScript with MySQL for robust enterprise solutions. Transformed graphic designs from Photoshop and Illustrator into semantic HTML5/CSS3 web layouts with SASS, ensuring visual fidelity. Optimized frontend performance through minification, asset compression, and caching strategies. Resolved cross-browser compatibility issues while creating intuitive and responsive interfaces that adapted to different devices and screen sizes."
 
 [[focuses.experiences]]
 company = "EL NACIONAL"
-position = "Junior DevOps Engineer"
 period = "Mar 2008 - Sep 2011"
+position = "Junior DevOps Engineer"
 description = "Developed and customized content management systems (CMS) based on PHP for daily news publishing. Administered Debian Linux servers performing security configurations, performance monitoring, and preventive maintenance. Executed automated backups and MySQL database restoration, ensuring critical information integrity. Documented technical processes and resolved critical system incidents under pressure of daily newspaper publication deadlines."
 
+# ══════════════════════════════════════════════════════════════════════════════
+# 02. DESIGNER PROFILE
+# ══════════════════════════════════════════════════════════════════════════════
 [[focuses]]
 name = "designer"
 title = "UI/UX Designer & Product Designer"
@@ -103,40 +108,43 @@ items = ["Design Thinking", "Scrum", "User Research", "Information Architecture"
 
 [[focuses.experiences]]
 company = "Freelance Designer & Technology Updates"
-position = "Freelance Designer"
 period = "Jan 2025 - Dec 2025"
+position = "Freelance Designer"
 description = "Worked as an independent designer on visual identity and digital design projects while specializing in artificial intelligence tools applied to design. Invested time in learning generative AI systems for visual asset creation, creative workflow optimization, and emerging design tools. Completed intensive technical English training reaching A2 level, significantly expanding professional capabilities in international contexts."
 
 [[focuses.experiences]]
 company = "ITGroup Systems"
-position = "Product Designer / UI Lead"
 period = "Oct 2016 - Dec 2024"
+position = "Product Designer / UI Lead"
 description = "Defined visual guidelines, brand identity, and design strategy for digital products ensuring consistency. Designed and developed a complete design system in Figma with components and documentation that accelerated the design-development process. Created high-fidelity interactive prototypes to validate concepts, led Design Thinking workshops, and conducted user research to solve complex UX problems."
 
 [[focuses.experiences]]
 company = "SSUT Tarija"
-position = "UI/UX Designer"
 period = "Nov 2023 - May 2024"
+position = "UI/UX Designer"
 description = "Designed complete user experiences for Flutter mobile applications, from wireframes to final high-fidelity prototypes in Figma. Created user flows, journey maps, and information architecture to identify pain points and optimize the end-user experience. Developed a library of reusable UI components with detailed documentation, conducted iterative usability testing, and coordinated asset delivery and technical specifications to the development team."
 
 [[focuses.experiences]]
 company = "UAJMS"
-position = "UI/UX & Web Designer"
 period = "Jul 2014 - Sep 2016"
+position = "UI/UX & Web Designer"
 description = "Designed user interfaces for institutional websites ensuring optimal accessibility and usability. Created wireframes, mockups, and visual prototypes with Photoshop and Illustrator, validating concepts before development. Managed content and optimized user experience in WordPress for high-traffic portals, developing visual style guides and digital communication pieces while maintaining consistency in visual identity."
 
 [[focuses.experiences]]
 company = "GRAPHICART"
-position = "Web / Graphic Designer"
 period = "Oct 2011 - Jun 2014"
-description = "Conceptualized and designed intuitive web interfaces for corporate sites and commercial applications, optimized for conversion and engagement. Developed complete brand identities including logos, color palettes, and corporate stationery. Designed digital advertising material applying responsive design principles for different devices, collaborating closely with clients to translate business needs into effective visual solutions."
+position = "Web / Graphic Designer"
+description = "Conceptualicé y diseñé interfaces web intuitivas para sitios corporativos y aplicaciones comerciales, optimizadas para conversión y engagement. Desarrollé identidades de marca completas incluyendo logotipos, paletas de colores y papelería corporativa. Diseñé material publicitario digital aplicando principios de diseño responsivo para diferentes dispositivos, colaborando estrechamente con clientes para traducir necesidades del negocio en soluciones visuales efectivas."
 
 [[focuses.experiences]]
 company = "EL NACIONAL"
-position = "Web Designer"
 period = "Mar 2008 - Sep 2011"
+position = "Web Designer"
 description = "Managed visual design, layout, and content updates for the digital newspaper's institutional web portal. Created advertising banners, graphic pieces for digital campaigns, and web-optimized newsletters. Edited and optimized digital images with Photoshop to improve loading performance, maintaining the newspaper's visual identity and ensuring aesthetic coherence across all platforms."
 
+# ══════════════════════════════════════════════════════════════════════════════
+# 03. GRAPHIC PROFILE
+# ══════════════════════════════════════════════════════════════════════════════
 [[focuses]]
 name = "graphic"
 title = "Integral Graphic Designer (Digital & Offset)"
@@ -161,36 +169,36 @@ items = ["Logo Design", "Corporate Identity", "Stationery"]
 
 [[focuses.experiences]]
 company = "Freelance Graphic Designer & Technology Updates"
-position = "Freelance Graphic Designer"
 period = "Jan 2025 - Dec 2025"
+position = "Freelance Graphic Designer"
 description = "Worked as an independent graphic designer on branding and graphic production projects while specializing in artificial intelligence tools applied to visual design. Invested time in learning generative AI for graphic asset creation, creative process optimization, and emerging design tools. Completed intensive technical English training reaching A2 level, significantly expanding competencies for international collaborations."
 
 [[focuses.experiences]]
 company = "GRAPHICART"
-position = "Graphic Designer"
 period = "Oct 2011 - Jun 2014"
+position = "Graphic Designer"
 description = "Created complete brand identities including logos, corporate identity manuals, and promotional material for diverse clients. Designed and laid out advertising material for offset printing, screen printing, and large format: brochures, catalogs, billboards, vinyl, and printed textiles. Managed the prepress and screen printing production process with color separation, preparing files with technical specifications for bleed, resolution, and CMYK/Pantone color management. Coordinated with vendors to ensure final print quality."
 
 [[focuses.experiences]]
 company = "ITGroup Systems"
-position = "Product Designer"
 period = "Oct 2016 - Dec 2024"
+position = "Product Designer"
 description = "Defined and maintained corporate visual identity, brand guidelines, and style guides for all company products and communications. Created visual design systems, graphic assets, iconography, and visual elements for software interfaces and web applications. Designed digital graphic material including banners, social media graphics, and corporate presentations, supervising the aesthetic quality of all digital deliverables and ensuring visual coherence across the brand."
 
 [[focuses.experiences]]
 company = "SSUT Tarija"
-position = "Interface Designer"
 period = "Nov 2023 - May 2024"
+position = "Interface Designer"
 description = "Designed visual interfaces, custom iconography, and cohesive graphic elements for Flutter mobile applications. Created visual compositions, screen layouts, and high-quality mockups to guide software development. Adapted and optimized graphics and digital assets to ensure correct rendering across different devices, collaborating on the definition of color palette, typography, and complete visual system of the digital product."
 
 [[focuses.experiences]]
 company = "UAJMS"
-position = "Graphic / Web Designer"
 period = "Jul 2014 - Sep 2016"
+position = "Graphic / Web Designer"
 description = "Designed university promotional material for academic events and institutional campaigns: flyers, posters, banners, and pennants. Performed professional photo retouching, digital compositing, and creative image manipulation in Adobe Photoshop for web content and publications. Managed visual design and content layout for the institutional web portal, maintaining the visual coherence of the university's graphic identity across various digital and print media."
 
 [[focuses.experiences]]
 company = "EL NACIONAL"
-position = "Digital Designer / Offset Production"
 period = "Mar 2008 - Sep 2011"
+position = "Digital Designer / Offset Production"
 description = "Designed advertising banners, journalistic infographics, and graphic pieces for the digital newspaper and online campaigns under tight daily deadlines. Prepared files and coordinated offset production of the printed newspaper, ensuring technical specifications for color registration, bleed, and crop marks. Optimized and edited photographic images for digital and print publication, maintaining the website's visual design and creating layouts for documents and newsletters with brand consistency."

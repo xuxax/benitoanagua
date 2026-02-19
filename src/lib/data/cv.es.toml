@@ -10,7 +10,6 @@ behance = "https://behance.net/benitoanagua"
 whatsapp = "https://wa.me/59172945548"
 maps = "https://www.google.com/maps/place/Tarija,+Bolivia"
 
-
 [[education]]
 degree = "Licenciatura en Ingeniería de Informática"
 institution = "Universidad Autónoma Juan Misael Saracho"
@@ -21,6 +20,9 @@ degree = "Inglés — A2"
 institution = "Funval Internacional"
 year = "2025"
 
+# ══════════════════════════════════════════════════════════════════════════════
+# 01. DEVELOPER PROFILE
+# ══════════════════════════════════════════════════════════════════════════════
 [[focuses]]
 name = "developer"
 title = "Desarrollador Full Stack & Frontend Senior"
@@ -44,7 +46,7 @@ category = "Diseño"
 items = ["Figma", "Design Systems", "Prototipado", "Responsive Design"]
 
 [[focuses.experiences]]
-company = "Desarrollador Freelance & Actualización Tecnológica"
+company = "Freelance & Actualización Tecnológica"
 position = "Freelance Developer"
 period = "Ene 2025 - Dic 2025"
 description = "Trabajé como desarrollador independiente en proyectos web mientras me especializaba en herramientas de inteligencia artificial aplicadas al desarrollo de software. Invertí tiempo en aprendizaje de tecnologías emergentes, frameworks modernos y sistemas de IA para automatización y optimización de código. Exploré implementaciones prácticas de IA en desarrollo frontend. Completé formación intensiva en inglés técnico alcanzando nivel A2, mejorando mis capacidades de comunicación en entornos internacionales y preparándome para colaboraciones globales."
@@ -79,6 +81,9 @@ position = "Junior DevOps Engineer"
 period = "Mar 2008 - Sep 2011"
 description = "Desarrollé y personalicé sistemas de gestión de contenidos (CMS) basados en PHP para publicación diaria de noticias. Administré servidores Linux Debian realizando configuraciones de seguridad, monitoreo de rendimiento y mantenimiento preventivo. Ejecuté copias de seguridad automatizadas y restauración de bases de datos MySQL, garantizando integridad de información crítica. Documenté procesos técnicos y solucioné incidencias críticas del sistema bajo presión de deadlines de publicación diaria del periódico."
 
+# ══════════════════════════════════════════════════════════════════════════════
+# 02. DESIGNER PROFILE
+# ══════════════════════════════════════════════════════════════════════════════
 [[focuses]]
 name = "designer"
 title = "Diseñador UI/UX & Product Designer"
@@ -102,7 +107,7 @@ category = "Metodología"
 items = ["Design Thinking", "Scrum", "User Research", "Arquitectura de Información", "Usability Testing"]
 
 [[focuses.experiences]]
-company = "Diseñador Freelance & Actualización Tecnológica"
+company = "Freelance & Actualización Tecnológica"
 position = "Freelance Designer"
 period = "Ene 2025 - Dic 2025"
 description = "Trabajé como diseñador independiente en proyectos de identidad visual y diseño digital mientras me especializaba en herramientas de inteligencia artificial aplicadas al diseño. Invertí tiempo en aprendizaje de sistemas de IA generativa para creación de assets visuales, optimización de workflows creativos y nuevas herramientas emergentes de diseño. Completé formación intensiva en inglés técnico alcanzando nivel A2, expandiendo significativamente mis capacidades profesionales en contextos internacionales."
@@ -137,6 +142,9 @@ position = "Diseñador Web"
 period = "Mar 2008 - Sep 2011"
 description = "Gestioné el diseño visual, maquetación y actualización de contenido en el portal web institucional del periódico digital. Creé banners publicitarios, piezas gráficas para campañas digitales y newsletters optimizadas para web. Edité y optimicé imágenes digitales con Photoshop para mejorar el rendimiento de carga, manteniendo la identidad visual del periódico y asegurando coherencia estética en todas las plataformas."
 
+# ══════════════════════════════════════════════════════════════════════════════
+# 03. GRAPHIC PROFILE
+# ══════════════════════════════════════════════════════════════════════════════
 [[focuses]]
 name = "graphic"
 title = "Diseñador Gráfico Integral (Digital & Off-set)"
@@ -160,7 +168,7 @@ category = "Branding"
 items = ["Diseño de logotipos", "Identidad corporativa", "Papelería"]
 
 [[focuses.experiences]]
-company = "Diseñador Gráfico Freelance & Actualización Tecnológica"
+company = "Freelance & Actualización Tecnológica"
 position = "Freelance Graphic Designer"
 period = "Ene 2025 - Dic 2025"
 description = "Trabajé como diseñador gráfico independiente en proyectos de branding y producción gráfica mientras me especializaba en herramientas de inteligencia artificial aplicadas al diseño visual. Invertí tiempo en aprendizaje de IA generativa para creación de assets gráficos, optimización de procesos creativos y nuevas herramientas de diseño emergentes. Completé formación intensiva en inglés técnico alcanzando nivel A2, ampliando significativamente mis competencias para colaboraciones internacionales."
