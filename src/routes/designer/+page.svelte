@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { loadCVData, getFocusByName } from '$lib/data/cv-loader';
 	import { loadSiteData } from '$lib/data/site-loader';
+	import { SITE_URL, ROUTES } from '$lib/config';
 	import PortalLayout from '$lib/components/PortalLayout.svelte';
+
+	let { data } = $props();
 
 	const cvData = $derived(loadCVData());
 	const site = $derived(loadSiteData());
@@ -21,7 +24,31 @@
 </script>
 
 <svelte:head>
-	<title>{focus?.title} — {cvData.personal.name}</title>
+	<title>{data.seo.title}</title>
+	<meta name="description" content={data.seo.description} />
+	<meta name="keywords" content={data.seo.keywords} />
+
+	<!-- Schema.org markup for designer page -->
+	<script type="application/ld+json">
+		{{
+			"@context": "https://schema.org",
+			"@type": "BreadcrumbList",
+			"itemListElement": [
+				{{
+					"@type": "ListItem",
+					"position": 1,
+					"name": "Home",
+					"item": "{SITE_URL}"
+				}},
+				{{
+					"@type": "ListItem",
+					"position": 2,
+					"name": "Designer",
+					"item": "{SITE_URL}{ROUTES.designer}"
+				}}
+			]
+		}}
+	</script>
 </svelte:head>
 
 <PortalLayout {navItems} showBackButton={true}>

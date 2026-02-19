@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getAllFocuses, getPersonalInfo, getEducation } from '$lib/data/cv-loader';
 	import { loadSiteData } from '$lib/data/site-loader';
+	import { SITE_URL } from '$lib/config';
 	import PortalLayout from '$lib/components/PortalLayout.svelte';
 
 	const personal = $derived(getPersonalInfo());
@@ -24,6 +25,26 @@
 <svelte:head>
 	<title>{personal.name} — {site.meta.tagline}</title>
 	<meta name="description" content="{personal.name} — {site.meta.description}" />
+	<meta
+		name="keywords"
+		content="portfolio, design, development, graphic design, interdisciplinary"
+	/>
+
+	<!-- Schema.org markup for home page -->
+	<script type="application/ld+json">
+		{{
+			"@context": "https://schema.org",
+			"@type": "ProfilePage",
+			"mainEntity": {{
+				"@type": "Person",
+				"name": "{personal.name}",
+				"description": "{site.meta.description}",
+				"url": "{SITE_URL}",
+				"jobTitle": "Interdisciplinary Creator",
+				"knowsAbout": ["Design", "Development", "Graphic Design"]
+			}}
+		}}
+	</script>
 </svelte:head>
 
 <PortalLayout {navItems}>

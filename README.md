@@ -148,6 +148,63 @@ pnpm run preview
 - **Data**: TOML loaders
 - **Icons**: Material Symbols Outlined
 
+## SEO Optimization
+
+This portfolio includes comprehensive SEO implementations:
+
+### On-Page SEO
+
+- **Dynamic Meta Tags**: Page-specific titles, descriptions, and keywords generated per route
+- **Canonical URLs**: Prevents duplicate content issues
+- **Open Graph Tags**: Optimized social media previews with images
+- **Twitter Card**: Custom Twitter-specific metadata
+- **Structured Data**: JSON-LD schema markup for Person, ProfilePage, and BreadcrumbList
+
+### Technical SEO
+
+- **Sitemap.xml**: Auto-generated XML sitemap with all routes
+- **robots.txt**: Crawler directives with sitemap references
+- **Prerender Optimization**: Static generation for instant page loads
+- **Mobile-Friendly**: Responsive design with viewport meta tags
+- **Performance**: CSS variables for efficient styling, GPU-accelerated interactions
+- **Accessibility**: Semantic HTML with proper heading hierarchy and ARIA support
+
+### Configuration
+
+- **`src/routes/+layout.server.ts`** — Global SEO data loader
+- **`src/routes/*/+layout.server.ts`** — Page-specific SEO metadata
+- **`src/routes/sitemap.xml/+server.ts`** — Dynamic sitemap generation
+- **`static/manifest.json`** — PWA manifest with app metadata
+- **`static/robots.txt`** — Search engine crawler directives
+
+### Files to Update for Your Domain
+
+All domain URLs are centralized in **`src/lib/config.ts`**. To change your domain:
+
+```typescript
+// src/lib/config.ts
+export const SITE_URL = 'https://your-new-domain.com'; // ← Update this
+export const SITE_NAME = 'Your Site Name';
+export const SITE_DESCRIPTION = 'Your description';
+```
+
+Then rebuild:
+
+```bash
+pnpm run build  # ← Automatically generates all static files with new domain
+```
+
+This single change automatically updates **everything**:
+
+- ✅ Canonical URLs in all pages
+- ✅ Open Graph image URLs
+- ✅ Schema.org structured data
+- ✅ `robots.txt` — Auto-generated with sitemap URL
+- ✅ `sitemap.xml` — Auto-generated with all routes
+- ✅ `manifest.json` — Auto-generated with app metadata
+
+**No manual updates needed!** See [DOMAIN_CONFIG.md](./DOMAIN_CONFIG.md) for detailed information.
+
 ## Environment Variables
 
 Optional configuration via `.env.local` (see `.env.example`):
