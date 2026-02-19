@@ -18,11 +18,9 @@
 				]
 			: []
 	);
-
-	function extractYear(period: string) {
-		const start = period.split('-')[0].trim();
-		const year = start.split(' ').pop();
-		return year;
+	function splitPeriod(period: string) {
+		const parts = period.split('-').map((p) => p.trim());
+		return { start: parts[0], end: parts[1] };
 	}
 </script>
 
@@ -34,36 +32,55 @@
 	<div class="cv-container developer-portal">
 		<!-- ══ HEADER: Logic Specification ══ -->
 		<header class="spec-header" id="perfil">
-			<div class="header-blueprint shared-boundary">
-				<div class="main-spec">
-					<div class="joint joint--tl"></div>
-					<div class="joint joint--br"></div>
+			<div class="header-terminal shared-boundary">
+				<div class="terminal-top-bar mono">
+					<span>root@BENITO_CV:~# init_sequence --verbose</span>
+					<span class="status-light"></span>
+				</div>
 
+				<div class="main-spec">
 					<h1 class="hero-title">
-						<span class="stroke-text">{focus?.title.split(' ')[0]}</span>
+						<span class="title-label mono">{focus?.title.split(' ')[0]}</span>
 						<span class="solid-text">{focus?.title.split(' ').slice(1).join(' ')}</span>
 					</h1>
 
 					<div class="spec-summary">
-						<div class="summary-line"></div>
+						<div class="summary-cursor"></div>
 						<p>{focus?.summary}</p>
 					</div>
+
+					{#if focus?.subtitles}
+						<div class="focus-tags">
+							{#each focus.subtitles as tag}
+								<span class="focus-tag mono">
+									<span class="brace">[</span>
+									{tag.toUpperCase()} <span class="brace">]</span>
+								</span>
+							{/each}
+						</div>
+					{/if}
 				</div>
 
-				<aside class="meta-spec">
-					<div class="spec-box-list shared-boundary">
-						<div class="spec-item">
-							<span class="mono label">LOCATION</span>
-							<span class="val">{cvData.personal.location}</span>
-						</div>
-						<div class="spec-item">
-							<span class="mono label">ENGINEERING_EXP</span>
-							<span class="val">{site.nav.exp_label}</span>
-						</div>
-						<div class="spec-item">
-							<span class="mono label">ENGINEERING_EXP</span>
-							<span class="val">{site.nav.exp_label}</span>
-						</div>
+				<aside class="meta-footer mono">
+					<div class="meta-item">
+						<span class="label">User:</span>
+						<span class="val">{cvData.personal.name}</span>
+					</div>
+					<div class="meta-item">
+						<span class="label">Loc:</span>
+						<span class="val">{cvData.personal.location}</span>
+					</div>
+					<div class="meta-item">
+						<span class="label">Uptime:</span>
+						<span class="val">{site.nav.exp_label}</span>
+					</div>
+					<div class="meta-item">
+						<span class="label">Contact:</span>
+						<span class="val">{cvData.personal.email}</span>
+					</div>
+					<div class="meta-item mobile-hide">
+						<span class="label">Shell:</span>
+						<span class="val">zsh</span>
 					</div>
 				</aside>
 			</div>
@@ -76,14 +93,20 @@
 				<div class="heading-line"></div>
 			</div>
 
-			<div class="shared-boundary skills-matrix">
+			<div class="shared-boundary skills-terminal">
 				{#if focus?.skills}
 					{#each focus.skills as skillGroup}
-						<div class="matrix-cell">
-							<div class="cell-header mono">{skillGroup.category.toUpperCase()}</div>
-							<ul class="cell-list mono">
+						<div class="terminal-block">
+							<div class="block-header mono">
+								<span class="prompt">//</span>
+								{skillGroup.category.toUpperCase()}
+							</div>
+							<ul class="block-list mono">
 								{#each skillGroup.items as item}
-									<li><span class="bullet">›</span> {item}</li>
+									<li>
+										<span class="status">[ OK ]</span>
+										<span class="cmd">{item}</span>
+									</li>
 								{/each}
 							</ul>
 						</div>
@@ -99,19 +122,33 @@
 				<div class="heading-line"></div>
 			</div>
 
-			<div class="trajectory-log">
+			<div class="git-history">
 				{#each focus?.experiences || [] as exp, index}
-					<article class="log-entry" class:active={index === 0}>
-						<div class="log-side mono">
-							<span class="year">{extractYear(exp.period)}</span>
-							{#if index === 0}<span class="pulse">LIVE</span>{/if}
+					<article class="commit-entry" class:current={index === 0}>
+						<div class="commit-meta mono">
+							<span class="hash">7f{index}a{9 - index}c</span>
+							<div class="date-stack">
+								<span class="date">{splitPeriod(exp.period).start}</span>
+								<span class="sep">↓</span>
+								<span class="date">{splitPeriod(exp.period).end || 'PRESENT'}</span>
+							</div>
 						</div>
-						<div class="log-main">
-							<h3 class="log-company">{exp.company}</h3>
-							<span class="log-role mono">{exp.position.toUpperCase()}</span>
-							<p class="log-desc">{exp.description}</p>
+						<div class="commit-node">
+							<div class="dot"></div>
+							<div class="line"></div>
 						</div>
-						<div class="log-path"></div>
+						<div class="commit-body">
+							<div class="header">
+								<h3 class="company mono">{exp.company.toUpperCase()}</h3>
+								{#if index === 0}
+									<span class="tag mono">HEAD -> MAIN</span>
+								{:else}
+									<span class="tag tag--merged mono">MERGED</span>
+								{/if}
+							</div>
+							<div class="sub-header mono">{exp.position}</div>
+							<p class="message">{exp.description}</p>
+						</div>
 					</article>
 				{/each}
 			</div>
@@ -149,114 +186,155 @@
 		}
 	}
 
-	/* ── JOINTS ── */
-	.joint {
-		position: absolute;
-		width: 12px;
-		height: 12px;
-		z-index: 2;
-		border: 1.5px solid var(--color-primary);
-	}
-	@media (min-width: 768px) {
-		.joint {
-			width: 16px;
-			height: 16px;
-		}
-	}
-
-	.joint--tl {
-		top: -6px;
-		left: -6px;
-		border-right: none;
-		border-bottom: none;
-	}
-	.joint--br {
-		bottom: -6px;
-		right: -6px;
-		border-left: none;
-		border-top: none;
-	}
-
 	/* ── HEADER ── */
-	.header-blueprint {
-		grid-template-columns: 1fr;
+	.header-terminal {
+		display: flex;
+		flex-direction: column;
+		background: var(--color-surface);
 		border: 1px solid var(--color-outline-variant);
+		position: relative;
+		overflow: hidden;
 	}
-	@media (min-width: 1024px) {
-		.header-blueprint {
-			grid-template-columns: 2fr 1fr;
+
+	.terminal-top-bar {
+		background: var(--color-surface-container);
+		padding: var(--space-2) var(--space-4);
+		font-size: 0.75rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border-bottom: 1px solid var(--color-outline-variant);
+		opacity: 0.7;
+	}
+
+	.status-light {
+		width: 8px;
+		height: 8px;
+		background: var(--color-primary);
+		border-radius: 50%;
+		box-shadow: 0 0 8px var(--color-primary);
+		animation: blink 2s infinite;
+	}
+
+	@keyframes blink {
+		0%,
+		100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0.4;
 		}
 	}
 
 	.main-spec {
-		position: relative;
 		padding: var(--space-8) var(--space-4);
 	}
 	@media (min-width: 768px) {
 		.main-spec {
-			padding: var(--space-12) var(--space-8);
+			padding: var(--space-12) var(--space-10);
 		}
 	}
 
 	.hero-title {
 		display: flex;
 		flex-direction: column;
-		line-height: 0.8;
-		margin-bottom: var(--space-6);
+		margin-bottom: var(--space-8);
+		gap: var(--space-2);
 	}
-	.stroke-text {
-		font-family: var(--font-display);
-		font-size: clamp(2rem, 8vw, 6rem);
-		color: transparent;
-		-webkit-text-stroke: 1px var(--color-on-surface);
-		opacity: 0.4;
+	.title-label {
+		font-size: 0.875rem;
+		color: var(--color-primary);
+		opacity: 0.6;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
 	}
 	.solid-text {
 		font-family: var(--font-display);
-		font-size: clamp(1.75rem, 6vw, 5rem);
+		font-size: clamp(2rem, 5vw, 4rem);
+		line-height: 1;
 	}
 
 	.spec-summary {
-		position: relative;
-		padding-left: var(--space-6);
+		max-width: 65ch;
+		margin-bottom: var(--space-8);
+		display: flex;
+		gap: var(--space-4);
 	}
-	.summary-line {
-		position: absolute;
-		left: 0;
-		top: 0;
-		bottom: 0;
-		width: 3px;
+	.summary-cursor {
+		width: 10px;
+		height: 1.25em;
 		background: var(--color-primary);
-	}
-	.spec-summary p {
-		font-size: 1rem;
-		line-height: 1.6;
-		opacity: 0.8;
-		max-width: 60ch;
+		margin-top: 4px;
+		flex-shrink: 0;
 	}
 
-	.meta-spec {
+	.spec-summary p {
+		font-family: var(--font-mono);
+		font-size: 0.875rem;
+		line-height: 1.7;
+		opacity: 0.9;
+	}
+	@media (min-width: 768px) {
+		.spec-summary p {
+			font-size: 1rem;
+		}
+	}
+
+	.focus-tags {
 		display: flex;
-		flex-direction: column;
+		flex-wrap: wrap;
+		gap: var(--space-3);
 	}
-	.spec-box-list {
-		grid-template-columns: 1fr;
-		height: 100%;
-	}
-	.spec-item {
-		padding: var(--space-4) var(--space-6);
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-1);
-	}
-	.spec-item .label {
-		font-size: 0.5rem;
-		opacity: 0.4;
+	.focus-tag {
+		background: var(--color-surface-container-low);
+		padding: 4px 8px;
+		font-size: 0.75rem;
 		color: var(--color-primary);
 	}
-	.spec-item .val {
-		font-weight: 700;
+	.focus-tag .brace {
+		color: var(--color-on-surface);
+		opacity: 0.5;
+	}
+
+	.meta-footer {
+		display: grid;
+		grid-template-columns: 1fr;
+		border-top: 1px solid var(--color-outline-variant);
+		background: var(--color-surface-container-lowest);
+	}
+	@media (min-width: 768px) {
+		.meta-footer {
+			grid-template-columns: repeat(5, auto);
+		}
+	}
+
+	.meta-item {
+		padding: var(--space-3) var(--space-6);
 		font-size: 0.75rem;
+		display: flex;
+		gap: var(--space-2);
+		border-bottom: 1px solid var(--color-outline-variant);
+	}
+	.meta-item .label {
+		color: var(--color-primary);
+		opacity: 0.7;
+	}
+	@media (min-width: 768px) {
+		.meta-item {
+			border-bottom: none;
+			border-right: 1px solid var(--color-outline-variant);
+		}
+		.meta-item:last-child {
+			border-right: none;
+		}
+	}
+	.mobile-hide {
+		display: none;
+	}
+	@media (min-width: 768px) {
+		.mobile-hide {
+			display: flex;
+		}
 	}
 
 	/* ── SECTIONS ── */
@@ -289,141 +367,197 @@
 	}
 
 	/* ── MATRIX ── */
-	.skills-matrix {
+
+	/* ── TERMINAL MATRIX ── */
+	.skills-terminal {
 		grid-template-columns: 1fr;
-		border: 1px solid var(--color-outline-variant);
+		background: var(--color-surface-container-lowest);
+		background-image:
+			linear-gradient(rgba(34, 197, 94, 0.03) 1px, transparent 1px),
+			linear-gradient(90px, rgba(34, 197, 94, 0.03) 1px, transparent 1px);
+		background-size: 100% 20px;
+		border: 1px solid var(--color-on-surface);
+		padding: var(--space-2);
+		position: relative;
+		overflow: hidden;
 	}
-	@media (min-width: 640px) {
-		.skills-matrix {
-			grid-template-columns: repeat(2, 1fr);
-		}
+	.skills-terminal::after {
+		content: '0101010101101010101010101101010101010101101010101010101101010101010101101010101010101101010101010';
+		position: absolute;
+		bottom: 2px;
+		right: 2px;
+		font-family: var(--font-mono);
+		font-size: 10px;
+		color: var(--color-primary);
+		opacity: 0.05;
+		white-space: nowrap;
+		pointer-events: none;
 	}
-	@media (min-width: 1024px) {
-		.skills-matrix {
-			grid-template-columns: repeat(3, 1fr);
+	@media (min-width: 768px) {
+		.skills-terminal {
+			grid-template-columns: repeat(4, 1fr);
 		}
 	}
 
-	.matrix-cell {
+	.terminal-block {
 		padding: var(--space-6);
-		transition: background var(--duration-fast);
+		border: 1px solid transparent;
 	}
-	.matrix-cell:hover {
+	.terminal-block:hover {
+		border-color: var(--color-primary);
 		background: var(--color-surface-container-low);
 	}
-	.cell-header {
+
+	.block-header {
 		font-size: 0.625rem;
 		color: var(--color-primary);
 		margin-bottom: var(--space-4);
-		border-bottom: 1px solid var(--color-outline-variant);
-		padding-bottom: 4px;
+		font-weight: 700;
 	}
-	.cell-list {
+	.block-header .prompt {
+		opacity: 0.4;
+	}
+
+	.block-list {
 		list-style: none;
 		font-size: 0.75rem;
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-1);
+		gap: var(--space-2);
 	}
-	.bullet {
-		color: var(--color-primary);
+	.block-list li {
+		display: flex;
+		gap: var(--space-3);
+		align-items: center;
+	}
+	.block-list .status {
+		color: #22c55e;
+		font-size: 0.625rem;
 		font-weight: 700;
 	}
+	.block-list .cmd {
+		opacity: 0.8;
+	}
 
-	/* ── LOG ── */
-	.trajectory-log {
+	/* ── GIT DYNAMICS ── */
+	.git-history {
 		display: flex;
 		flex-direction: column;
-		position: relative;
+		background: var(--color-surface-container-lowest);
+		border-left: 2px solid var(--color-on-surface);
+		padding: var(--space-8) 0;
 	}
-	.log-entry {
+
+	.commit-entry {
 		display: grid;
-		grid-template-columns: 60px 1fr;
-		gap: var(--space-4);
-		padding: var(--space-6) 0;
-		border-bottom: 1px solid var(--color-outline-variant);
+		grid-template-columns: 80px 40px 1fr;
+		padding: var(--space-4) var(--space-6);
 		position: relative;
 	}
+
 	@media (min-width: 768px) {
-		.log-entry {
-			grid-template-columns: 100px 1fr;
-			gap: var(--space-12);
-			padding: var(--space-10) 0;
+		.commit-entry {
+			grid-template-columns: 120px 60px 1fr;
+			padding: var(--space-6) var(--space-10);
 		}
 	}
 
-	.log-side {
+	.commit-meta {
 		display: flex;
 		flex-direction: column;
 		align-items: flex-end;
-		gap: var(--space-1);
+		gap: 6px;
 	}
-	.log-side .year {
-		font-size: 1rem;
-		font-weight: 800;
-		opacity: 0.2;
-	}
-	@media (min-width: 768px) {
-		.log-side .year {
-			font-size: 1.5rem;
-		}
-	}
-
-	.active .log-side .year {
-		opacity: 1;
+	.commit-meta .hash {
+		font-size: 0.5625rem;
 		color: var(--color-primary);
+		opacity: 0.4;
 	}
-	.pulse {
-		font-size: 0.5rem;
-		color: #22c55e;
-		border: 1px solid #22c55e;
-		padding: 1px 4px;
+	.date-stack {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		line-height: 1;
+		gap: 2px;
+	}
+	.date-stack .date {
+		font-size: 0.6875rem;
+		font-weight: 800;
+		white-space: nowrap;
+	}
+	.date-stack .sep {
+		font-size: 10px;
+		opacity: 0.3;
+		margin-right: 4px;
 	}
 
-	.log-role {
-		font-size: 0.625rem;
+	.commit-node {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		position: relative;
+	}
+	.commit-node .dot {
+		width: 12px;
+		height: 12px;
+		border: 2px solid var(--color-on-surface);
+		background: var(--color-surface);
+		border-radius: 50%;
+		z-index: 2;
+		margin-top: 4px;
+	}
+	.current .commit-node .dot {
+		background: var(--color-primary);
+		border-color: var(--color-primary);
+		box-shadow: 0 0 0 4px var(--color-primary-container);
+	}
+	.commit-node .line {
+		flex: 1;
+		width: 2px;
+		background: var(--color-outline-variant);
+		margin: 4px 0 -24px 0;
+	}
+	.commit-entry:last-child .commit-node .line {
+		display: none;
+	}
+
+	.commit-body {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+	}
+	.commit-body .header {
+		display: flex;
+		align-items: center;
+		gap: var(--space-4);
+		flex-wrap: wrap;
+	}
+	.commit-body .company {
+		font-size: 1.125rem;
+		font-weight: 800;
+	}
+	.commit-body .tag {
+		font-size: 0.5625rem;
+		padding: 2px 6px;
+		background: #22c55e;
+		color: white;
+		border-radius: 2px;
+	}
+	.commit-body .tag--merged {
+		background: var(--color-outline);
+		opacity: 0.6;
+	}
+
+	.commit-body .sub-header {
+		font-size: 0.75rem;
 		color: var(--color-primary);
 		font-weight: 700;
-		display: block;
-		margin-bottom: 2px;
 	}
-	.log-company {
-		font-family: var(--font-display);
-		font-size: 1.25rem;
-		line-height: 1.1;
-		margin-bottom: var(--space-1);
-	}
-	@media (min-width: 768px) {
-		.log-company {
-			font-size: 1.75rem;
-		}
-	}
-
-	.log-desc {
+	.commit-body .message {
 		font-size: 0.8125rem;
 		opacity: 0.7;
 		line-height: 1.5;
 		max-width: 65ch;
-	}
-
-	.log-path {
-		position: absolute;
-		left: 68px;
-		top: 0;
-		bottom: 0;
-		width: 1px;
-		background: var(--color-outline-variant);
-	}
-	@media (min-width: 768px) {
-		.log-path {
-			left: 112px;
-		}
-	}
-
-	.active .log-path {
-		background: var(--color-primary);
-		border-left: 2px solid var(--color-primary);
-		margin-left: -1px;
 	}
 
 	/* ── EDU ── */

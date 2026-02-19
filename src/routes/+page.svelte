@@ -30,27 +30,34 @@
 	<div class="lobby-container">
 		<!-- ══ LOBBY HERO: Structural Narrative ══ -->
 		<section class="lobby-hero">
-			<div class="blueprint-frame">
-				<div class="joint joint--tl"></div>
-				<div class="joint joint--tr"></div>
-				<div class="joint joint--bl"></div>
-				<div class="joint joint--br"></div>
+			<section class="lobby-hero">
+				<div class="header-terminal shared-boundary">
+					<div class="terminal-top-bar mono">
+						<span>BENITO ANAGUA // PORTFOLIO_INDEX</span>
+						<span class="status-light"></span>
+					</div>
 
-				<div class="hero-label mono">SYS_AUTH_PORTAL_V2</div>
+					<div class="main-spec">
+						<div class="hero-label mono">INTERDISCIPLINARY_HUB</div>
 
-				<h1 class="hero-title">
-					<span class="stroke-text">{personal.name.split(' ')[0]}</span>
-					<span class="solid-text">{personal.name.split(' ')[1] || ''}</span>
-				</h1>
+						<h1 class="hero-title">
+							<span class="stroke-text">{personal.name.split(' ')[0]}</span>
+							<span class="solid-text">{personal.name.split(' ')[1] || ''}</span>
+						</h1>
 
-				<div class="hero-divider">
-					<div class="line"></div>
-					<span class="mono">{site.meta.tagline.toUpperCase()}</span>
-					<div class="line"></div>
+						<div class="hero-divider">
+							<div class="line"></div>
+							<span class="mono">{site.meta.tagline.toUpperCase()}</span>
+							<div class="line"></div>
+						</div>
+
+						<div class="hero-intro-box">
+							<div class="summary-cursor"></div>
+							<p class="hero-intro">{site.meta.description}</p>
+						</div>
+					</div>
 				</div>
-
-				<p class="hero-intro">{site.meta.description}</p>
-			</div>
+			</section>
 		</section>
 
 		<!-- ══ PATHS: Grid-Boundary System ══ -->
@@ -135,97 +142,42 @@
 		}
 	}
 
-	/* ── JOINTS (Structural CAD Detail) ── */
-	.joint {
-		position: absolute;
-		width: 16px;
-		height: 16px;
-		z-index: 2;
-	}
-	.joint::before,
-	.joint::after {
-		content: '';
-		position: absolute;
-		background: var(--color-on-surface);
-	}
-	.joint--tl {
-		top: -1px;
-		left: -1px;
-	}
-	.joint--tl::before {
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 2px;
-	}
-	.joint--tl::after {
-		top: 0;
-		left: 0;
-		width: 2px;
-		height: 100%;
-	}
-
-	.joint--tr {
-		top: -1px;
-		right: -1px;
-	}
-	.joint--tr::before {
-		top: 0;
-		right: 0;
-		width: 100%;
-		height: 2px;
-	}
-	.joint--tr::after {
-		top: 0;
-		right: 0;
-		width: 2px;
-		height: 100%;
-	}
-
-	.joint--bl {
-		bottom: -1px;
-		left: -1px;
-	}
-	.joint--bl::before {
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		height: 2px;
-	}
-	.joint--bl::after {
-		bottom: 0;
-		left: 0;
-		width: 2px;
-		height: 100%;
-	}
-
-	.joint--br {
-		bottom: -1px;
-		right: -1px;
-	}
-	.joint--br::before {
-		bottom: 0;
-		right: 0;
-		width: 100%;
-		height: 2px;
-	}
-	.joint--br::after {
-		bottom: 0;
-		right: 0;
-		width: 2px;
-		height: 100%;
-	}
-
 	/* ── HERO ── */
-	.blueprint-frame {
-		position: relative;
-		padding: var(--space-10) var(--space-4);
-		border: 1px solid var(--color-outline-variant);
+	.header-terminal {
+		display: flex;
+		flex-direction: column;
 		background: var(--color-surface);
+		border: 1px solid var(--color-outline-variant);
+		position: relative;
+		overflow: hidden;
 		text-align: center;
 	}
+
+	.terminal-top-bar {
+		background: var(--color-surface-container);
+		padding: var(--space-2) var(--space-4);
+		font-size: 0.75rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border-bottom: 1px solid var(--color-outline-variant);
+		opacity: 0.7;
+	}
+
+	.status-light {
+		width: 8px;
+		height: 8px;
+		background: var(--color-primary);
+		border-radius: 50%;
+		box-shadow: 0 0 8px var(--color-primary);
+		animation: blink 2s infinite;
+	}
+
+	.main-spec {
+		padding: var(--space-10) var(--space-4);
+	}
 	@media (min-width: 768px) {
-		.blueprint-frame {
+		.main-spec {
 			padding: var(--space-20) var(--space-8);
 		}
 	}
@@ -240,46 +192,61 @@
 	.hero-title {
 		display: flex;
 		flex-direction: column;
-		line-height: 0.85;
-		margin-bottom: var(--space-6);
+		align-items: center;
+		gap: var(--space-2);
+		margin-bottom: var(--space-8);
 	}
 
 	.stroke-text {
 		font-family: var(--font-display);
-		font-size: clamp(2.5rem, 10vw, 8rem);
+		font-size: clamp(3rem, 12vw, 8rem);
+		line-height: 1;
 		color: transparent;
-		-webkit-text-stroke: 1px var(--color-on-surface);
-		opacity: 0.4;
+		-webkit-text-stroke: 1px var(--color-primary);
+		opacity: 0.3;
 	}
-
 	.solid-text {
 		font-family: var(--font-display);
-		font-size: clamp(2rem, 8vw, 7rem);
+		font-size: clamp(3rem, 12vw, 8rem);
+		line-height: 1;
+		color: var(--color-primary);
 	}
 
 	.hero-divider {
 		display: flex;
 		align-items: center;
 		gap: var(--space-4);
-		margin-bottom: var(--space-6);
+		font-size: 0.75rem;
+		opacity: 0.6;
+		margin: 0 auto var(--space-8) auto;
+		max-width: 400px;
 	}
 	.hero-divider .line {
 		flex: 1;
 		height: 1px;
-		background: var(--color-outline-variant);
-	}
-	.hero-divider span {
-		font-size: 0.625rem;
-		color: var(--color-primary);
-		font-weight: 700;
+		background: var(--color-primary);
+		opacity: 0.3;
 	}
 
-	.hero-intro {
-		max-width: 50ch;
+	.hero-intro-box {
+		display: flex;
+		justify-content: center;
+		gap: var(--space-3);
+		max-width: 60ch;
 		margin: 0 auto;
+	}
+	.summary-cursor {
+		width: 8px;
+		height: 1.2em;
+		background: var(--color-primary);
+		margin-top: 4px;
+		animation: blink 1s infinite;
+	}
+	.hero-intro {
+		font-size: 1rem;
 		line-height: 1.6;
-		opacity: 0.7;
-		font-size: var(--text-base);
+		opacity: 0.9;
+		text-align: left;
 	}
 
 	/* ── PATHS GRID (Shared Boundary) ── */

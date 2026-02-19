@@ -18,12 +18,6 @@
 				]
 			: []
 	);
-
-	function extractYear(period: string) {
-		const start = period.split('-')[0].trim();
-		const year = start.split(' ').pop();
-		return year;
-	}
 </script>
 
 <svelte:head>
@@ -43,7 +37,7 @@
 					<div class="reg-mark br"></div>
 
 					<h1 class="hero-title">
-						<span class="stroke-text">{focus?.title.split(' ')[0]}</span>
+						<span class="title-label mono">{focus?.title.split(' ')[0]}</span>
 						<span class="solid-text">{focus?.title.split(' ').slice(1).join(' ')}</span>
 					</h1>
 
@@ -51,12 +45,28 @@
 						<div class="plate-divider"></div>
 						<p class="summary">{focus?.summary}</p>
 					</div>
+
+					{#if focus?.subtitles}
+						<div class="focus-tags">
+							{#each focus.subtitles as tag}
+								<span class="focus-tag mono">{tag.toUpperCase()}</span>
+							{/each}
+						</div>
+					{/if}
 				</div>
 
 				<aside class="sidebar-plate shared-boundary">
 					<div class="meta-module">
 						<h3 class="mono label">PROD_LOCATION</h3>
 						<span class="val">{cvData.personal.location}</span>
+					</div>
+					<div class="meta-module">
+						<h3 class="mono label">PROD_EMAIL</h3>
+						<span class="val">{cvData.personal.email}</span>
+					</div>
+					<div class="meta-module">
+						<h3 class="mono label">PROD_EXPERIENCE</h3>
+						<span class="val">{site.nav.exp_label}</span>
 					</div>
 					<div class="meta-module">
 						<h3 class="mono label">TECH_SPECS</h3>
@@ -76,17 +86,31 @@
 				<div class="rule"></div>
 			</header>
 
-			<div class="shared-boundary skills-press">
+			<div class="shared-boundary skills-editorial">
 				{#if focus?.skills}
-					{#each focus.skills as skillGroup}
-						<div class="press-module">
-							<div class="module-overline"></div>
-							<h3 class="module-title-editorial">{skillGroup.category.toUpperCase()}</h3>
-							<ul class="module-list-press">
-								{#each skillGroup.items as item}
-									<li><span class="bullet">+</span> {item}</li>
-								{/each}
-							</ul>
+					{#each focus.skills as skillGroup, i}
+						<div class="editorial-plate plate--{['cyan', 'magenta', 'yellow', 'black'][i % 4]}">
+							<div class="registration-marks">
+								<div class="mark tl"></div>
+								<div class="mark tr"></div>
+								<div class="mark bl"></div>
+								<div class="mark br"></div>
+							</div>
+							<div class="plate-sidebar mono">
+								<span class="plate-code">P_{100 + i}</span>
+								<div class="color-mark"></div>
+							</div>
+							<div class="plate-content">
+								<h3 class="plate-title mono">{skillGroup.category.toUpperCase()}</h3>
+								<ul class="plate-list">
+									{#each skillGroup.items as item}
+										<li>
+											<span class="spot mono">●</span>
+											{item}
+										</li>
+									{/each}
+								</ul>
+							</div>
 						</div>
 					{/each}
 				{/if}
@@ -100,17 +124,19 @@
 				<div class="rule"></div>
 			</header>
 
-			<div class="editorial-timeline">
+			<div class="editorial-catalog">
 				{#each focus?.experiences || [] as exp, index}
-					<article class="timeline-article" class:active={index === 0}>
-						<div class="article-meta">
-							<span class="year-stamp mono">{extractYear(exp.period)}</span>
-							{#if index === 0}<div class="active-rule">RELEASED</div>{/if}
+					<article class="catalog-entry">
+						<div class="entry-header">
+							<span class="series-num mono">0{index + 1}</span>
+							<h3 class="entry-title">{exp.company}</h3>
 						</div>
-						<div class="article-main">
-							<h3 class="article-company">{exp.company}</h3>
-							<span class="article-role mono">{exp.position}</span>
-							<p class="article-desc">{exp.description}</p>
+						<div class="entry-body">
+							<div class="meta-strip mono">
+								<span class="ref">PERIOD::{exp.period}</span>
+								<span class="role">{exp.position}</span>
+							</div>
+							<p class="description">{exp.description}</p>
 						</div>
 					</article>
 				{/each}
@@ -248,8 +274,8 @@
 	.hero-title {
 		display: flex;
 		flex-direction: column;
-		line-height: 0.8;
 		margin-bottom: var(--space-8);
+		gap: var(--space-2);
 	}
 	@media (min-width: 768px) {
 		.hero-title {
@@ -257,16 +283,17 @@
 		}
 	}
 
-	.stroke-text {
-		font-family: var(--font-display);
-		font-size: clamp(2.5rem, 12vw, 6rem);
-		color: transparent;
-		-webkit-text-stroke: 1px var(--color-on-surface);
-		opacity: 0.5;
+	.title-label {
+		font-size: 0.875rem;
+		color: var(--color-primary);
+		opacity: 0.6;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
 	}
 	.solid-text {
 		font-family: var(--font-display);
-		font-size: clamp(2rem, 10vw, 5.5rem);
+		font-size: clamp(2rem, 5vw, 4rem);
+		line-height: 1;
 	}
 
 	.editorial-block {
@@ -302,6 +329,20 @@
 		}
 	}
 
+	.focus-tags {
+		margin-top: var(--space-8);
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-4);
+		max-width: 70ch;
+	}
+	.focus-tag {
+		font-size: 0.625rem;
+		padding: 2px 0;
+		border-bottom: 2px solid var(--color-primary);
+		font-weight: 800;
+		letter-spacing: 0.1em;
+	}
 	.sidebar-plate {
 		grid-template-columns: 1fr;
 	}
@@ -358,6 +399,21 @@
 		font-size: 0.625rem;
 		font-weight: 900;
 	}
+
+	:root {
+		--color-cmyk-c: #0088ff; /* High contrast cyan for light */
+		--color-cmyk-m: #ff0088; /* High contrast magenta for light */
+		--color-cmyk-y: #ffcc00; /* High contrast yellow for light */
+		--color-cmyk-k: #1a1a1a; /* Rich black for light */
+	}
+
+	:global(.dark-theme) {
+		--color-cmyk-c: #00ffff; /* Neon cyan for dark */
+		--color-cmyk-m: #ff00ff; /* Neon magenta for dark */
+		--color-cmyk-y: #ffff00; /* Neon yellow for dark */
+		--color-cmyk-k: #ffffff; /* White for dark 'black' plate */
+	}
+
 	.section-label-press .rule {
 		flex: 1;
 		height: 2px;
@@ -369,139 +425,212 @@
 		}
 	}
 
-	.skills-press {
+	/* ── EDITORIAL MATRIX ── */
+	.skills-editorial {
 		grid-template-columns: 1fr;
-		border: 1px solid var(--color-on-surface);
+		gap: var(--space-8);
 	}
-	@media (min-width: 640px) {
-		.skills-press {
+	@media (min-width: 768px) {
+		.skills-editorial {
 			grid-template-columns: repeat(2, 1fr);
 		}
 	}
-	@media (min-width: 1024px) {
-		.skills-press {
-			grid-template-columns: repeat(3, 1fr);
-		}
-	}
 
-	.press-module {
-		padding: var(--space-6);
+	.editorial-plate {
+		display: grid;
+		grid-template-columns: 40px 1fr;
+		background: var(--color-surface-container-lowest);
+		border-left: 4px solid var(--color-on-surface);
+		transition: transform 0.2s;
 		position: relative;
 	}
-	@media (min-width: 768px) {
-		.press-module {
-			padding: var(--space-8);
-		}
+	.editorial-plate:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
 	}
 
-	.press-module:hover {
-		background: var(--color-surface-container-lowest);
+	.registration-marks .mark {
+		position: absolute;
+		width: 10px;
+		height: 10px;
+		border: 1px solid var(--color-on-surface);
+		opacity: 0.1;
 	}
-	.module-overline {
-		height: 4px;
-		background: var(--color-primary);
-		width: 30px;
-		margin-bottom: var(--space-3);
+	.mark.tl {
+		top: -5px;
+		left: -5px;
 	}
-	.module-title-editorial {
-		font-family: var(--font-display);
-		font-size: 1rem;
-		margin-bottom: var(--space-4);
-		text-transform: uppercase;
+	.mark.tr {
+		top: -5px;
+		right: -5px;
 	}
-	.module-list-press {
-		list-style: none;
+	.mark.bl {
+		bottom: -5px;
+		left: -5px;
+	}
+	.mark.br {
+		bottom: -5px;
+		right: -5px;
+	}
+
+	.plate-sidebar {
+		background: var(--color-surface-container-low);
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-1);
-		font-size: 0.75rem;
+		align-items: center;
+		padding: var(--space-4) 0;
+		gap: var(--space-4);
+		border-right: 1px dashed var(--color-outline-variant);
 	}
-	.bullet {
+
+	.plate-code {
+		writing-mode: vertical-rl;
+		font-size: 0.625rem;
+		opacity: 0.4;
+		transform: rotate(180deg);
+	}
+
+	.color-mark {
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+	}
+
+	.plate--cyan .color-mark,
+	.plate--cyan .spot {
+		color: var(--color-cmyk-c);
+	}
+	.plate--magenta .color-mark,
+	.plate--magenta .spot {
+		color: var(--color-cmyk-m);
+	}
+	.plate--yellow .color-mark,
+	.plate--yellow .spot {
+		color: var(--color-cmyk-y);
+	}
+	.plate--black .color-mark,
+	.plate--black .spot {
+		color: var(--color-cmyk-k);
+	}
+
+	.plate--cyan .color-mark {
+		background: var(--color-cmyk-c);
+		box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-cmyk-c) 20%, transparent);
+	}
+	.plate--magenta .color-mark {
+		background: var(--color-cmyk-m);
+		box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-cmyk-m) 20%, transparent);
+	}
+	.plate--yellow .color-mark {
+		background: var(--color-cmyk-y);
+		box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-cmyk-y) 20%, transparent);
+	}
+	.plate--black .color-mark {
+		background: var(--color-cmyk-k);
+		box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-cmyk-k) 20%, transparent);
+	}
+
+	.plate-content {
+		padding: var(--space-6);
+	}
+
+	.plate-title {
+		font-size: 0.6875rem;
+		font-weight: 800;
 		color: var(--color-primary);
-		font-weight: 900;
-		margin-right: 4px;
+		margin-bottom: var(--space-4);
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
 	}
 
-	/* ── TIMELINE ── */
-	.editorial-timeline {
-		display: flex;
-		flex-direction: column;
-	}
-	.timeline-article {
+	.plate-list {
+		list-style: none;
+		font-size: 0.8125rem;
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: var(--space-4);
-		padding: var(--space-6) 0;
-		border-bottom: 1px solid var(--color-on-surface);
+		gap: var(--space-1);
 	}
-	@media (min-width: 768px) {
-		.timeline-article {
-			grid-template-columns: 100px 1fr;
-			gap: var(--space-12);
-			padding: var(--space-12) 0;
-		}
+	.plate-list li {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+	}
+	.plate-list .spot {
+		font-size: 8px;
 	}
 
-	.article-meta {
+	/* ── EDITORIAL CATALOG ── */
+	.editorial-catalog {
 		display: flex;
 		flex-direction: column;
-		align-items: flex-start;
-	}
-	@media (min-width: 768px) {
-		.article-meta {
-			align-items: flex-end;
-		}
+		gap: var(--space-12);
+		margin-top: var(--space-8);
 	}
 
-	.year-stamp {
+	.catalog-entry {
+		border-bottom: 2px solid var(--color-on-surface);
+		padding-bottom: var(--space-8);
+	}
+
+	.entry-header {
+		display: flex;
+		align-items: baseline;
+		gap: var(--space-6);
+		margin-bottom: var(--space-6);
+	}
+
+	.series-num {
 		font-size: 2rem;
 		font-weight: 900;
-		opacity: 0.1;
-		line-height: 0.8;
-	}
-	@media (min-width: 768px) {
-		.year-stamp {
-			font-size: 3rem;
-		}
-	}
-
-	.active .year-stamp {
-		opacity: 1;
 		color: var(--color-primary);
-	}
-	.active-rule {
-		background: var(--color-primary);
-		color: var(--color-background);
-		font-family: var(--font-mono);
-		font-size: 0.5rem;
-		padding: 2px 6px;
-		margin-top: 4px;
+		line-height: 1;
+		opacity: 0.2;
 	}
 
-	.article-company {
+	.entry-title {
 		font-family: var(--font-display);
-		font-size: 1.5rem;
+		font-size: 1.25rem;
 		text-transform: uppercase;
-		margin-bottom: 2px;
+		line-height: 1.1;
+		flex: 1;
 	}
+
 	@media (min-width: 768px) {
-		.article-company {
-			font-size: 2rem;
+		.entry-title {
+			font-size: 1.75rem;
 		}
 	}
 
-	.article-role {
+	.entry-body {
+		padding-left: 0;
+	}
+	@media (min-width: 768px) {
+		.entry-body {
+			padding-left: 100px;
+		}
+	}
+
+	.meta-strip {
+		display: flex;
+		justify-content: space-between;
+		padding: var(--space-2) 0;
+		border-top: 1px solid var(--color-outline-variant);
+		border-bottom: 1px solid var(--color-outline-variant);
 		font-size: 0.6875rem;
 		font-weight: 700;
-		color: var(--color-primary);
-		margin-bottom: var(--space-3);
-		display: block;
+		margin-bottom: var(--space-4);
 	}
-	.article-desc {
-		font-size: 0.875rem;
+
+	.meta-strip .role {
+		color: var(--color-primary);
+	}
+
+	.description {
+		font-size: 1rem;
 		line-height: 1.6;
 		opacity: 0.8;
-		max-width: 65ch;
+		max-width: 70ch;
 	}
 
 	/* ── EDU ── */

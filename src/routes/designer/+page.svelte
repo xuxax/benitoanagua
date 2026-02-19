@@ -18,12 +18,6 @@
 				]
 			: []
 	);
-
-	function extractYear(period: string) {
-		const start = period.split('-')[0].trim();
-		const year = start.split(' ').pop();
-		return year;
-	}
 </script>
 
 <svelte:head>
@@ -40,31 +34,53 @@
 				<div class="joint joint--bl"></div>
 				<div class="joint joint--br"></div>
 
-				<div class="canvas-header"></div>
+				<div class="canvas-header-meta">
+					<div class="sheet-info">
+						<span class="mono">// SHEET_A-101</span>
+						<span class="mono">// VERSION_2.4.0</span>
+					</div>
+					<div class="drafting-scale mono">SCALE: 1:18_YRS</div>
+				</div>
 
-				<h1 class="monumental-title">
-					<span class="stroke-text">{focus?.title.split(' ')[0]}</span>
-					<span class="solid-text">{focus?.title.split(' ').slice(1).join(' ')}</span>
-				</h1>
+				<div class="main-canvas-area">
+					<h1 class="monumental-title">
+						<span class="title-label mono">{focus?.title.split(' ')[0]}</span>
+						<span class="solid-text">{focus?.title.split(' ').slice(1).join(' ')}</span>
+					</h1>
 
-				<div class="blueprint-summary">
-					<p>{focus?.summary}</p>
-					<div class="anchor-point"></div>
+					<div class="blueprint-summary">
+						<div class="dim-line dim-line--t"></div>
+						<div class="dim-line dim-line--l"></div>
+						<p>{focus?.summary}</p>
+						<div class="anchor-point"></div>
+					</div>
+
+					{#if focus?.subtitles}
+						<div class="focus-tags">
+							{#each focus.subtitles as tag}
+								<span class="focus-tag mono">{tag}</span>
+							{/each}
+						</div>
+					{/if}
 				</div>
 
 				<div class="canvas-footer">
 					<div class="spec-matrix shared-boundary">
 						<div class="spec-cell">
-							<span class="mono label">LAT:</span>
-							<span class="val">-21.53</span>
+							<span class="mono label">LOC:</span>
+							<span class="val">{cvData.personal.location.toUpperCase()}</span>
 						</div>
 						<div class="spec-cell">
-							<span class="mono label">LNG:</span>
-							<span class="val">-64.72</span>
+							<span class="mono label">EXP:</span>
+							<span class="val">{site.nav.exp_label}</span>
 						</div>
 						<div class="spec-cell">
-							<span class="mono label">SCALE:</span>
-							<span class="val">1:18_YRS</span>
+							<span class="mono label">COMMS:</span>
+							<span class="val">{cvData.personal.email.toUpperCase()}</span>
+						</div>
+						<div class="spec-cell meta-only">
+							<span class="mono label">COORD:</span>
+							<span class="val">-21.53 / -64.72</span>
 						</div>
 					</div>
 				</div>
@@ -78,19 +94,20 @@
 				<div class="line"></div>
 			</header>
 
-			<div class="shared-boundary skills-grid">
+			<div class="shared-boundary skills-blueprint">
 				{#if focus?.skills}
 					{#each focus.skills as skillGroup}
-						<div class="skill-module">
-							<div class="module-id mono">
-								NODE__{skillGroup.category.slice(0, 3).toUpperCase()}
-							</div>
-							<h3 class="module-title">{skillGroup.category}</h3>
-							<ul class="module-list">
+						<div class="blueprint-module">
+							<div class="module-marker tl"></div>
+							<div class="module-marker tr"></div>
+							<div class="module-marker bl"></div>
+							<div class="module-marker br"></div>
+							<div class="module-label mono">{skillGroup.category}</div>
+							<ul class="module-nodes">
 								{#each skillGroup.items as item}
-									<li class="item">
-										<span class="node"></span>
-										<span class="text">{item}</span>
+									<li class="node-item">
+										<span class="dot"></span>
+										<span class="label">{item}</span>
 									</li>
 								{/each}
 							</ul>
@@ -107,21 +124,21 @@
 				<div class="line"></div>
 			</header>
 
-			<div class="projection-timeline">
+			<div class="roadmap-grid">
 				{#each focus?.experiences || [] as exp, index}
-					<article class="projection-point" class:active={index === 0}>
-						<div class="point-side">
-							<div class="point-marker"></div>
-							<span class="mono year">{extractYear(exp.period)}</span>
+					<article class="milestone-card" class:stagger={index % 2 !== 0}>
+						<div class="milestone-meta mono">
+							<span class="marker">●</span>
+							<span class="period">{exp.period}</span>
 						</div>
-						<div class="point-content">
-							<h3 class="company-title">{exp.company}</h3>
-							<span class="role-tag mono">{exp.position.toUpperCase()}</span>
-							<p class="desc">{exp.description}</p>
+						<div class="milestone-content">
+							<h3 class="title">{exp.company}</h3>
+							<div class="role mono">{exp.position.toUpperCase()}</div>
+							<p class="body">{exp.description}</p>
 						</div>
+						<div class="milestone-edge"></div>
 					</article>
 				{/each}
-				<div class="axis-line"></div>
 			</div>
 		</section>
 
@@ -258,69 +275,132 @@
 	}
 	@media (min-width: 1024px) {
 		.blueprint-header {
-			grid-template-columns: 2fr 1fr;
 			gap: var(--space-8);
 		}
 	}
 
 	.blueprint-canvas {
 		position: relative;
-		padding: var(--space-10) var(--space-4);
-		border: 1px solid var(--color-outline-variant);
+		padding: var(--space-8) var(--space-4);
+		border: 1px solid var(--color-on-surface);
 		background: var(--color-surface);
+		background-image: radial-gradient(var(--color-outline-variant) 1px, transparent 1px);
+		background-size: 30px 30px;
 	}
 	@media (min-width: 768px) {
 		.blueprint-canvas {
-			padding: var(--space-12) var(--space-8);
+			padding: var(--space-12) var(--space-10);
 		}
 	}
 
-	.canvas-header {
+	.canvas-header-meta {
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
-		margin-bottom: var(--space-8);
+		align-items: flex-start;
+		margin-bottom: var(--space-12);
+		font-size: 0.625rem;
+		opacity: 0.4;
+	}
+	.sheet-info {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
 	}
 
 	.monumental-title {
 		display: flex;
 		flex-direction: column;
-		line-height: 0.85;
 		margin-bottom: var(--space-8);
+		gap: var(--space-2);
 	}
-	.stroke-text {
-		font-family: var(--font-display);
-		font-size: clamp(2.5rem, 10vw, 7rem);
-		color: transparent;
-		-webkit-text-stroke: 1px var(--color-on-surface);
+	.title-label {
+		font-size: 0.875rem;
+		color: var(--color-primary);
+		opacity: 0.6;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
 	}
 	.solid-text {
 		font-family: var(--font-display);
-		font-size: clamp(2rem, 8vw, 5.5rem);
+		font-size: clamp(2rem, 5vw, 4rem);
+		line-height: 1;
 		color: var(--color-primary);
+	}
+
+	.main-canvas-area {
+		position: relative;
+		z-index: 1;
 	}
 
 	.blueprint-summary {
 		position: relative;
-		padding: var(--space-4);
-		border: 1px solid var(--color-outline-variant);
-		max-width: 60ch;
+		padding: var(--space-6) var(--space-8);
+		border: 1px solid var(--color-on-surface);
+		background: var(--color-surface);
+		max-width: 65ch;
+		box-shadow: 10px 10px 0 var(--color-surface-container-low);
 	}
 	@media (min-width: 768px) {
 		.blueprint-summary {
-			padding: var(--space-8);
+			margin-left: 20%;
 		}
+	}
+
+	.dim-line {
+		position: absolute;
+		background: var(--color-primary);
+		opacity: 0.2;
+	}
+	.dim-line--t {
+		top: -20px;
+		left: 0;
+		right: 0;
+		height: 1px;
+	}
+	.dim-line--t::before,
+	.dim-line--t::after {
+		content: '';
+		position: absolute;
+		top: -4px;
+		width: 1px;
+		height: 10px;
+		background: currentColor;
+	}
+	.dim-line--t::before {
+		left: 0;
+	}
+	.dim-line--t::after {
+		right: 0;
+	}
+
+	.dim-line--l {
+		left: -20px;
+		top: 0;
+		bottom: 0;
+		width: 1px;
 	}
 
 	.blueprint-summary p {
 		font-size: 1rem;
 		line-height: 1.6;
-		opacity: 0.8;
+		font-weight: 300;
 	}
-	@media (min-width: 768px) {
-		.blueprint-summary p {
-			font-size: 1.125rem;
-		}
+
+	.focus-tags {
+		margin-top: var(--space-6);
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-3);
+		max-width: 60ch;
+	}
+	.focus-tag {
+		font-size: 0.625rem;
+		padding: 4px 10px;
+		border: 1px solid var(--color-primary);
+		color: var(--color-primary);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
 	}
 
 	.anchor-point {
@@ -343,13 +423,25 @@
 	}
 
 	.spec-matrix {
-		grid-template-columns: repeat(3, 1fr);
-		border: 1px solid var(--color-outline-variant);
+		grid-template-columns: repeat(2, 1fr);
+		border: 1px solid var(--color-on-surface);
+	}
+	@media (min-width: 768px) {
+		.spec-matrix {
+			grid-template-columns: repeat(4, 1fr);
+		}
 	}
 	.spec-cell {
-		padding: var(--space-3);
+		padding: var(--space-4);
 		display: flex;
 		flex-direction: column;
+		border-right: 1px solid var(--color-outline-variant);
+	}
+	.spec-cell:last-child {
+		border-right: none;
+	}
+	.spec-matrix.shared-boundary {
+		background: var(--color-surface-container-lowest);
 	}
 	@media (min-width: 768px) {
 		.spec-cell {
@@ -395,195 +487,197 @@
 		background: var(--color-outline-variant);
 	}
 
-	/* ── MODULES ── */
-	.skills-grid {
+	/* ── BLUEPRINT SKILLS ── */
+	.skills-blueprint {
 		grid-template-columns: 1fr;
-		border: 1px solid var(--color-outline-variant);
+		background: var(--color-surface-container-lowest);
+		background-image: radial-gradient(var(--color-outline-variant) 1px, transparent 1px);
+		background-size: 20px 20px;
+		border: 1px solid var(--color-on-surface);
+		padding: 1px;
 	}
 	@media (min-width: 640px) {
-		.skills-grid {
+		.skills-blueprint {
 			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 	@media (min-width: 1024px) {
-		.skills-grid {
-			grid-template-columns: repeat(3, 1fr);
+		.skills-blueprint {
+			grid-template-columns: repeat(4, 1fr);
 		}
 	}
 
-	.skill-module {
-		padding: var(--space-6);
-		transition: box-shadow var(--duration-fast);
+	.blueprint-module {
+		padding: var(--space-8);
+		border: 1px solid var(--color-outline-variant);
 		position: relative;
+		transition: background 0.2s;
 	}
-	@media (min-width: 768px) {
-		.skill-module {
-			padding: var(--space-8);
-		}
+	.blueprint-module:hover {
+		background: var(--color-surface-container-lowest);
+		box-shadow: inset 0 0 0 1px var(--color-primary);
 	}
 
-	.skill-module:hover {
-		z-index: 5;
-		box-shadow: var(--ring-primary);
-		background: var(--color-surface-container-lowest);
-	}
-	.module-id {
-		font-size: 0.5rem;
+	.module-marker {
+		position: absolute;
+		width: 10px;
+		height: 10px;
+		color: var(--color-primary);
 		opacity: 0.3;
-		margin-bottom: var(--space-4);
-		background: var(--color-primary-container);
-		width: fit-content;
-		padding: 2px 6px;
+		font-family: var(--font-mono);
+		font-size: 10px;
+		line-height: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
-	.module-title {
-		font-family: var(--font-display);
-		font-size: 1.125rem;
+	.module-marker::before {
+		content: '+';
+	}
+	.module-marker.tl {
+		top: 4px;
+		left: 4px;
+	}
+	.module-marker.tr {
+		top: 4px;
+		right: 4px;
+	}
+	.module-marker.bl {
+		bottom: 4px;
+		left: 4px;
+	}
+	.module-marker.br {
+		bottom: 4px;
+		right: 4px;
+	}
+
+	.module-label {
+		font-size: 0.625rem;
+		color: var(--color-primary);
 		text-transform: uppercase;
-		margin-bottom: var(--space-4);
+		font-weight: 800;
+		margin-bottom: var(--space-6);
+		letter-spacing: 0.1em;
 	}
-	.module-list {
+
+	.module-nodes {
 		list-style: none;
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-1);
+		gap: var(--space-3);
 	}
-	.item {
+	.node-item {
 		display: flex;
 		align-items: center;
 		gap: var(--space-3);
 		font-size: 0.75rem;
+		color: var(--color-on-surface-variant);
 	}
-	.node {
-		width: 6px;
-		height: 6px;
-		border: 1.5px solid var(--color-primary);
-	}
-
-	/* ── PROJECTION ── */
-	.projection-timeline {
-		position: relative;
-		padding-left: var(--space-10);
-	}
-	@media (min-width: 768px) {
-		.projection-timeline {
-			padding-left: var(--space-16);
-		}
-	}
-
-	.axis-line {
-		position: absolute;
-		left: 8px;
-		top: 0;
-		bottom: 0;
-		width: 1px;
-		background: var(--color-outline-variant);
-	}
-	@media (min-width: 768px) {
-		.axis-line {
-			left: 10px;
-		}
-	}
-
-	.projection-point {
-		position: relative;
-		padding-bottom: var(--space-10);
-		display: flex;
-		gap: var(--space-6);
-	}
-	@media (min-width: 768px) {
-		.projection-point {
-			padding-bottom: var(--space-16);
-			gap: var(--space-12);
-		}
-	}
-
-	.point-side {
-		position: absolute;
-		left: -42px;
-		top: 0;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-	@media (min-width: 768px) {
-		.point-side {
-			left: -54px;
-		}
-	}
-
-	.point-marker {
-		width: 15px;
-		height: 15px;
-		border: 1px solid var(--color-on-surface);
-		background: var(--color-background);
+	.node-item .dot {
+		width: 4px;
+		height: 4px;
+		background: var(--color-outline);
 		border-radius: 50%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		position: relative;
-		z-index: 2;
 	}
-	@media (min-width: 768px) {
-		.point-marker {
-			width: 21px;
-			height: 21px;
-		}
-	}
-
-	.active .point-marker {
-		border-color: var(--color-primary);
-		box-shadow: 0 0 0 4px var(--color-primary-container);
-	}
-	.active .point-marker::after {
-		content: '';
-		width: 7px;
-		height: 7px;
+	.node-item:hover .dot {
 		background: var(--color-primary);
-		border-radius: 50%;
+		transform: scale(1.5);
 	}
-	@media (min-width: 768px) {
-		.active .point-marker::after {
-			width: 9px;
-			height: 9px;
+
+	/* ── ROADMAP DYNAMICS ── */
+	.roadmap-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--space-8);
+		position: relative;
+		padding-left: var(--space-6);
+		border-left: 1px solid var(--color-on-surface);
+	}
+
+	@media (min-width: 1024px) {
+		.roadmap-grid {
+			grid-template-columns: repeat(2, 1fr);
+			gap: var(--space-12);
+			padding-left: 0;
+			border-left: none;
+		}
+		.roadmap-grid::before {
+			content: '';
+			position: absolute;
+			left: 50%;
+			top: 0;
+			bottom: 0;
+			width: 1px;
+			background: var(--color-on-surface);
+			transform: translateX(-50%);
 		}
 	}
 
-	.point-side .year {
-		font-size: 0.625rem;
-		font-weight: 700;
-		margin-top: var(--space-1);
-		opacity: 0.5;
-	}
-	.active .year {
-		opacity: 1;
-		color: var(--color-primary);
+	.milestone-card {
+		background: var(--color-surface-container-lowest);
+		border: 1px solid var(--color-outline-variant);
+		padding: var(--space-8);
+		position: relative;
+		transition: all 0.3s;
 	}
 
-	.company-title {
+	@media (min-width: 1024px) {
+		.milestone-card {
+			width: calc(100% - 40px);
+		}
+		.milestone-card.stagger {
+			justify-self: end;
+			margin-top: var(--space-20);
+		}
+	}
+
+	.milestone-card:hover {
+		border-color: var(--color-primary);
+		transform: translateY(-4px);
+		box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1);
+	}
+
+	.milestone-meta {
+		display: flex;
+		align-items: center;
+		gap: var(--space-3);
+		font-size: 0.625rem;
+		color: var(--color-primary);
+		font-weight: 800;
+		margin-bottom: var(--space-4);
+	}
+
+	.milestone-content .title {
 		font-family: var(--font-display);
-		font-size: 1.25rem;
-		text-transform: uppercase;
-		line-height: 1.1;
-		margin-bottom: 2px;
-	}
-	@media (min-width: 768px) {
-		.company-title {
-			font-size: 1.75rem;
-		}
+		font-size: 1.5rem;
+		margin-bottom: var(--space-1);
+		color: var(--color-on-surface);
 	}
 
-	.role-tag {
-		font-size: 0.625rem;
-		color: var(--color-primary);
-		font-weight: 700;
-		opacity: 0.8;
+	.milestone-content .role {
+		font-size: 0.6875rem;
+		letter-spacing: 0.1em;
+		opacity: 0.5;
+		margin-bottom: var(--space-4);
 	}
-	.desc {
-		margin-top: var(--space-3);
+
+	.milestone-content .body {
 		font-size: 0.875rem;
 		line-height: 1.6;
 		opacity: 0.7;
-		max-width: 65ch;
+	}
+
+	.milestone-edge {
+		position: absolute;
+		right: -1px;
+		top: -1px;
+		bottom: -1px;
+		width: 4px;
+		background: var(--color-primary);
+		opacity: 0.1;
+	}
+	.milestone-card:hover .milestone-edge {
+		opacity: 1;
 	}
 
 	/* ── NODES ── */
